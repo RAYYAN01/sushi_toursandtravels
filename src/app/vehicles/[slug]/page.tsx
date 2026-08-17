@@ -1,0 +1,193 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { CheckCircle2 } from 'lucide-react';
+import { vehiclePages, getVehiclePage, getVehiclesForPage, getPagePrimaryImage } from '@/lib/vehiclePages';
+import { servicePages } from '@/lib/services';
+import { routePages } from '@/lib/routes';
+import { getBreadcrumbListSchema, getFAQSchema, getVehicleProductSchema } from '@/lib/schema';
+import LandingHero from '@/components/LandingHero';
+import FaqAccordion from '@/components/FaqAccordion';
+import CTABand from '@/components/CTABand';
+import RelatedLinks from '@/components/RelatedLinks';
+import VehiclePricingTable from '@/components/VehiclePricingTable';
+
+export function generateStaticParams() {
+  return vehiclePages.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const page = getVehiclePage(slug);
+  if (!page) return {};
+  const url = `/vehicles/${page.slug}`;
+  const image = getPagePrimaryImage(page);
+  return {
+    title: page.title,
+    description: page.metaDescription,
+    alternates: { canonical: url },
+    openGraph: {
+      title: page.title,
+      description: page.metaDescription,
+      url,
+      images: [{ url: image, width: 800, height: 600, alt: page.h1 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: page.title,
+      description: page.metaDescription,
+      images: [image],
+    },
+  };
+}
+
+export default async function VehiclePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const page = getVehiclePage(slug);
+  if (!page) notFound();
+
+  const pageVehicles = getVehiclesForPage(page);
+  const heroImage = getPagePrimaryImage(page);
+  const url = `/vehicles/${page.slug}`;
+
+  const breadcrumbItems = [
+    { name: 'Home', item: '/' },
+    { name: 'Vehicles', item: '/vehicles' },
+    { name: page.h1, item: url },
+  ];
+
+  const relatedVehicles = page.relatedVehicleSlugs
+    .map((s) => vehiclePages.find((p) => p.slug === s))
+    .filter((p): p is NonNullable<typeof p> => !!p);
+  const relatedServices = page.relatedServiceSlugs
+    .map((s) => servicePages.find((p) => p.slug === s))
+    .filter((p): p is NonNullable<typeof p> => !!p);
+  const relatedRoutes = page.relatedRouteSlugs
+    .map((s) => routePages.find((p) => p.slug === s))
+    .filter((p): p is NonNullable<typeof p> => !!p);
+
+  const whatsappMessage = `Hello Sushi Tours & Travels, I would like to enquire about the ${page.h1}. Please share availability and a quotation.`;
+
+  return (
+    <div className="bg-cream min-h-screen pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbListSchema(breadcrumbItems)) }}
+      />
+      {pageVehicles.map((vehicle) => (
+        <script
+          key={vehicle.id}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getVehicleProductSchema(vehicle, url)) }}
+        />
+      ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getFAQSchema(page.faqs)) }}
+      />
+
+      <LandingHero
+        h1={page.h1}
+        subtitle={page.heroSubtitle}
+        image={heroImage}
+        crumbs={[
+          { name: 'Vehicles', href: '/vehicles' },
+          { name: page.h1, href: url },
+        ]}
+      />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
+        {/* GEO-style factual summary */}
+        <section className="bg-white rounded-2xl border border-navy-light/10 p-6 sm:p-8">
+          <p className="text-sm sm:text-base text-navy leading-relaxed">{page.geoSummary}</p>
+        </section>
+
+        {/* Full photo gallery — every image for each vehicle on this page */}
+        {pageVehicles.map((vehicle) => {
+          const galleryImages = vehicle.images && vehicle.images.length > 0 ? vehicle.images : [vehicle.image];
+          return (
+            <section key={vehicle.id} className="space-y-4">
+              {pageVehicles.length > 1 && (
+                <h2 className="font-serif font-bold text-xl text-navy">{vehicle.name} — Photos</h2>
+              )}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {galleryImages.map((img, idx) => (
+                  <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden border border-navy-light/10 shadow-sm bg-cream-warm/30">
+                    <Image
+                      src={img}
+                      alt={`Sushi Travels ${vehicle.name} — photo ${idx + 1} of ${galleryImages.length}`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover"
+                      loading={idx < 3 ? undefined : 'lazy'}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+
+        {/* Body copy */}
+        <section className="space-y-4 text-sm sm:text-base text-navy-light leading-relaxed">
+          {page.bodyParagraphs.map((para, idx) => (
+            <p key={idx}>{para}</p>
+          ))}
+        </section>
+
+        {/* Pricing */}
+        <VehiclePricingTable vehicles={pageVehicles} />
+
+        {/* Feature highlights */}
+        <section className="bg-white rounded-2xl border border-navy-light/10 p-6 sm:p-8 space-y-4">
+          <h2 className="font-serif font-bold text-xl text-navy">What&apos;s Included</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {Array.from(new Set(pageVehicles.flatMap((v) => v.features))).slice(0, 8).map((feature, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-sm text-navy">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* FAQ */}
+        <FaqAccordion faqs={page.faqs} />
+
+        {/* CTA */}
+        <CTABand
+          heading={`Book the ${page.h1.replace(' in Bangalore', '')}`}
+          subheading="Call, WhatsApp, or submit a quick enquiry — our dispatch team will confirm availability and pricing."
+          whatsappMessage={whatsappMessage}
+        />
+
+        {/* Internal links */}
+        <RelatedLinks
+          groups={[
+            {
+              heading: 'Related Vehicles',
+              links: relatedVehicles.map((p) => ({ label: p.h1, href: `/vehicles/${p.slug}` })),
+            },
+            {
+              heading: 'Related Services',
+              links: relatedServices.map((p) => ({ label: p.h1, href: `/services/${p.slug}` })),
+            },
+            {
+              heading: 'Popular Routes',
+              links: relatedRoutes.map((p) => ({ label: p.h1, href: `/routes/${p.slug}` })),
+            },
+            {
+              heading: 'Plan Your Trip',
+              links: [
+                { label: 'Book this vehicle online', href: '/booking' },
+                { label: 'Contact Sushi Travels', href: '/contact' },
+                { label: 'View the full rental fleet', href: '/fleet' },
+              ],
+            },
+          ]}
+        />
+      </div>
+    </div>
+  );
+}

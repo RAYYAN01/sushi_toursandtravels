@@ -1,0 +1,128 @@
+// Prisma schema for Sushi Travels — Neon Postgres
+// Run `npx prisma generate` after any change here.
+// Run `npx prisma migrate dev --name <desc>` (dev) or `npx prisma db push` (quick sync)
+// against a real Neon database to create/update tables.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Admin — single (or few) admin user(s) for the CMS login flow.
+// ---------------------------------------------------------------------------
+model Admin {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Vehicle — Mongo's business-facing `id` (a slug like "innova-crysta") is
+// renamed to `vehicleId` here to avoid clashing with Prisma's own primary
+// key convention. API routes expose it back to the frontend as `id`.
+// ---------------------------------------------------------------------------
+model Vehicle {
+  id        String  @id @default(cuid())
+  vehicleId String  @unique // business-facing slug id (was Mongo's `id` field)
+
+  name        String
+  type        String
+  seats       Int
+  ac          Boolean
+  luggage     Int
+  ratePerKm   Float
+  features    String[]
+  image       String
+  images      String[]
+  imageFit    String?  @default("cover")
+  imageFits   String[]
+  imagePositions String[]
+  imageScales Float[]
+  description String
+
+  driverBata     Float?
+  minKmPerDay    Float?
+  ratePerKmAc    Float?
+  ratePerKmNonAc Float?
+  acOnly         Boolean?
+  hasNonAcOption Boolean?
+  drivingHours   String?
+  priceDisplay   String?
+  seatsDisplay   String?
+
+  sortOrder     Int     @default(0)
+  showOnHome    Boolean @default(true)
+  homeCategory  String  @default("")
+  categoryOrder Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+// ---------------------------------------------------------------------------
+// PopularRoute
+// ---------------------------------------------------------------------------
+model PopularRoute {
+  id             String @id @default(cuid())
+  from           String
+  to             String
+  distance       String
+  duration       String
+  estimatedPrice String
+  imageUrl       String
+  tripType       String @default("Round Trip")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Review
+// ---------------------------------------------------------------------------
+model Review {
+  id       String @id @default(cuid())
+  name     String
+  location String
+  rating   Int
+  text     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Booking
+// ---------------------------------------------------------------------------
+model Booking {
+  id              String  @id @default(cuid())
+  bookingId       String  @unique
+  pickupLocation  String
+  dropLocation    String
+  tripType        String
+  date            String
+  time            String
+  returnDate      String?
+  vehicleType     String
+  fullName        String
+  mobile          String
+  email           String
+  passengers      Int
+  specialRequests String?
+  status          String  @default("New")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+}

@@ -1,0 +1,92 @@
+import React, { Suspense } from 'react';
+import { ShieldCheck, Clock, ShieldAlert } from 'lucide-react';
+import { getServiceSchema, getBreadcrumbListSchema } from '@/lib/schema';
+import BookingForm from '@/components/BookingForm';
+
+export const metadata = {
+  title: 'Book a Car with Driver | Chauffeur Rental India',
+  description: 'Book local drops, full-day packages, or outstation chauffeur services. Multi-step transparent booking with verified professional drivers.'
+};
+
+export default function BookingPage() {
+  // Breadcrumbs config
+  const breadcrumbItems = [
+    { name: 'Home', item: '/' },
+    { name: 'Booking', item: '/booking' },
+  ];
+
+  return (
+    <div className="bg-cream min-h-screen pb-16">
+      {/* Schema Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getServiceSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbListSchema(breadcrumbItems)) }}
+      />
+
+      {/* Booking Hero Banner — pulled up under the fixed transparent header, same pattern as the Fleet page */}
+      <div
+        className="relative -mt-[72px] md:-mt-[80px] min-h-screen flex items-center justify-center bg-cover bg-center px-4 text-center text-white"
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1200')` }}
+      >
+        <div className="absolute inset-0 bg-navy-dark/80 z-0" />
+        <div className="relative z-10 max-w-7xl mx-auto space-y-3">
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+            Chauffeur Rental Booking Center
+          </h1>
+          <p className="text-sm text-cream-warm/95 max-w-xl mx-auto">
+            Book verified drivers and air-conditioned vehicles in under 3 minutes. Secure booking, pay on trip completion.
+          </p>
+        </div>
+      </div>
+
+      {/* Main Form Area wrapper */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* BookingForm requires Suspense as it uses useSearchParams() */}
+        <Suspense fallback={
+          <div className="py-20 text-center font-bold text-navy animate-pulse">
+            Loading booking options...
+          </div>
+        }>
+          <BookingForm />
+        </Suspense>
+
+        {/* Small Trust Grid below Form */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 text-navy">
+          <div className="bg-white p-6 rounded-2xl border border-navy-light/10 flex items-start space-x-4 shadow-sm">
+            <ShieldCheck className="w-8 h-8 text-primary flex-shrink-0" />
+            <div>
+              <h3 className="font-bold text-sm text-navy">Verified Chauffeurs Only</h3>
+              <p className="text-xs text-navy-light leading-relaxed mt-1">
+                Every driver in our roster passes police records vetting and road safety tests on ghat curves.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-2xl border border-navy-light/10 flex items-start space-x-4 shadow-sm">
+            <Clock className="w-8 h-8 text-primary flex-shrink-0" />
+            <div>
+              <h3 className="font-bold text-sm text-navy">No Cancellation Fee</h3>
+              <p className="text-xs text-navy-light leading-relaxed mt-1">
+                Change in plans? Cancel up to 12 hours before schedule without incurring any platform charges.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-2xl border border-navy-light/10 flex items-start space-x-4 shadow-sm">
+            <ShieldAlert className="w-8 h-8 text-primary flex-shrink-0" />
+            <div>
+              <h3 className="font-bold text-sm text-navy">GPS Tracking & Security</h3>
+              <p className="text-xs text-navy-light leading-relaxed mt-1">
+                All vehicles carry emergency SOS buttons and live tracking links shareable with family members.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
