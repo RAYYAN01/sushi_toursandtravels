@@ -11,6 +11,20 @@ export const metadata: Metadata = {
   description:
     'Explore Sushi Travels services in Bangalore: airport taxi, outstation cabs, local taxi, corporate transport, wedding vehicle rental, and sightseeing cabs.',
   alternates: { canonical: '/services' },
+  openGraph: {
+    title: 'Car & Van Rental Services in Bangalore | Sushi Travels',
+    description:
+      'Explore Sushi Travels services in Bangalore: airport taxi, outstation cabs, local taxi, corporate transport, wedding vehicle rental, and sightseeing cabs.',
+    url: '/services',
+    images: [{ url: '/fortuner-front-view.webp', width: 800, height: 600, alt: 'Sushi Travels car and van rental services in Bangalore' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Car & Van Rental Services in Bangalore | Sushi Travels',
+    description:
+      'Explore Sushi Travels services in Bangalore: airport taxi, outstation cabs, local taxi, corporate transport, wedding vehicle rental, and sightseeing cabs.',
+    images: ['/fortuner-front-view.webp'],
+  },
 };
 
 export default function ServicesHubPage() {

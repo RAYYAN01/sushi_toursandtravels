@@ -10,6 +10,20 @@ export const metadata: Metadata = {
   description:
     'Sushi Travels provides chauffeur-driven car rental pickup and drop across Whitefield, Koramangala, Indiranagar, Electronic City and more Bangalore areas.',
   alternates: { canonical: '/locations' },
+  openGraph: {
+    title: 'Areas We Serve in Bangalore | Sushi Travels',
+    description:
+      'Sushi Travels provides chauffeur-driven car rental pickup and drop across Whitefield, Koramangala, Indiranagar, Electronic City and more Bangalore areas.',
+    url: '/locations',
+    images: [{ url: '/fleet/force-traveller-yaksha-front-01.webp', width: 800, height: 600, alt: 'Sushi Travels car rental areas served across Bangalore' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Areas We Serve in Bangalore | Sushi Travels',
+    description:
+      'Sushi Travels provides chauffeur-driven car rental pickup and drop across Whitefield, Koramangala, Indiranagar, Electronic City and more Bangalore areas.',
+    images: ['/fleet/force-traveller-yaksha-front-01.webp'],
+  },
 };
 
 export default function LocationsHubPage() {

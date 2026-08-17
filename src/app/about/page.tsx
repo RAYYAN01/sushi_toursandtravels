@@ -6,7 +6,22 @@ import { getBreadcrumbListSchema } from '@/lib/schema';
 
 export const metadata = {
   title: 'About Sushi Travels | Chauffeur Car Rental India',
-  description: 'Learn about Sushi Travels, a premium car rental agency based in Bangalore. 15+ years experience, 50+ vehicles, and verified professional drivers.'
+  description: 'Learn about Sushi Travels, a premium car rental agency based in Bangalore. 15+ years experience, 50+ vehicles, and verified professional drivers.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About Sushi Travels | Chauffeur Car Rental India',
+    description: 'Learn about Sushi Travels, a premium car rental agency based in Bangalore. 15+ years experience, 50+ vehicles, and verified professional drivers.',
+    url: '/about',
+    images: [{ url: '/videos/about-scene-13-poster.webp', width: 800, height: 600, alt: 'About Sushi Travels — chauffeur car rental agency in Bangalore' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Sushi Travels | Chauffeur Car Rental India',
+    description: 'Learn about Sushi Travels, a premium car rental agency based in Bangalore. 15+ years experience, 50+ vehicles, and verified professional drivers.',
+    images: ['/videos/about-scene-13-poster.webp'],
+  },
 };
 
 export default function AboutPage() {
@@ -38,7 +53,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-navy-dark/75 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-4">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold">
-            Our Story & Values
+            About Sushi Travels — Our Story & Values
           </h1>
           <p className="text-sm md:text-base text-cream-warm max-w-2xl mx-auto">
             Providing premium, transparent road rental hospitality across the Indian subcontinent since 2011.
@@ -56,10 +71,10 @@ export default function AboutPage() {
               Pioneering Safe Mountain & Highway Trips in South India
             </h2>
             <p className="text-sm text-navy leading-relaxed">
-              Founded in Bangalore, <strong>Sushi Travels</strong> started with a vision of bridging the gap between professional, verified hospitality and regional road trips in India. Over fifteen years, we have grown into one of the region's most trusted travel partners, specializing exclusively in high-capacity, premium group vehicles — see our fleet and chauffeur details below.
+              Founded in Bangalore, <strong>Sushi Travels</strong> started with a vision of bridging the gap between professional, verified hospitality and regional road trips in India. Over fifteen years, we have grown into one of the region&apos;s most trusted travel partners, specializing exclusively in high-capacity, premium group vehicles — see our fleet and chauffeur details below.
             </p>
             <p className="text-sm text-navy leading-relaxed">
-              Our service model is built around <strong>outstation round-trips</strong>. We believe the best parts of travel happen when you're not rushed — stopping at roadside viewpoints, exploring local heritage sites, and dining at hidden gems. By focusing on dedicated round-trip services, we give groups the freedom to set their own itinerary and travel together at a relaxed pace, with a private vehicle and chauffeur that stay with you throughout the holiday.
+              Our service model is built around <strong>outstation round-trips</strong>. We believe the best parts of travel happen when you&apos;re not rushed — stopping at roadside viewpoints, exploring local heritage sites, and dining at hidden gems. By focusing on dedicated round-trip services, we give groups the freedom to set their own itinerary and travel together at a relaxed pace, with a private vehicle and chauffeur that stay with you throughout the holiday.
             </p>
             <p className="text-sm text-navy leading-relaxed">
               We specialize in mountain ghat route navigation (the hairpin bends of Ooty, Coorg, Wayanad, and Munnar), outstation sightseeing tours, and long-distance pilgrimage routes such as Bangalore to Tirupati. Our fleet undergoes rigorous safety checks and multi-point mechanical inspections before every journey.

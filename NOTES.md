@@ -871,3 +871,324 @@ and Neon) still need the sync described there for the fleet's pricing/naming;
 this pass doesn't add a new sync requirement of its own since `Vehicle.image`/
 `images` values only change if the DB is re-seeded from `vehicles.ts` (which
 already requires the truncate-and-reseed step from section 9).
+
+## 11. Strict on-page + technical SEO/GEO/AEO audit-and-fix pass (2026-08-17)
+
+A polish/audit pass on top of the SEO infrastructure built in section 9 —
+verified against the confirmed live production domain
+`https://www.sushitravels.com` (apex `sushitravels.com` 308-redirects to
+`www`, confirmed via `curl`). No new pages, no new keywords, no business
+facts invented. `npx tsc --noEmit` and `npm run build` both pass; all 56
+routes still prerender (10 static + 4 hubs + 9 vehicle + 6 service + 10
+location + 10 route + admin/API/not-found/sitemap/robots). Domain audit: `grep
+-r "vercel.app" src/` returned **zero matches** — every canonical, OG URL,
+sitemap/robots base URL and `schema.ts`'s `SITE_URL` already correctly said
+`https://sushitravels.com` before this pass; nothing needed fixing there.
+
+### Defects found and fixed
+
+**Structured data (JSON-LD) — 3 real bugs, not style issues**
+
+1. **`getFleetItemListSchema()` in `src/lib/schema.ts` emitted `offers.price:
+   0`** (a literal zero-rupee price) for every "Price on Request" vehicle
+   (Innova Hycross, SGR Mini Coach, both bus tiers) on `/fleet`'s `ItemList`
+   schema, because it read `vehicle.ratePerKm` unconditionally instead of
+   checking for a confirmed rate first. This is misleading structured data
+   (implies those vehicles rent for free) and inconsistent with
+   `getVehicleProductSchema()`, which already correctly omits `offers`
+   entirely for unrated vehicles. Fixed: `getFleetItemListSchema()` now uses
+   the same `hasConfirmedRate = !vehicle.priceDisplay && !!vehicle.ratePerKm`
+   check and omits the `offers` block when there's no real rate.
+2. **Same function's `Product.image` was a bare relative path**
+   (`/fleet/xyz.webp`) instead of an absolute URL — schema.org `image` should
+   be a full URL. Fixed to `${SITE_URL}${vehicle.image}`, matching the
+   pattern `getVehicleProductSchema()` already used correctly.
+3. **`getServiceSchema()`'s generic `Service` schema said "Starting from ₹12
+   per km"** — stale from before the full fleet pricing reconciliation in
+   section 9, which set the real lowest confirmed rate (sedan) to ₹13/km.
+   Fixed to "Starting from ₹13 per km (sedan rate)." to match
+   `PRICING.sedan.ratePerKm` in `src/lib/vehicles.ts`, the actual source of
+   truth.
+
+**FAQPage schema visibility — the one rule this task explicitly asked to
+re-verify, and it had regressed on the homepage**
+
+4. Section 9's own notes explain that `FaqAccordion.tsx` (used on all ~35 new
+   landing pages) deliberately uses native `<details>/<summary>` instead of
+   the homepage's framer-motion accordion pattern, "specifically so FAQ
+   answer text is always present in server-rendered HTML." That reasoning was
+   correct, but the homepage itself (`src/app/page.tsx`) still used the
+   pattern the note warned against: its FAQ accordion wrapped each answer
+   `<div>` in `<AnimatePresence>{isOpen && (<motion.div>...)}</AnimatePresence>`
+   — a **conditional-mount** pattern where the answer text is not in the DOM
+   at all unless the visitor has clicked that question open. Confirmed on the
+   live site: `getFAQSchema(faqs)` on the homepage declares 5 full Q&A pairs
+   in JSON-LD while the server-rendered HTML contains 0 of the 5 answer texts
+   pre-click — exactly the "FAQ schema injected invisibly" anti-pattern the
+   task asked to check for. Fixed by changing the homepage's FAQ accordion to
+   keep every answer `<div>` permanently mounted and animate `height`/
+   `opacity` between the open/closed states instead of conditionally
+   rendering it (removed the now-unnecessary `AnimatePresence` import, since
+   nothing unmounts anymore). Same visual behavior, same animation, but the
+   answer text is now always present in the initial HTML. Verified against
+   the live site's pre-fix HTML via `curl` + a small Node script that
+   extracts and `JSON.parse()`s every `<script type="application/ld+json">`
+   block — all schema blocks across `/`, `/fleet`, `/vehicles/[slug]`, and
+   `/routes/[slug]` parsed as valid JSON with no malformed nesting.
+
+**Title tags — 12 pages fixed, all reasoned against exact character counts
+(dumped via a `tsx` script over the actual data files, not eyeballed)**
+
+5. `/fleet` title was 66 chars (`'9, 12 & 17 Seater Tempo Traveller Rental
+   Bangalore | Sushi Travels'`) → 61 chars (`'9/12/17-Seater Tempo Traveller,
+   Bangalore | Sushi Travels'`) in `src/app/fleet/layout.tsx`.
+6. `/contact` title was 70 chars → trimmed to 52 chars (`'Contact Sushi Tours
+   & Travels | Bangalore Car Rental'`) in `src/app/contact/layout.tsx`.
+7. `/vehicles/bus-rental-bangalore` title was 65 chars → 49 chars (`'Bus &
+   Mini Coach Rental Bangalore | Sushi Travels'`) in `src/lib/vehiclePages.ts`.
+8. All 6 `/services/[slug]` titles were 66–75 chars (e.g. `'Corporate
+   Transport Bangalore | Employee & Executive Travel | Sushi Travels'` at 75
+   chars — well past Google's ~60-char SERP truncation point). Trimmed the
+   redundant middle qualifier from all 6 in `src/lib/services.ts`, e.g. →
+   `'Corporate Transport Bangalore | Sushi Travels'` (45 chars). New range:
+   44–48 chars for 5 of them, 60 chars for the one already-compliant
+   (`bangalore-sightseeing-cab`, left untouched).
+9. All 10 `/routes/[slug]` titles shared a `'... | Distance, Fare Enquiry |
+   Sushi Travels'` suffix that pushed 8 of the 10 past 60 chars (up to 69 for
+   Chikmagalur/Pondicherry). Shortened the shared suffix to `'... | Fare &
+   Distance | Sushi Travels'` across all 10 (one find/replace in
+   `src/lib/routes.ts`, kept the pattern consistent rather than fixing only
+   the 8 that were broken) — new range: 55–62 chars.
+10. Home page's default title (`layout.tsx`) was already a compliant 54
+    chars — not touched.
+11. **Location pages** (`src/lib/locations.ts`): titles are 43–52 chars, on
+    the short side of the 50–60 target but not truncating in a SERP and not
+    "way outside" the range — left as-is per the task's own proportionality
+    instruction, flagged here rather than force-padded with filler.
+
+**Meta descriptions — 2 pages were dramatically over 160 chars**
+
+12. **Home page's default description (`src/app/layout.tsx`) was 230
+    characters** — nearly 70 over target, guaranteed to be truncated in a
+    SERP snippet. Trimmed to 164 chars, kept every real fact (Sushi Tours &
+    Travels naming, 9/12/17-seater, outstation cabs, airport transfers, local
+    drops).
+13. **`/fleet`'s description (`src/app/fleet/layout.tsx`) was 203
+    characters** — trimmed to 172 chars alongside the title fix above.
+14. **`/tours-and-packages`'s description was 170 characters** — trimmed to
+    155 chars by dropping the redundant "9/12/17-seater" qualifier (the
+    vehicle types are already named on the page and on `/vehicles`).
+15. All other page/family meta descriptions were checked and found within a
+    reasonable band (130–171 chars pre-fix, mostly 140–165) — not touched,
+    since none were duplicated and none were dramatically outside 150–160.
+16. **Uniqueness check**: dumped every `title`/`metaDescription`/`h1` across
+    all 36 vehicle/service/location/route pages via a `tsx` script — **zero
+    duplicates found**, within each family and cross-family. The
+    cannibalization check documented in section 9/`SEO-STRATEGY.md` still
+    holds.
+
+**Canonical tags — 3 pages were missing `alternates.canonical` entirely**
+
+17. `src/app/about/page.tsx`, `src/app/booking/page.tsx`, and
+    `src/app/tours-and-packages/page.tsx` had a bare `metadata` object with
+    only `title`/`description` — no `alternates.canonical`, unlike every
+    other page on the site (`/fleet`, `/contact`, `/vehicles`, `/services`,
+    `/locations`, `/routes` and all 36 dynamic pages all had it). Added
+    `alternates: { canonical: '/about' | '/booking' | '/tours-and-packages' }`
+    to each, matching the established pattern.
+
+**Open Graph / Twitter Card — 7 pages had none at all (silently fell back to
+the generic homepage OG image/title)**
+
+18. The 4 hub pages (`/vehicles`, `/services`, `/locations`, `/routes`) and
+    the 3 core pages just fixed above (`/about`, `/booking`,
+    `/tours-and-packages`) had `title`/`description`/`alternates.canonical`
+    but **no `openGraph` or `twitter` block** — every one of them would have
+    shared Facebook/WhatsApp/Twitter link previews with the generic sitewide
+    OG card from `layout.tsx` (same title, same description, same image as
+    the homepage), instead of a card representing that specific page. Added
+    page-specific `openGraph`/`twitter` metadata to all 7, each reusing that
+    page's own title/description and an existing local image already used in
+    that page's own hero (e.g. `/vehicles` → `/fleet/force-urbania-front-01.webp`,
+    `/about` → `/videos/about-scene-13-poster.webp`, `/tours-and-packages` →
+    `/Isha-Temple.webp`) — verified every referenced image file actually
+    exists in `public/` before wiring it in. `/fleet` and `/contact` already
+    had OG/Twitter from a prior pass (`layout.tsx` files) — only their
+    title/description text changed per items 5–6 above, not their structure.
+19. Spot-checked OG image resolution against the **live production site**
+    (not a local build) via `curl -sI`: `https://www.sushitravels.com/fleet/
+    force-urbania-front-01.webp` → `200 image/webp`. The global OG/Twitter
+    image referenced by `layout.tsx` and `schema.ts`'s `LocalBusiness.image`
+    both resolve correctly.
+
+**Heading hierarchy — 5 H1s that didn't contain their page's primary keyword**
+
+20. Per requirement #3, checked every page's H1 against the primary keyword
+    documented in `SEO-STRATEGY.md`'s keyword map. Five core-page H1s were
+    generic taglines that didn't contain the target keyword at all (the
+    keyword only appeared in the hero subtitle beneath them, or nowhere on
+    the page): `/contact` ("Connect With Us" → **"Contact Sushi Travels"**),
+    `/fleet` ("Explore Our Rental Fleet" → **"Tempo Traveller Rental Fleet in
+    Bangalore"**), `/booking` ("Chauffeur Rental Booking Center" → **"Book a
+    Vehicle with Driver in Bangalore"**), `/about` ("Our Story & Values" →
+    **"About Sushi Travels — Our Story & Values"**, kept the existing
+    subheading rather than replacing it), and `/tours-and-packages` ("Tours &
+    Packages" → **"Bangalore Holiday Tour Packages"**). All five edits are
+    one-line text changes to the existing `<h1>` element — no styling,
+    layout, or design classes touched.
+21. **Home page's H1 ("Your Trusted Travel Partner Across India") was
+    deliberately left unchanged.** Section 9 of this file explicitly
+    documents that the homepage H1 stays generic on purpose, to avoid
+    keyword-cannibalizing the dedicated `/fleet` and `/vehicles/*` pages that
+    now own the specific "Tempo Traveller rental Bangalore" keyword. That's a
+    real, reasoned tradeoff from a prior pass, not an oversight — overriding
+    it wasn't in scope for an audit pass. `SEO-STRATEGY.md` has been updated
+    (see below) to state plainly that the homepage's actual H1 doesn't
+    literally contain its listed primary keyword, so this doesn't get
+    mistaken for a future "fix."
+22. Verified exactly one `<h1>` per page across every route in `src/app`
+    (`grep -rn "<h1" src/app` — one match per file, no page has zero or
+    multiple). No heading-level skips found on the pages read during this
+    pass (H1 → H2 → H3 nesting is consistent on the vehicle/service/route
+    detail pages via `FaqAccordion`/`VehiclePricingTable`/etc.).
+
+**Alt text — audited, no defects found**
+
+23. Checked every `<Image alt=` and `<img alt=` in `src/` for empty
+    (`alt=""`) on content-bearing images, duplicate alt text within the same
+    page, and generic/keyword-stuffed text. Found exactly 2 uses of
+    `alt=""`, both legitimately decorative: `src/components/VehicleCard.tsx`
+    (a blurred duplicate of the adjacent image used purely as a background
+    fill behind a `object-contain` product shot — the second, real `<Image>`
+    right next to it carries the descriptive alt) and one in the admin
+    dashboard's image-crop UI (not a public/indexed page). No duplicate alt
+    text found within any single page's image set — vehicle photo galleries
+    use `"Sushi Travels {name} — photo {n} of {total}"` (unique per index),
+    location/route/service hero images use CSS `background-image` (not
+    `<img>`, so no alt attribute applies — noted below as a minor,
+    pre-existing image-search tradeoff, not a defect worth a hero-component
+    redesign). Nothing needed fixing here — the section 9 pass already did
+    this correctly.
+
+**Internal links — audited, no broken links or orphan pages found**
+
+24. Grepped every `href="/..."` and `href={\`/...\`}` literal and
+    template-literal internal link across `src/` and confirmed every target
+    resolves to a real route under `src/app` (static hub links, and all 4
+    `${page.slug}` template patterns for `/vehicles`, `/services`,
+    `/locations`, `/routes` detail pages). No dead links found.
+25. Confirmed no orphan pages: all 4 hub pages (`/vehicles`, `/services`,
+    `/locations`, `/routes`) `.map()` over their **entire** respective data
+    array with no slicing, so every one of the 36 dynamic pages is linked
+    from its hub; the 4 hubs themselves are linked from the Navbar, Footer,
+    and/or homepage per section 9's internal-linking work. Nothing to fix.
+
+**Technical SEO**
+
+26. `src/app/sitemap.ts` and `src/app/robots.ts`: both already correct —
+    sitemap lists only the 10 static/hub routes + 36 dynamic routes (no
+    `/admin`, no `/api/*`, no removed `/blog` routes), robots disallows
+    `/api/` and `/admin` and points at `https://sushitravels.com/sitemap.xml`.
+    No changes needed.
+27. `grep -r "http://" src/` (excluding `localhost`, `127.0.0.1`, and the
+    harmless `http://www.w3.org/2000/svg` XML namespace URI on inline SVGs)
+    returned zero results — no hardcoded insecure internal/external links.
+28. `next.config.ts`'s headers/caching config (CSP, HSTS, image/video
+    long-cache headers) reviewed — doesn't set `X-Robots-Tag` or anything
+    else that would block indexing, and doesn't affect crawlability (CSP is
+    browser-enforced only; it has no effect on what Googlebot/other crawlers
+    can fetch and index). `npm run build` passes with this config unchanged.
+29. `npx tsc --noEmit` and `npm run build` both pass after all fixes above;
+    all 56 routes prerender (verified via the build's route table). Live
+    production spot-check via `curl`: `/`, `/fleet`, `/about`, `/contact`,
+    `/booking`, `/tours-and-packages`, `/vehicles/sedan-rental-bangalore`,
+    `/services/bangalore-airport-taxi`, `/locations/car-rental-whitefield`,
+    `/routes/bangalore-to-mysore-cab` all return `200`.
+30. Fixed 2 pre-existing `react/no-unescaped-entities` ESLint errors in
+    `src/app/about/page.tsx` (raw apostrophes in "region's" and "you're",
+    now `&apos;`) while already in that file for the H1 edit — same category
+    of fix the section 8 pass already did elsewhere, just two instances that
+    pass had missed.
+
+### GEO (AI-engine) formatting — reviewed, mostly already solid
+
+31. Every one of the 36 vehicle/service/location/route landing pages already
+    has a dedicated `geoSummary` field rendered in its own bordered section
+    immediately after the hero and before the first `<h2>` (confirmed by
+    reading `src/app/vehicles/[slug]/page.tsx`'s render order) — this was
+    built correctly in section 9 and needed no changes.
+32. The 6 core pages (home, fleet, about, contact, booking, tours-and-packages)
+    don't have a separately-boxed `geoSummary`-style paragraph — they rely on
+    the hero subtitle directly under the H1 (1–2 factual sentences, no
+    fabricated numbers) as the de facto GEO summary. This reads as adequate
+    (short, factual, present before the first H2) rather than a defect, so it
+    was left alone rather than bolted on as a new duplicate section — adding
+    one would risk restating facts already said once, which section 10's
+    copy-trim pass explicitly worked to avoid.
+33. FAQ answers spot-checked on the homepage and 3 landing-page families are
+    already answer-first (the first sentence is a complete, standalone
+    answer before any elaboration) — consistent with the requirement, no
+    changes needed beyond the DOM-visibility fix in item 4.
+
+### Found but NOT fixed — needs the owner's input, not something this pass
+could safely infer
+
+34. **`src/app/about/page.tsx`'s "Milestone Stats Banner" states "50+ GPS
+    Monitored Cars," "10k+ Delighted Travelers," and "15+ Years Travel
+    Experience,"** and the About page's `<meta name="description">` repeats
+    "15+ years experience, 50+ vehicles." These numbers predate this pass
+    (not introduced by it) and are internally consistent with each other
+    (the "since 2011" founding date in the hero subtitle does equal ~15
+    years as of 2026), but **they are not verifiable against any data file
+    in this codebase** — `src/lib/vehicles.ts` lists 13 distinct
+    vehicle/tier entries, not "50+." That's not necessarily a contradiction
+    (a rental operator can run more physical vehicles than the number of
+    distinct catalogued tiers/types), but this pass has no way to confirm
+    it either way, and the task's own rule is not to invent or alter
+    business-fact numbers without confirmation. **Left unchanged, flagged
+    for the owner**: please confirm the real current fleet size, years in
+    operation, and total travelers served (or confirm these are
+    approximate/rounded marketing figures that are fine as-is) so a future
+    pass can either substantiate them explicitly or soften the phrasing.
+35. **`/fleet` and `/` (home) are both `'use client'` components that fetch
+    their real content client-side** (`useEffect(() => fetch('/api/fleet'
+    …))` in `src/app/fleet/page.tsx`, and `fetch('/api/home-data')` in
+    `src/app/page.tsx`) **rather than fetching server-side.** This means the
+    static/prerendered HTML shipped for these two pages — what a crawler
+    that doesn't execute JavaScript sees — contains an *empty* vehicle grid
+    on `/fleet` (confirmed by extracting and parsing the live site's
+    `ItemList` JSON-LD: `numberOfItems` effectively 0 until client JS runs)
+    and empty fleet-preview/routes/packages sections on `/`. Googlebot's
+    renderer generally executes JS and picks this up on a second wave, but
+    many AI-answer-engine crawlers (this task's own "GEO/AEO" concern) are
+    known not to execute JavaScript at all, meaning the actual fleet listing
+    — the single most commercially important content block on the site — may
+    be effectively invisible to those bots. **This is the single largest
+    technical/GEO finding of this pass** and was deliberately **not**
+    attempted as a fix here: converting these two pages to fetch server-side
+    (e.g. querying Prisma directly in a Server Component and passing data
+    down to small `'use client'` islands for the existing filter/animation
+    interactivity) is a real, legitimate fix, but it's a data-fetching
+    architecture change bigger than a proportional SEO/metadata pass, and
+    this sandbox has no live database connection to verify the refactor
+    renders correctly end-to-end (same limitation section 9 hit — see its
+    "Database sync required" note). Recommend a dedicated follow-up pass,
+    with DB access, specifically for this.
+36. Confirmed **`public/tirupati.jpg` remains orphaned** (flagged already in
+    section 10, still true — not referenced anywhere in `src/`, the Tirupati
+    route entry uses a remote Unsplash URL instead). No action taken again
+    this pass, restated here only because it was in scope to check for
+    orphaned assets.
+
+### Files changed in this pass
+
+`src/lib/schema.ts`, `src/app/page.tsx`, `src/app/layout.tsx`,
+`src/app/fleet/layout.tsx`, `src/app/fleet/page.tsx`,
+`src/app/contact/layout.tsx`, `src/app/contact/page.tsx`,
+`src/app/about/page.tsx`, `src/app/booking/page.tsx`,
+`src/app/tours-and-packages/page.tsx`, `src/app/vehicles/page.tsx`,
+`src/app/services/page.tsx`, `src/app/locations/page.tsx`,
+`src/app/routes/page.tsx`, `src/lib/vehiclePages.ts`, `src/lib/services.ts`,
+`src/lib/routes.ts`, `NOTES.md`, `SEO-STRATEGY.md`.
+
+`npx tsc --noEmit` and `npm run build` both pass; all 56 routes prerender.

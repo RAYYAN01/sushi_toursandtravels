@@ -20,7 +20,7 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'bangalore-airport-taxi',
     h1: 'Bangalore Airport Taxi Service',
-    title: 'Bangalore Airport Taxi Service | Kempegowda Airport Cab | Sushi Travels',
+    title: 'Bangalore Airport Taxi Service | Sushi Travels',
     metaDescription:
       'Chauffeur-driven airport taxi in Bangalore for Kempegowda International Airport (BLR) pickup & drop. Sedans, SUVs & group vehicles. Flight-time tracking on request.',
     heroSubtitle:
@@ -61,7 +61,7 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'outstation-cab-bangalore',
     h1: 'Outstation Cab Service from Bangalore',
-    title: 'Outstation Cab Service Bangalore | Round Trip Rental | Sushi Travels',
+    title: 'Outstation Cab Service Bangalore | Sushi Travels',
     metaDescription:
       'Book an outstation cab from Bangalore with a verified chauffeur — sedans, SUVs, Tempo Travellers & buses for round trips to Mysore, Coorg, Ooty and beyond.',
     heroSubtitle:
@@ -103,7 +103,7 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'local-taxi-bangalore',
     h1: 'Local Taxi Service in Bangalore',
-    title: 'Local Taxi Service Bangalore | Hourly & Point-to-Point | Sushi Travels',
+    title: 'Local Taxi Service Bangalore | Sushi Travels',
     metaDescription:
       'Book a local taxi in Bangalore for point-to-point drops, hourly city travel and errands — chauffeur-driven sedans and SUVs with transparent per-km rates.',
     heroSubtitle:
@@ -145,7 +145,7 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'corporate-transport-bangalore',
     h1: 'Corporate Transport Service in Bangalore',
-    title: 'Corporate Transport Bangalore | Employee & Executive Travel | Sushi Travels',
+    title: 'Corporate Transport Bangalore | Sushi Travels',
     metaDescription:
       'Corporate car and van rental in Bangalore for executive travel, employee transport and offsites. Sedans to Tempo Travellers with verified chauffeurs.',
     heroSubtitle:
@@ -187,7 +187,7 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'wedding-vehicle-rental-bangalore',
     h1: 'Wedding Vehicle Rental in Bangalore',
-    title: 'Wedding Vehicle Rental Bangalore | Guest Transport | Sushi Travels',
+    title: 'Wedding Vehicle Rental Bangalore | Sushi Travels',
     metaDescription:
       'Wedding car and van rental in Bangalore for guest transport between venues, family pickups & multi-day wedding events. Tempo Travellers to buses.',
     heroSubtitle:

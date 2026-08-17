@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Shield, UserCheck, Headset, BadgePercent, ArrowRight, Star, MapPin, MessageSquare, AlertCircle, X } from 'lucide-react';
 import { getLocalBusinessSchema, getFAQSchema } from '@/lib/schema';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import VehicleCard from '@/components/VehicleCard';
 import { sortVehiclesByName } from '@/lib/vehicles';
 import PackageCard from '@/components/PackageCard';
@@ -683,20 +683,19 @@ export default function Home() {
                     </span>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      >
-                        <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-navy-light leading-relaxed border-t border-navy-light/5">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Answer stays mounted in the DOM (never conditionally rendered) so the
+                      FAQPage JSON-LD below always matches the server-rendered HTML — only
+                      visibility/height is animated, not presence. */}
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-navy-light leading-relaxed border-t border-navy-light/5">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
                 </div>
               );
             })}

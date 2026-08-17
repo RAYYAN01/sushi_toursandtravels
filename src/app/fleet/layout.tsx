@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '9, 12 & 17 Seater Tempo Traveller Rental Bangalore | Sushi Travels',
+  title: '9/12/17-Seater Tempo Traveller, Bangalore | Sushi Travels',
   description:
-    'Book 9 seater, 12 seater & 17 seater Tempo Traveller rental in Bangalore with Sushi Tours & Travels. Plus sedans, SUVs, and mini coach hire with verified drivers for outstation, corporate & group travel.',
+    'Book 9, 12 & 17-seater Tempo Travellers in Bangalore with Sushi Tours & Travels, plus sedans, SUVs & mini coach hire — all with verified drivers for outstation trips.',
   alternates: {
     canonical: '/fleet',
   },
   openGraph: {
-    title: '9, 12 & 17 Seater Tempo Traveller Rental Bangalore | Sushi Travels',
+    title: '9/12/17-Seater Tempo Traveller, Bangalore | Sushi Travels',
     description:
       'Browse the full Sushi Tours & Travels fleet: 9/12/17 seater Tempo Travellers, sedans, SUVs, and a mini coach — all with verified drivers.',
     url: '/fleet',

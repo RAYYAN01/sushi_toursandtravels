@@ -66,7 +66,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-navy-dark/75 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-4">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold">
-            Connect With Us
+            Contact Sushi Travels
           </h1>
           <p className="text-sm md:text-base text-cream-warm/95 max-w-2xl mx-auto">
             Have questions about regional state permits, routing, or specialized rental packages? Get in touch with our desk.

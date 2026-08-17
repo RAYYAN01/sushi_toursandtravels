@@ -63,7 +63,7 @@ export default function FleetPage() {
         <div className="absolute inset-0 bg-navy-dark/55 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold">
-            Explore Our Rental Fleet
+            Tempo Traveller Rental Fleet in Bangalore
           </h1>
           <p className="text-sm md:text-base text-cream-warm max-w-2xl mx-auto">
             9-seater, 12-seater &amp; 17-seater Tempo Traveller rentals in Bangalore, plus sedans, SUVs, and mini coaches — all with verified professional drivers for local, outstation, and group travel.

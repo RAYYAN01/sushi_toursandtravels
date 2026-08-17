@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: 'Sushi Travels | Car & Tempo Traveller Rental Bangalore',
     template: '%s | Sushi Travels'
   },
-  description: 'Sushi Tours & Travels (Sushi Travels) provides premium chauffeur-driven car and Tempo Traveller rentals in Bangalore. Book 9/12/17 seater Tempo Travellers, outstation cabs, airport transfers, and local drops with verified drivers.',
+  description: 'Sushi Tours & Travels offers chauffeur-driven car & Tempo Traveller rentals in Bangalore: 9/12/17-seater vans, outstation cabs, airport transfers & local drops.',
   keywords: [
     'Sushi Tours & Travels',
     'Sushi Tours and Travels Bangalore',

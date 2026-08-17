@@ -414,7 +414,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'bus-rental-bangalore',
     h1: 'Bus & Mini Coach Rental in Bangalore',
-    title: 'Bus Rental Bangalore | Mini Coach, 21 & 50 Seater | Sushi Travels',
+    title: 'Bus & Mini Coach Rental Bangalore | Sushi Travels',
     metaDescription:
       'Compare our Bangalore bus rental options: SGR Mini Coach (20-seater), 21-seater and 50-seater AC buses for group travel, weddings & corporate events.',
     heroSubtitle:

@@ -6,7 +6,24 @@ import PackageCard from '@/components/PackageCard';
 export const metadata = {
   title: 'Tours & Packages | Sushi Travels Bangalore',
   description:
-    'Explore Sushi Travels tour packages from Bangalore — Mysore, Coorg, Ooty, Goa, Tirupati and Pondicherry round trips with 9/12/17-seater Tempo Travellers, sedans and SUVs.',
+    'Explore Sushi Travels tour packages from Bangalore — Mysore, Coorg, Ooty, Goa, Tirupati and Pondicherry round trips with Tempo Travellers, sedans and SUVs.',
+  alternates: {
+    canonical: '/tours-and-packages',
+  },
+  openGraph: {
+    title: 'Tours & Packages | Sushi Travels Bangalore',
+    description:
+      'Explore Sushi Travels tour packages from Bangalore — Mysore, Coorg, Ooty, Goa, Tirupati and Pondicherry round trips with Tempo Travellers, sedans and SUVs.',
+    url: '/tours-and-packages',
+    images: [{ url: '/Isha-Temple.webp', width: 800, height: 600, alt: 'Sushi Travels tour packages from Bangalore' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Tours & Packages | Sushi Travels Bangalore',
+    description:
+      'Explore Sushi Travels tour packages from Bangalore — Mysore, Coorg, Ooty, Goa, Tirupati and Pondicherry round trips with Tempo Travellers, sedans and SUVs.',
+    images: ['/Isha-Temple.webp'],
+  },
 };
 
 export default function ToursAndPackagesPage() {
@@ -30,7 +47,7 @@ export default function ToursAndPackagesPage() {
         <div className="absolute inset-0 bg-navy-dark/75 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-4">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold">
-            Tours &amp; Packages
+            Bangalore Holiday Tour Packages
           </h1>
           <p className="text-sm md:text-base text-cream-warm max-w-2xl mx-auto">
             Ready-made round trips from Bangalore to Mysore, Coorg, Ooty, Goa, Tirupati and Pondicherry — matched to the right vehicle for your group size.

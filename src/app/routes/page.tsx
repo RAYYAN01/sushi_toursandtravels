@@ -11,6 +11,20 @@ export const metadata: Metadata = {
   description:
     'Distance, travel time and vehicle guidance for popular Bangalore outstation cab routes — Mysore, Coorg, Ooty, Hampi, Tirupati, Pondicherry and more.',
   alternates: { canonical: '/routes' },
+  openGraph: {
+    title: 'Bangalore Outstation Cab Routes | Sushi Travels',
+    description:
+      'Distance, travel time and vehicle guidance for popular Bangalore outstation cab routes — Mysore, Coorg, Ooty, Hampi, Tirupati, Pondicherry and more.',
+    url: '/routes',
+    images: [{ url: '/coorg.webp', width: 800, height: 600, alt: 'Bangalore outstation cab routes served by Sushi Travels' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Bangalore Outstation Cab Routes | Sushi Travels',
+    description:
+      'Distance, travel time and vehicle guidance for popular Bangalore outstation cab routes — Mysore, Coorg, Ooty, Hampi, Tirupati, Pondicherry and more.',
+    images: ['/coorg.webp'],
+  },
 };
 
 export default function RoutesHubPage() {

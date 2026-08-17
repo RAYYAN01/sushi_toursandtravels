@@ -68,32 +68,44 @@ export function getFleetItemListSchema(vehicleList: Vehicle[]) {
     description: 'Browse our diverse fleet of AC sedans, luxury SUVs, and spacious tempo travellers available with drivers for rent.',
     url: `${SITE_URL}/fleet`,
     numberOfItems: vehicleList.length,
-    itemListElement: vehicleList.map((vehicle, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      item: {
-        '@type': 'Product',
-        name: vehicle.name,
-        image: vehicle.image,
-        description: vehicle.description,
-        brand: {
-          '@type': 'Brand',
-          name: vehicle.name.split(' ')[0],
-        },
-        offers: {
-          '@type': 'Offer',
-          url: `${SITE_URL}/fleet`,
-          priceCurrency: 'INR',
-          price: vehicle.ratePerKm,
-          priceSpecification: {
-            '@type': 'UnitPriceSpecification',
-            price: vehicle.ratePerKm,
-            priceCurrency: 'INR',
-            unitText: 'KM',
+    itemListElement: vehicleList.map((vehicle, idx) => {
+      // Vehicles priced "Price on Request" have ratePerKm === 0 — emitting
+      // offers.price: 0 would falsely advertise a free/zero-cost rental in
+      // structured data. Only include the offers block when there is a real
+      // confirmed rate, matching the rule getVehicleProductSchema() already
+      // follows for the per-vehicle landing pages.
+      const hasConfirmedRate = !vehicle.priceDisplay && !!vehicle.ratePerKm;
+      return {
+        '@type': 'ListItem',
+        position: idx + 1,
+        item: {
+          '@type': 'Product',
+          name: vehicle.name,
+          image: `${SITE_URL}${vehicle.image}`,
+          description: vehicle.description,
+          brand: {
+            '@type': 'Brand',
+            name: vehicle.name.split(' ')[0],
           },
+          ...(hasConfirmedRate
+            ? {
+                offers: {
+                  '@type': 'Offer',
+                  url: `${SITE_URL}/fleet`,
+                  priceCurrency: 'INR',
+                  price: vehicle.ratePerKm,
+                  priceSpecification: {
+                    '@type': 'UnitPriceSpecification',
+                    price: vehicle.ratePerKm,
+                    priceCurrency: 'INR',
+                    unitText: 'KM',
+                  },
+                },
+              }
+            : {}),
         },
-      },
-    })),
+      };
+    }),
   };
 }
 
@@ -130,7 +142,7 @@ export function getServiceSchema() {
     offers: {
       '@type': 'Offer',
       priceCurrency: 'INR',
-      description: 'Starting from ₹12 per km. Plus GST applicable.',
+      description: 'Starting from ₹13 per km (sedan rate). Plus GST applicable.',
     },
   };
 }

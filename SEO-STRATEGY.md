@@ -1,4 +1,4 @@
-# Sushi Travels — SEO Strategy (2026-08-16)
+# Sushi Travels — SEO Strategy (2026-08-16, corrected 2026-08-17)
 
 This document is the written strategy deliverable accompanying the technical/
 on-page SEO build described in `NOTES.md` section 9. Everything in this file
@@ -6,6 +6,17 @@ is documentation for the owner to review and action — none of it (backlinks,
 Google Business Profile, blog content) was or could be executed as part of
 the code pass, since it requires accounts, relationships and manual work the
 codebase change itself can't perform.
+
+**2026-08-17 correction note:** a follow-up SEO/technical audit
+(`NOTES.md` section 11) found that several core pages' actual `<h1>` text
+didn't literally contain the "Primary Keyword" listed below — see the
+per-page notes added inline under the Core Pages table. Five of those were
+fixed (H1 text now contains the keyword); the homepage's H1 was deliberately
+left generic, as explained inline, to avoid cannibalizing `/fleet` and
+`/vehicles/*` for the same keyword. The keyword *assignments* themselves
+(which URL owns which phrase) are unchanged and still the working baseline —
+only the "does the H1 literally say this" claim has been corrected to match
+reality.
 
 All guidance here follows the brief's rules: no keyword stuffing, no fake
 reviews/ratings/locations, no invented pricing, no unproven superlative
@@ -18,14 +29,14 @@ white-hat only (no PBNs, link farms, or paid link schemes).
 
 ### Core pages (existing)
 
-| Page | Primary Keyword | Supporting Keywords |
-|---|---|---|
-| `/` (Home) | Car & Tempo Traveller rental Bangalore | Sushi Travels, chauffeur-driven car rental India, outstation cab Bangalore |
-| `/fleet` | Tempo Traveller rental Bangalore (9/12/17 seater) | vehicle hire with driver Bangalore, sedan/SUV/bus rental Bangalore |
-| `/tours-and-packages` | Bangalore holiday packages | Mysore/Coorg/Ooty tour package, round trip packages Bangalore |
-| `/about` | About Sushi Travels | Bangalore travel agency, chauffeur service company |
-| `/contact` | Contact Sushi Travels | Sushi Tours & Travels Bangalore phone number |
-| `/booking` | Book a cab / vehicle Bangalore | online vehicle booking Bangalore |
+| Page | Primary Keyword | Supporting Keywords | H1 matches keyword? |
+|---|---|---|---|
+| `/` (Home) | Car & Tempo Traveller rental Bangalore | Sushi Travels, chauffeur-driven car rental India, outstation cab Bangalore | **No, intentionally.** H1 is "Your Trusted Travel Partner Across India" — kept generic on purpose so the homepage doesn't compete with `/fleet` and `/vehicles/*` for this exact phrase (see `NOTES.md` section 9's cannibalization check). The keyword does appear in the hero subtitle directly beneath the H1. |
+| `/fleet` | Tempo Traveller rental Bangalore (9/12/17 seater) | vehicle hire with driver Bangalore, sedan/SUV/bus rental Bangalore | Yes — H1 is now "Tempo Traveller Rental Fleet in Bangalore" (fixed 2026-08-17; was "Explore Our Rental Fleet"). |
+| `/tours-and-packages` | Bangalore holiday packages | Mysore/Coorg/Ooty tour package, round trip packages Bangalore | Yes — H1 is now "Bangalore Holiday Tour Packages" (fixed 2026-08-17; was "Tours & Packages"). |
+| `/about` | About Sushi Travels | Bangalore travel agency, chauffeur service company | Yes — H1 is now "About Sushi Travels — Our Story & Values" (fixed 2026-08-17; was "Our Story & Values"). |
+| `/contact` | Contact Sushi Travels | Sushi Tours & Travels Bangalore phone number | Yes — H1 is now "Contact Sushi Travels" (fixed 2026-08-17; was "Connect With Us"). |
+| `/booking` | Book a cab / vehicle Bangalore | online vehicle booking Bangalore | Yes — H1 is now "Book a Vehicle with Driver in Bangalore" (fixed 2026-08-17; was "Chauffeur Rental Booking Center"). |
 
 ### Vehicle pages (`/vehicles/[slug]`)
 

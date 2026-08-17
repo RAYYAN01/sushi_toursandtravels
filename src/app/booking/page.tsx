@@ -5,7 +5,22 @@ import BookingForm from '@/components/BookingForm';
 
 export const metadata = {
   title: 'Book a Car with Driver | Chauffeur Rental India',
-  description: 'Book local drops, full-day packages, or outstation chauffeur services. Multi-step transparent booking with verified professional drivers.'
+  description: 'Book local drops, full-day packages, or outstation chauffeur services. Multi-step transparent booking with verified professional drivers.',
+  alternates: {
+    canonical: '/booking',
+  },
+  openGraph: {
+    title: 'Book a Car with Driver | Chauffeur Rental India',
+    description: 'Book local drops, full-day packages, or outstation chauffeur services. Multi-step transparent booking with verified professional drivers.',
+    url: '/booking',
+    images: [{ url: '/fleet/force-urbania-front-01.webp', width: 800, height: 600, alt: 'Book a Sushi Travels vehicle with driver online' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Book a Car with Driver | Chauffeur Rental India',
+    description: 'Book local drops, full-day packages, or outstation chauffeur services. Multi-step transparent booking with verified professional drivers.',
+    images: ['/fleet/force-urbania-front-01.webp'],
+  },
 };
 
 export default function BookingPage() {
@@ -35,7 +50,7 @@ export default function BookingPage() {
         <div className="absolute inset-0 bg-navy-dark/80 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-3">
           <h1 className="text-3xl sm:text-4xl font-serif font-bold text-white">
-            Chauffeur Rental Booking Center
+            Book a Vehicle with Driver in Bangalore
           </h1>
           <p className="text-sm text-cream-warm/95 max-w-xl mx-auto">
             Book verified drivers and air-conditioned vehicles in under 3 minutes. Secure booking, pay on trip completion.
