@@ -6,7 +6,7 @@ import { getBreadcrumbListSchema } from '@/lib/schema';
 import LandingHero from '@/components/LandingHero';
 
 export const metadata: Metadata = {
-  title: 'Areas We Serve in Bangalore | Sushi Travels',
+  title: 'Areas We Serve in Bangalore',
   description:
     'Sushi Travels provides chauffeur-driven car rental pickup and drop across Whitefield, Koramangala, Indiranagar, Electronic City and more Bangalore areas.',
   alternates: { canonical: '/locations' },

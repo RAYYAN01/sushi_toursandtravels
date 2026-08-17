@@ -24,7 +24,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-mysore-cab',
     destination: 'Mysore',
     h1: 'Bangalore to Mysore Cab Service',
-    title: 'Bangalore to Mysore Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Mysore Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Mysore cab service — approx. 143 km, 2.5–3 hrs one way. Sedans, SUVs & Tempo Travellers with verified drivers. Get a fare quote today.',
     heroSubtitle: 'Approx. 143 km, 2.5–3 hours one way — one of our most-booked South India routes.',
@@ -64,7 +64,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-coorg-cab',
     destination: 'Coorg',
     h1: 'Bangalore to Coorg Cab Service',
-    title: 'Bangalore to Coorg Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Coorg Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Coorg cab service — approx. 250 km, 5.5–6 hrs one way through ghat roads. SUVs & Tempo Travellers with experienced drivers.',
     heroSubtitle: 'Approx. 250 km, 5.5–6 hours one way through the Western Ghats coffee country.',
@@ -104,7 +104,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-ooty-cab',
     destination: 'Ooty',
     h1: 'Bangalore to Ooty Cab Service',
-    title: 'Bangalore to Ooty Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Ooty Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Ooty cab service — approx. 270 km, 6–7 hrs one way via Bandipur. SUVs & Tempo Travellers with experienced hill-road drivers.',
     heroSubtitle: 'Approx. 270 km, 6–7 hours one way through the Bandipur forest corridor and Nilgiri hairpin bends.',
@@ -144,7 +144,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-chikmagalur-cab',
     destination: 'Chikmagalur',
     h1: 'Bangalore to Chikmagalur Cab Service',
-    title: 'Bangalore to Chikmagalur Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Chikmagalur Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Chikmagalur cab service — approx. 245 km, 5–5.5 hrs one way through Karnataka\'s coffee hill country. SUVs & Tempo Travellers available.',
     heroSubtitle: 'Approx. 245 km, 5–5.5 hours one way into Karnataka\'s coffee-growing hill country.',
@@ -183,7 +183,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-hampi-cab',
     destination: 'Hampi',
     h1: 'Bangalore to Hampi Cab Service',
-    title: 'Bangalore to Hampi Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Hampi Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Hampi cab service — approx. 340 km, 6–7 hrs one way to the UNESCO ruins. SUVs, Tempo Travellers & buses for overnight trips.',
     heroSubtitle: 'Approx. 340 km, 6–7 hours one way to the UNESCO World Heritage ruins of Hampi.',
@@ -223,7 +223,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-tirupati-cab',
     destination: 'Tirupati',
     h1: 'Bangalore to Tirupati Cab Service',
-    title: 'Bangalore to Tirupati Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Tirupati Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Tirupati cab service — approx. 250 km, 5–5.5 hrs one way. Early darshan-timed pickups, sedans to Tempo Travellers with waiting driver.',
     heroSubtitle: 'Approx. 250 km, 5–5.5 hours one way — timed for darshan queues, with waiting-driver options for same-day return.',
@@ -263,7 +263,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-pondicherry-cab',
     destination: 'Pondicherry',
     h1: 'Bangalore to Pondicherry Cab Service',
-    title: 'Bangalore to Pondicherry Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Pondicherry Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Pondicherry cab service — approx. 310 km, 6–7 hrs one way to the French Quarter & beaches. Sedans to Tempo Travellers available.',
     heroSubtitle: 'Approx. 310 km, 6–7 hours one way to Pondicherry\'s French Quarter and beaches.',
@@ -303,7 +303,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-chennai-cab',
     destination: 'Chennai',
     h1: 'Bangalore to Chennai Cab Service',
-    title: 'Bangalore to Chennai Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Chennai Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Chennai cab service — approx. 350 km, 6–6.5 hrs one way via NH44. Sedans, SUVs & Tempo Travellers for business & family travel.',
     heroSubtitle: 'Approx. 350 km, 6–6.5 hours one way via NH44 — a straightforward highway drive.',
@@ -342,7 +342,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-hyderabad-cab',
     destination: 'Hyderabad',
     h1: 'Bangalore to Hyderabad Cab Service',
-    title: 'Bangalore to Hyderabad Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Hyderabad Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Hyderabad cab service — approx. 570 km, 9–10 hrs one way. SUVs & Tempo Travellers for long-distance business & family travel.',
     heroSubtitle: 'Approx. 570 km, 9–10 hours one way — our longest regular outstation route.',
@@ -381,7 +381,7 @@ export const routePages: RoutePage[] = [
     slug: 'bangalore-to-mangalore-cab',
     destination: 'Mangalore',
     h1: 'Bangalore to Mangalore Cab Service',
-    title: 'Bangalore to Mangalore Cab | Fare & Distance | Sushi Travels',
+    title: 'Bangalore to Mangalore Cab | Fare & Distance',
     metaDescription:
       'Bangalore to Mangalore cab service — approx. 350 km, 7–8 hrs one way via the Western Ghats. SUVs & Tempo Travellers with experienced ghat-road drivers.',
     heroSubtitle: 'Approx. 350 km, 7–8 hours one way via the Western Ghats to the coast.',

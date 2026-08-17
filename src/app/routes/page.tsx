@@ -7,7 +7,7 @@ import { getBreadcrumbListSchema } from '@/lib/schema';
 import LandingHero from '@/components/LandingHero';
 
 export const metadata: Metadata = {
-  title: 'Bangalore Outstation Cab Routes | Sushi Travels',
+  title: 'Bangalore Outstation Cab Routes',
   description:
     'Distance, travel time and vehicle guidance for popular Bangalore outstation cab routes — Mysore, Coorg, Ooty, Hampi, Tirupati, Pondicherry and more.',
   alternates: { canonical: '/routes' },

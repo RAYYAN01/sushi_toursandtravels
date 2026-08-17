@@ -23,19 +23,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!page) return {};
   const url = `/vehicles/${page.slug}`;
   const image = getPagePrimaryImage(page);
+  // The root layout's title template auto-appends "| Sushi Travels" to the
+  // plain `title`, but NOT to openGraph/twitter titles (those don't inherit
+  // the template) — so those need the suffix built explicitly here.
+  const brandedTitle = `${page.title} | Sushi Travels`;
   return {
     title: page.title,
     description: page.metaDescription,
     alternates: { canonical: url },
     openGraph: {
-      title: page.title,
+      title: brandedTitle,
       description: page.metaDescription,
       url,
       images: [{ url: image, width: 800, height: 600, alt: page.h1 }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: page.title,
+      title: brandedTitle,
       description: page.metaDescription,
       images: [image],
     },

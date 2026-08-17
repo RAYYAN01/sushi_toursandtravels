@@ -21,7 +21,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-whitefield',
     name: 'Whitefield',
     h1: 'Car Rental in Whitefield, Bangalore',
-    title: 'Car Rental Whitefield Bangalore | Sushi Travels',
+    title: 'Car Rental Whitefield Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Whitefield, Bangalore. Airport transfers, IT park commutes, outstation trips. Call or WhatsApp for a quote.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Whitefield, Bangalore\'s IT park and tech corridor.',
@@ -55,7 +55,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-electronic-city',
     name: 'Electronic City',
     h1: 'Car Rental in Electronic City, Bangalore',
-    title: 'Car Rental Electronic City Bangalore | Sushi Travels',
+    title: 'Car Rental Electronic City Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Electronic City, Bangalore. Corporate travel, airport transfers, outstation trips with verified drivers.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Electronic City, Bangalore\'s established IT hub in the south.',
@@ -89,7 +89,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-koramangala',
     name: 'Koramangala',
     h1: 'Car Rental in Koramangala, Bangalore',
-    title: 'Car Rental Koramangala Bangalore | Sushi Travels',
+    title: 'Car Rental Koramangala Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Koramangala, Bangalore. Local travel, airport transfers, outstation trips with verified drivers.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Koramangala, a busy commercial and startup hub in central Bangalore.',
@@ -123,7 +123,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-indiranagar',
     name: 'Indiranagar',
     h1: 'Car Rental in Indiranagar, Bangalore',
-    title: 'Car Rental Indiranagar Bangalore | Sushi Travels',
+    title: 'Car Rental Indiranagar Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Indiranagar, Bangalore. Local travel, airport transfers, outstation trips with verified drivers.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Indiranagar, one of Bangalore\'s well-known residential and commercial neighbourhoods.',
@@ -157,7 +157,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-jayanagar',
     name: 'Jayanagar',
     h1: 'Car Rental in Jayanagar, Bangalore',
-    title: 'Car Rental Jayanagar Bangalore | Sushi Travels',
+    title: 'Car Rental Jayanagar Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Jayanagar, Bangalore. Local travel, airport transfers, outstation and pilgrimage trips.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Jayanagar, one of Bangalore\'s established south-side residential areas.',
@@ -191,7 +191,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-jp-nagar',
     name: 'JP Nagar',
     h1: 'Car Rental in JP Nagar, Bangalore',
-    title: 'Car Rental JP Nagar Bangalore | Sushi Travels',
+    title: 'Car Rental JP Nagar Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in JP Nagar, Bangalore. Local travel, airport transfers, outstation trips with verified drivers.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across JP Nagar, a residential neighbourhood on Bangalore\'s south side.',
@@ -225,7 +225,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-marathahalli',
     name: 'Marathahalli',
     h1: 'Car Rental in Marathahalli, Bangalore',
-    title: 'Car Rental Marathahalli Bangalore | Sushi Travels',
+    title: 'Car Rental Marathahalli Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Marathahalli, Bangalore. Corporate travel, airport transfers, outstation trips.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Marathahalli, a busy junction connecting Bangalore\'s eastern IT corridor.',
@@ -259,7 +259,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-hebbal',
     name: 'Hebbal',
     h1: 'Car Rental in Hebbal, Bangalore',
-    title: 'Car Rental Hebbal Bangalore | Sushi Travels',
+    title: 'Car Rental Hebbal Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Hebbal, Bangalore. Airport transfers, local travel, outstation trips toward North Karnataka.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Hebbal, a key north Bangalore junction on the way to the airport.',
@@ -293,7 +293,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-yelahanka',
     name: 'Yelahanka',
     h1: 'Car Rental in Yelahanka, Bangalore',
-    title: 'Car Rental Yelahanka Bangalore | Sushi Travels',
+    title: 'Car Rental Yelahanka Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Yelahanka, Bangalore. Airport transfers, local travel, outstation trips with verified drivers.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Yelahanka, a residential area in north Bangalore near the airport.',
@@ -327,7 +327,7 @@ export const locationPages: LocationPage[] = [
     slug: 'car-rental-yeshwanthpur',
     name: 'Yeshwanthpur',
     h1: 'Car Rental in Yeshwanthpur, Bangalore',
-    title: 'Car Rental Yeshwanthpur Bangalore | Sushi Travels',
+    title: 'Car Rental Yeshwanthpur Bangalore',
     metaDescription:
       'Chauffeur-driven car rental for pickup and drop in Yeshwanthpur, Bangalore. Railway station transfers, local travel, outstation trips.',
     heroSubtitle: 'Chauffeur-driven pickup and drop across Yeshwanthpur, a well-connected transit and residential hub in northwest Bangalore.',

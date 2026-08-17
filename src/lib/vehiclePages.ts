@@ -30,7 +30,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'sedan-rental-bangalore',
     h1: 'Sedan Rental in Bangalore with Driver',
-    title: 'Sedan Rental Bangalore with Driver | Sushi Travels',
+    title: 'Sedan Rental Bangalore with Driver',
     metaDescription:
       'Book a chauffeur-driven sedan (Toyota Etios / Maruti Suzuki Dzire) in Bangalore at ₹13/km. Airport transfers, local drops & outstation trips. Call or WhatsApp for a quote.',
     heroSubtitle:
@@ -72,7 +72,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'innova-rental-bangalore',
     h1: 'Toyota Innova Rental in Bangalore',
-    title: 'Toyota Innova Rental Bangalore with Driver | Sushi Travels',
+    title: 'Toyota Innova Rental Bangalore with Driver',
     metaDescription:
       'Chauffeur-driven Toyota Innova (2011) rental in Bangalore at ₹17/km. Spacious 7-seater SUV for family outstation trips, pilgrimages & airport transfers.',
     heroSubtitle:
@@ -114,7 +114,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'innova-crysta-rental-bangalore',
     h1: 'Toyota Innova Crysta Rental in Bangalore',
-    title: 'Innova Crysta Rental Bangalore with Driver | Sushi Travels',
+    title: 'Innova Crysta Rental Bangalore with Driver',
     metaDescription:
       'Book a chauffeur-driven Toyota Innova Crysta in Bangalore at ₹19/km. Premium 7-seater SUV for family holidays, corporate travel & outstation road trips.',
     heroSubtitle:
@@ -156,7 +156,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'tempo-traveller-rental-bangalore',
     h1: '12-Seater Tempo Traveller Rental in Bangalore',
-    title: 'Tempo Traveller Rental Bangalore (AC & Non-AC) | Sushi Travels',
+    title: 'Tempo Traveller Rental Bangalore (AC & Non-AC)',
     metaDescription:
       'Hire a 12-seater Tempo Traveller in Bangalore — AC (₹22/km) or Non-AC (₹20/km). Pushback seats, dedicated luggage boot. Ideal for group outstation trips.',
     heroSubtitle:
@@ -202,7 +202,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: '9-seater-luxury-tempo-traveller-bangalore',
     h1: '9+1 Seater Luxury Tempo Traveller Rental in Bangalore',
-    title: '9 Seater Luxury Tempo Traveller Bangalore | Sushi Travels',
+    title: '9 Seater Luxury Tempo Traveller Bangalore',
     metaDescription:
       'Book the Luxury Tempo Traveller 9+1 Seater in Bangalore at ₹30/km — premium executive pushback seats for corporate teams, pilgrimages & mid-size family trips.',
     heroSubtitle:
@@ -248,7 +248,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'force-urbania-12-seater-maharaja-bangalore',
     h1: 'Force Urbania Maharaja 12-Seater Rental in Bangalore',
-    title: 'Force Urbania 12-Seater Rental Bangalore | Sushi Travels',
+    title: 'Force Urbania 12-Seater Rental Bangalore',
     metaDescription:
       'Hire the Force Urbania Maharaja 12-Seater in Bangalore at ₹45/km. High-roof premium van with captain seats for family holidays & corporate group travel.',
     heroSubtitle:
@@ -292,7 +292,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'force-urbania-16-seater-luxury-bangalore',
     h1: 'Force Urbania Luxury 16-Seater Rental in Bangalore',
-    title: 'Force Urbania 16-Seater Rental Bangalore | Sushi Travels',
+    title: 'Force Urbania 16-Seater Rental Bangalore',
     metaDescription:
       'Book the Force Urbania Luxury 16-Seater in Bangalore at ₹38/km. Our largest premium van — ideal for weddings, big families & corporate offsites.',
     heroSubtitle:
@@ -335,7 +335,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: '21-seater-bus-rental-bangalore',
     h1: '21-Seater Bus Rental in Bangalore',
-    title: '21 Seater Bus Rental Bangalore | Sushi Travels',
+    title: '21 Seater Bus Rental Bangalore',
     metaDescription:
       '21-seater AC bus rental in Bangalore for corporate offsites, school trips & pilgrimage groups. Price on request — call or WhatsApp for a custom quote.',
     heroSubtitle:
@@ -375,7 +375,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: '50-seater-bus-rental-bangalore',
     h1: '50-Seater Bus Rental in Bangalore',
-    title: '50 Seater Bus Rental Bangalore | Sushi Travels',
+    title: '50 Seater Bus Rental Bangalore',
     metaDescription:
       '50-seater AC bus rental in Bangalore for large corporate events, weddings & big pilgrimage groups. Price on request — call or WhatsApp for a custom quote.',
     heroSubtitle:
@@ -414,7 +414,7 @@ export const vehiclePages: VehiclePage[] = [
   {
     slug: 'bus-rental-bangalore',
     h1: 'Bus & Mini Coach Rental in Bangalore',
-    title: 'Bus & Mini Coach Rental Bangalore | Sushi Travels',
+    title: 'Bus & Mini Coach Rental Bangalore',
     metaDescription:
       'Compare our Bangalore bus rental options: SGR Mini Coach (20-seater), 21-seater and 50-seater AC buses for group travel, weddings & corporate events.',
     heroSubtitle:

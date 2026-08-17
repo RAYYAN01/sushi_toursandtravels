@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '9/12/17-Seater Tempo Traveller, Bangalore | Sushi Travels',
+  title: '9/12/17-Seater Tempo Traveller, Bangalore',
   description:
     'Book 9, 12 & 17-seater Tempo Travellers in Bangalore with Sushi Tours & Travels, plus sedans, SUVs & mini coach hire — all with verified drivers for outstation trips.',
   alternates: {

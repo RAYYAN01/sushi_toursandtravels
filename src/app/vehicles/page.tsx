@@ -7,7 +7,7 @@ import { getBreadcrumbListSchema } from '@/lib/schema';
 import LandingHero from '@/components/LandingHero';
 
 export const metadata: Metadata = {
-  title: 'Vehicle Rental Options in Bangalore | Sushi Travels',
+  title: 'Vehicle Rental Options in Bangalore',
   description:
     'Browse Sushi Travels vehicle rental pages by category — sedans, Innova SUVs, Tempo Travellers, Force Urbania vans and buses, each with real pricing and rental terms.',
   alternates: { canonical: '/vehicles' },
