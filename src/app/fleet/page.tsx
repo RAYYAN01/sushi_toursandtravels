@@ -57,6 +57,7 @@ export default function FleetPage() {
           loop
           playsInline
           preload="auto"
+          poster="/videos/fleet-scene-12-poster.webp"
         />
         {/* Flat wash — matched to the home hero's 55% strength for reliable text contrast against bright video frames, while the fleet video itself stays visible */}
         <div className="absolute inset-0 bg-navy-dark/55 z-0" />

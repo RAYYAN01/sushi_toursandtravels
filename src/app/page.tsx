@@ -146,7 +146,7 @@ export default function Home() {
           loop
           playsInline
           preload="auto"
-          poster="/logo-light-v3.png"
+          poster="/videos/hero-mountains-poster.webp"
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-navy-dark/55 z-0 pointer-events-none" />

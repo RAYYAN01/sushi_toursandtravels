@@ -66,6 +66,23 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Long-lived browser caching for static media in public/. Filenames
+      // here are stable between deploys (no content hash), so if a file is
+      // ever replaced in place it needs a new filename to bust this cache —
+      // that's already the convention used throughout this project (e.g.
+      // hero-mountains.mp4 vs a hypothetical hero-mountains-v2.mp4).
+      {
+        source: '/videos/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/fleet/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/:path*.(jpg|jpeg|png|webp|avif|svg|ico)',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
     ];
   },
   async rewrites() {

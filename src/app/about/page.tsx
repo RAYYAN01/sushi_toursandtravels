@@ -33,6 +33,7 @@ export default function AboutPage() {
           loop
           playsInline
           preload="auto"
+          poster="/videos/about-scene-13-poster.webp"
         />
         <div className="absolute inset-0 bg-navy-dark/75 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-4">
@@ -70,6 +71,7 @@ export default function AboutPage() {
               src="/mysuru.webp"
               alt="Mysore Palace — one of the popular South India destinations Sushi Travels serves"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
@@ -113,6 +115,7 @@ export default function AboutPage() {
               src="/coorg.webp"
               alt="Coorg — one of the popular South India destinations Sushi Travels serves"
               fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover"
             />
           </div>

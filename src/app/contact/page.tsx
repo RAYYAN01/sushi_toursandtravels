@@ -61,6 +61,7 @@ export default function ContactPage() {
           loop
           playsInline
           preload="auto"
+          poster="/videos/goa-beach-drone-poster.webp"
         />
         <div className="absolute inset-0 bg-navy-dark/75 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-4">
