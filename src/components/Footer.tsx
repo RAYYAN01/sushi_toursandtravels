@@ -175,17 +175,7 @@ export default function Footer() {
               &copy; {currentYear} Sushi Travels India. All rights reserved. Registered under Karnataka Tourism Board.
             </p>
             <span className="hidden sm:inline text-cream-warm/30" aria-hidden="true">|</span>
-            <p>
-              Developed by{' '}
-              <a 
-                href="https://www.cortinex-webstudio.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-primary-light hover:text-primary transition-colors duration-150 font-medium"
-              >
-                Cortinex Webstudio
-              </a>
-            </p>
+            <p>Developed by Naaz AI Labs</p>
           </div>
           <div className="flex space-x-6">
             <Link href="/contact" className="hover:text-primary transition-colors duration-150">
