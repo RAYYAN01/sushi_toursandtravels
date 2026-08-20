@@ -161,7 +161,7 @@ export const vehiclePages: VehiclePage[] = [
       'Hire a 12-seater Tempo Traveller in Bangalore — AC (₹22/km) or Non-AC (₹20/km). Pushback seats, dedicated luggage boot. Ideal for group outstation trips.',
     heroSubtitle:
       '12-seater Tempo Traveller, available in AC (₹22/km) and Non-AC (₹20/km) — pushback seating and a dedicated luggage boot for group trips out of Bangalore.',
-    vehicleIds: ['tempo-traveller-ac', 'tempo-traveller-non-ac'],
+    vehicleIds: ['tempo-traveller'],
     geoSummary:
       'Sushi Travels provides chauffeur-driven Tempo Traveller rental in Bangalore for outstation group trips, weekend getaways and pilgrimages. Both the AC (₹22/km) and Non-AC (₹20/km) 12-seater tiers include a 300 km/day minimum billing and a dedicated rear luggage boot.',
     bodyParagraphs: [

@@ -85,28 +85,29 @@ export function sortVehiclesByName<T extends { name: string }>(list: T[]): T[] {
 
 export const vehicles: Vehicle[] = [
   // ---------------------------------------------------------------------
-  // Tempo Traveller AC / Non-AC
-  // Repurposed from the former "9-Seater Force Traveller" entry — same base
-  // vehicle/photo set (force-traveller-c-*), split into two card entries per
-  // the confirmed AC / Non-AC tiers. See NOTES.md for the seat-count
-  // assumption (owner did not give an exact seat count for this tier).
+  // Tempo Traveller — merged AC/Non-AC into a single card (was two nearly
+  // identical listings sharing the same photos; hasNonAcOption + separate
+  // ratePerKmAc/ratePerKmNonAc already exists on the Vehicle type and
+  // VehicleCard for exactly this case, so both confirmed rates still show).
   // ---------------------------------------------------------------------
   {
-    id: 'tempo-traveller-ac',
-    name: 'Tempo Traveller AC',
+    id: 'tempo-traveller',
+    name: 'Tempo Traveller',
     type: 'Tempo Traveller',
     seats: 12,
     seatsDisplay: '12 Seater',
     ac: true,
+    hasNonAcOption: true,
     luggage: 8,
     ratePerKm: PRICING.tempoTravellerAc.ratePerKm,
+    ratePerKmAc: PRICING.tempoTravellerAc.ratePerKm,
+    ratePerKmNonAc: PRICING.tempoTravellerNonAc.ratePerKm,
     driverBata: PRICING.tempoTravellerAc.driverBata,
     minKmPerDay: MIN_KM_PER_DAY,
     drivingHours: STANDARD_DUTY_HOURS,
-    acOnly: true,
     features: [
       'Pushback reclining seats with extra legroom',
-      'Roof-mounted dual AC for all rows',
+      'Available in AC or Non-AC configuration',
       'USB charging points at every seat row',
       'Dedicated rear luggage boot for group baggage',
       'Reading lights, curtains & music system',
@@ -123,43 +124,8 @@ export const vehicles: Vehicle[] = [
       '/fleet/force-traveller-c-rear-02.webp',
     ],
     description:
-      'Our AC Tempo Traveller is the ideal pick for small family holidays, weekend getaways, and close-friend group trips out of Bangalore. Comfortable pushback seating, dual AC, and a dedicated luggage boot keep every outstation round trip relaxed from pickup to drop.',
+      'Our Tempo Traveller is the ideal pick for small family holidays, weekend getaways, and close-friend group trips out of Bangalore — available in AC or Non-AC, with comfortable pushback seating and a dedicated luggage boot on both.',
     sortOrder: 1,
-  },
-  {
-    id: 'tempo-traveller-non-ac',
-    name: 'Tempo Traveller Non-AC',
-    type: 'Tempo Traveller',
-    seats: 12,
-    seatsDisplay: '12 Seater',
-    ac: false,
-    luggage: 8,
-    ratePerKm: PRICING.tempoTravellerNonAc.ratePerKm,
-    driverBata: PRICING.tempoTravellerNonAc.driverBata,
-    minKmPerDay: MIN_KM_PER_DAY,
-    drivingHours: STANDARD_DUTY_HOURS,
-    acOnly: false,
-    features: [
-      'Pushback reclining seats with extra legroom',
-      'Well-ventilated cabin with large windows',
-      'USB charging points at every seat row',
-      'Dedicated rear luggage boot for group baggage',
-      'Reading lights & music system',
-      'Budget-friendly option for short/local group trips',
-    ],
-    image: '/fleet/force-traveller-c-front-01.webp',
-    images: [
-      '/fleet/force-traveller-c-front-01.webp',
-      '/fleet/force-traveller-c-front-02.webp',
-      '/fleet/force-traveller-c-side-01.webp',
-      '/fleet/force-traveller-c-interior-01.webp',
-      '/fleet/force-traveller-c-interior-02.webp',
-      '/fleet/force-traveller-c-interior-03.webp',
-      '/fleet/force-traveller-c-rear-02.webp',
-    ],
-    description:
-      'Our Non-AC Tempo Traveller offers the same comfortable pushback seating and dedicated luggage boot as our AC version, at a more budget-friendly rate — a practical choice for shorter trips or cooler-weather travel out of Bangalore.',
-    sortOrder: 2,
   },
 
   // ---------------------------------------------------------------------
