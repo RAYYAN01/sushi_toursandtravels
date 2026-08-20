@@ -163,7 +163,7 @@ export const vehiclePages: VehiclePage[] = [
       '12-seater Tempo Traveller, available in AC (₹22/km) and Non-AC (₹20/km) — pushback seating and a dedicated luggage boot for group trips out of Bangalore.',
     vehicleIds: ['tempo-traveller'],
     geoSummary:
-      'Sushi Travels provides chauffeur-driven Tempo Traveller rental in Bangalore for outstation group trips, weekend getaways and pilgrimages. Both the AC (₹22/km) and Non-AC (₹20/km) 12-seater tiers include a 300 km/day minimum billing and a dedicated rear luggage boot.',
+      'Sushi Travels provides the 12 seater tempo traveller in Bangalore for outstation group trips, weekend getaways and pilgrimages, available in AC (₹22/km) and Non-AC (₹20/km) tiers, both with a 300 km/day minimum billing and a dedicated rear luggage boot.',
     bodyParagraphs: [
       'The Tempo Traveller is the go-to vehicle for small family groups and close-friend circles who want to travel together rather than split across multiple cars. Pushback reclining seats, extra legroom, and a proper luggage boot make it far more comfortable than a minivan for multi-hour drives.',
       'The AC tier runs dual roof-mounted AC across all rows, suited to summer travel and longer routes; the Non-AC tier is a practical, budget-friendly option for shorter trips or cooler-weather travel. Both come with USB charging points, reading lights and a music system.',
@@ -209,7 +209,7 @@ export const vehiclePages: VehiclePage[] = [
       'Premium-badged 9+1 seater with executive pushback seats and individual AC vents, at ₹30/km — built for mid-size groups on longer outstation drives.',
     vehicleIds: ['luxury-tempo-traveller-9-plus-1'],
     geoSummary:
-      'Sushi Travels offers the Luxury Tempo Traveller 9+1 Seater in Bangalore for corporate offsites, pilgrimages and mid-size family group travel. Priced at ₹30/km with a 300 km/day minimum billing, it upgrades the standard Tempo Traveller with executive seating and individual AC vents.',
+      'Sushi Travels offers the 9 seater tempo traveller in Bangalore — badged as our Luxury Tempo Traveller 9+1 Seater — for corporate offsites, pilgrimages and mid-size family group travel. Priced at ₹30/km with a 300 km/day minimum billing, it upgrades the standard Tempo Traveller with executive seating and individual AC vents.',
     bodyParagraphs: [
       'This is our premium-badged Tempo Traveller — nine-plus-one executive pushback seats, ambient cabin lighting, individual AC vents, and large tinted windows that make the ghat-road drive to Coorg, Ooty or Munnar noticeably more comfortable for every passenger, not just the front row.',
       'It suits corporate teams heading to an offsite, extended families on a pilgrimage trip, or any group of 9–10 that wants more legroom and a quieter cabin than the standard 12-seater tier.',
@@ -239,10 +239,56 @@ export const vehiclePages: VehiclePage[] = [
     ],
     relatedVehicleSlugs: [
       'tempo-traveller-rental-bangalore',
+      '17-seater-tempo-traveller-bangalore',
       'force-urbania-12-seater-maharaja-bangalore',
-      'force-urbania-16-seater-luxury-bangalore',
     ],
     relatedServiceSlugs: ['corporate-transport-bangalore', 'outstation-cab-bangalore', 'wedding-vehicle-rental-bangalore'],
+    relatedRouteSlugs: ['bangalore-to-coorg-cab', 'bangalore-to-tirupati-cab'],
+  },
+  {
+    slug: '17-seater-tempo-traveller-bangalore',
+    h1: '17-Seater Force Tempo Traveller Rental in Bangalore',
+    title: '17 Seater Tempo Traveller Rental Bangalore',
+    metaDescription:
+      'Hire a 17 seater tempo traveller in Bangalore for large group outstation trips, corporate offsites & pilgrimages. Pricing on request — call or WhatsApp for a quote.',
+    heroSubtitle:
+      'Our largest Force Tempo Traveller — built for big groups on outstation trips, corporate offsites and pilgrimages. Pricing available on request.',
+    vehicleIds: ['force-tempo-traveller-17-seater'],
+    geoSummary:
+      'Sushi Travels offers a 17 seater tempo traveller in Bangalore for large groups needing extra capacity on outstation trips, corporate offsites and pilgrimages. This is a real, confirmed vehicle in our fleet; per-km pricing and dedicated photos are being finalised, so it is currently quoted on request rather than at a fixed rate.',
+    bodyParagraphs: [
+      'When a 12-seater Tempo Traveller isn\'t quite enough room, our 17-seater Force Tempo Traveller steps up to carry a larger group in one vehicle — pushback reclining seats, roof-mounted AC across every row, and a dedicated rear luggage boot sized for a full group\'s bags.',
+      'It suits large family gatherings, corporate offsites where an entire team travels together, and pilgrimage groups heading to South Indian temple towns who want everyone in a single vehicle rather than splitting across two smaller ones.',
+      'This tier is genuinely new to our lineup: the vehicle itself is confirmed and in service, but its dedicated photography and a fixed per-km rate are still being finalised with our team. Call or WhatsApp us with your route and group size and we\'ll get back with a quote quickly — for a similarly sized premium option with confirmed pricing today, see the Force Urbania Maharaja 12-Seater and Force Urbania Luxury 16-Seater pages below.',
+    ],
+    faqs: [
+      {
+        question: 'What is the per-km rate for the 17-seater tempo traveller?',
+        answer:
+          'This tier is currently priced on request rather than a fixed confirmed per-km rate, while photos and final pricing are being confirmed. Call or WhatsApp us with your route and group size for a fast quote.',
+      },
+      {
+        question: 'Is this a real vehicle in the Sushi Travels fleet?',
+        answer:
+          'Yes — the 17-seater Force Tempo Traveller is a confirmed, real vehicle in our fleet. Dedicated photography for this specific vehicle is still being finalised, which is why pricing is quoted on request for now.',
+      },
+      {
+        question: 'Can I book this for outstation travel?',
+        answer:
+          'Yes — this is one of our larger-capacity vehicles, well suited to outstation group trips, corporate offsites and pilgrimages where 13-17 passengers want to travel together.',
+      },
+      {
+        question: 'Can I book airport pickup with this vehicle?',
+        answer:
+          'Yes, group airport pickup/drop can be arranged for large families or teams arriving together — mention your group size when enquiring.',
+      },
+    ],
+    relatedVehicleSlugs: [
+      'tempo-traveller-rental-bangalore',
+      '9-seater-luxury-tempo-traveller-bangalore',
+      'force-urbania-12-seater-maharaja-bangalore',
+    ],
+    relatedServiceSlugs: ['outstation-cab-bangalore', 'corporate-transport-bangalore', 'wedding-vehicle-rental-bangalore'],
     relatedRouteSlugs: ['bangalore-to-coorg-cab', 'bangalore-to-tirupati-cab'],
   },
   {

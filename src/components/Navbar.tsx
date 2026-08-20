@@ -38,6 +38,7 @@ export default function Navbar() {
     { name: 'Our Fleet', href: '/fleet' },
     { name: 'Services', href: '/services' },
     { name: 'Tours & Packages', href: '/tours-and-packages' },
+    { name: 'Blog', href: '/blog' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];

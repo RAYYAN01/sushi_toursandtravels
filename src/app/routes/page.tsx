@@ -81,6 +81,15 @@ export default function RoutesHubPage() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-14 bg-white rounded-2xl border border-navy-light/10 p-6 sm:p-8 text-center">
+          <p className="text-sm text-navy-light">
+            Planning a longer trip further afield?{' '}
+            <Link href="/blog/statue-of-unity-kevadia-gujarat-travel-diary" className="text-primary font-semibold hover:text-primary-dark">
+              Read: A Trip to the Statue of Unity, Gujarat
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

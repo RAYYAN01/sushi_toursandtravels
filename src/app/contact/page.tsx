@@ -261,7 +261,7 @@ export default function ContactPage() {
           {/* Beautiful maps iframe mock with local details */}
           <div className="relative w-full h-[400px] rounded-2xl overflow-hidden bg-cream-warm border border-navy-light/5">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.4580594984072!2d77.489068!3d12.9425148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3fffcac47a89%3A0xd31d06d08e0a467f!2sSushi%20Travels!5e0!3m2!1sen!2sin!4v1784110856464!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.458059695387!2d77.4864930750759!3d12.942514787370245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3fffcac47a89%3A0xd31d06d08e0a467f!2sSushi%20Travels!5e0!3m2!1sen!2sin!4v1787215021327!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -296,6 +296,17 @@ export default function ContactPage() {
                 <span className="text-xs">↗</span>
               </a>
             </div>
+          </div>
+          <div className="mt-5 flex justify-center">
+            <a
+              href="https://share.google/St55UlsbDobuLv9jP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary-dark hover:text-navy transition-colors duration-150"
+            >
+              <span>Read our reviews on Google</span>
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </section>
 

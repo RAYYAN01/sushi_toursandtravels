@@ -3,12 +3,13 @@ import { vehiclePages } from '@/lib/vehiclePages';
 import { servicePages } from '@/lib/services';
 import { locationPages } from '@/lib/locations';
 import { routePages } from '@/lib/routes';
+import { blogPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://sushitravels.com';
   const now = new Date().toISOString();
 
-  const staticRoutes = ['', '/fleet', '/tours-and-packages', '/booking', '/about', '/contact', '/vehicles', '/services', '/locations', '/routes'].map(
+  const staticRoutes = ['', '/fleet', '/tours-and-packages', '/booking', '/about', '/contact', '/vehicles', '/services', '/locations', '/routes', '/blog'].map(
     (route) => ({
       url: `${baseUrl}${route}`,
       lastModified: now,
@@ -45,5 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...vehicleRoutes, ...serviceRoutes, ...locationRoutes, ...routeRoutes];
+  const blogRoutes = blogPosts.map((p) => ({
+    url: `${baseUrl}/blog/${p.slug}`,
+    lastModified: p.publishDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...vehicleRoutes, ...serviceRoutes, ...locationRoutes, ...routeRoutes, ...blogRoutes];
 }

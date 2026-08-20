@@ -42,6 +42,7 @@ export function getLocalBusinessSchema() {
     priceRange: '₹₹',
     sameAs: [
       'https://www.instagram.com/sushi_travels_official?utm_source=qr&igsh=bXphYXc1d2p5cnRm',
+      'https://share.google/St55UlsbDobuLv9jP',
     ],
     areaServed: [
       {
@@ -236,5 +237,47 @@ export function getVehicleProductSchema(vehicle: Vehicle, url: string) {
           },
         }
       : {}),
+  };
+}
+
+/**
+ * BlogPosting schema for a /blog/[slug] article. Author is always "Sushi
+ * Travels" (no fabricated individual byline), matching how the rest of the
+ * site attributes content to the business rather than an invented person.
+ */
+export function getBlogPostingSchema(params: {
+  headline: string;
+  description: string;
+  url: string;
+  image: string;
+  datePublished: string;
+  dateModified?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: params.headline,
+    description: params.description,
+    image: `${SITE_URL}${params.image}`,
+    url: `${SITE_URL}${params.url}`,
+    datePublished: params.datePublished,
+    dateModified: params.dateModified ?? params.datePublished,
+    author: {
+      '@type': 'Organization',
+      name: 'Sushi Travels',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Sushi Travels',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/logo-light-v3.png`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}${params.url}`,
+    },
   };
 }

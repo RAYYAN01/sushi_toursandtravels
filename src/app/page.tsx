@@ -8,7 +8,7 @@ import { Shield, UserCheck, Headset, BadgePercent, ArrowRight, Star, MapPin, Mes
 import { getLocalBusinessSchema, getFAQSchema } from '@/lib/schema';
 import { motion } from 'framer-motion';
 import VehicleCard from '@/components/VehicleCard';
-import { sortVehiclesByName } from '@/lib/vehicles';
+import { sortVehiclesForDisplay } from '@/lib/vehicles';
 import PackageCard from '@/components/PackageCard';
 import { packages } from '@/lib/packages';
 import RouteCard, { RouteInfo } from '@/components/RouteCard';
@@ -420,7 +420,7 @@ export default function Home() {
               );
             }
             return categories.map((cat: string, catIdx: number) => {
-              const catVehicles = sortVehiclesByName(
+              const catVehicles = sortVehiclesForDisplay(
                 homeVehicles.filter((v: any) => v.type === cat)
               );
               if (catVehicles.length === 0) return null;

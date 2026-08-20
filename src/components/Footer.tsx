@@ -104,6 +104,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="hover:text-primary transition-colors duration-150">
+                  Travel Blog
+                </Link>
+              </li>
+              <li>
                 <Link href="/routes" className="hover:text-primary transition-colors duration-150">
                   Popular Routes
                 </Link>
@@ -141,6 +146,16 @@ export default function Footer() {
                   className="hover:text-primary transition-colors duration-150"
                 >
                   No 272, corner shop, G/F, 8th cross, Opposite to BBMP office Bhuvaneshwari Nagara Dodda Basti Main Road, post, Nagadevana Halli, Bengaluru, Karnataka 560056
+                </a>
+              </li>
+              <li className="flex items-center space-x-3 pl-8">
+                <a
+                  href="https://share.google/St55UlsbDobuLv9jP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-primary-light hover:text-white transition-colors duration-150"
+                >
+                  Read our reviews on Google ↗
                 </a>
               </li>
               <li className="flex items-center space-x-3">

@@ -73,14 +73,33 @@ export function getMinimumDailyTotal(vehicle: Vehicle): number | null {
 
 /**
  * Sorts vehicles alphabetically by their displayed `name`, case-insensitive
- * and locale-aware. Use this wherever the fleet is rendered/listed instead
- * of relying on `sortOrder` or array insertion order — new vehicles then
- * sort correctly automatically with no manual ordering upkeep.
+ * and locale-aware.
  */
 export function sortVehiclesByName<T extends { name: string }>(list: T[]): T[] {
   return [...list].sort((a, b) =>
     a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
   );
+}
+
+// Category display order: cars first, then group vehicles by rising capacity.
+const CATEGORY_RANK: Record<string, number> = { Sedan: 0, SUV: 0, 'Tempo Traveller': 1, Bus: 2 };
+
+/**
+ * Fleet display order: cars (Sedan/SUV) first sorted A–Z, then Tempo
+ * Travellers and Buses sorted by ascending seat count (ties broken A–Z).
+ * Use this for the public Fleet grid; use sortVehiclesByName elsewhere.
+ */
+export function sortVehiclesForDisplay<T extends { name: string; type: string; seats: number }>(
+  list: T[]
+): T[] {
+  return [...list].sort((a, b) => {
+    const rankA = CATEGORY_RANK[a.type] ?? 3;
+    const rankB = CATEGORY_RANK[b.type] ?? 3;
+    if (rankA !== rankB) return rankA - rankB;
+    if (rankA === 0) return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+    if (a.seats !== b.seats) return a.seats - b.seats;
+    return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+  });
 }
 
 export const vehicles: Vehicle[] = [
@@ -126,6 +145,42 @@ export const vehicles: Vehicle[] = [
     description:
       'Our Tempo Traveller is the ideal pick for small family holidays, weekend getaways, and close-friend group trips out of Bangalore — available in AC or Non-AC, with comfortable pushback seating and a dedicated luggage boot on both.',
     sortOrder: 1,
+  },
+
+  // ---------------------------------------------------------------------
+  // 17-Seater Force Tempo Traveller — owner confirmed this vehicle is real
+  // (2026-08-20) but pricing and real photos are pending. Placeholder
+  // reuses the existing Force Traveller Yaksha photo set (NOT Urbania, per
+  // owner instruction) until real 17-seater photos arrive. No rate is
+  // invented — shows "Price on Request" until confirmed.
+  // ---------------------------------------------------------------------
+  {
+    id: 'force-tempo-traveller-17-seater',
+    name: '17-Seater Force Tempo Traveller',
+    type: 'Tempo Traveller',
+    seats: 17,
+    seatsDisplay: '17 Seater',
+    ac: true,
+    luggage: 14,
+    ratePerKm: 0,
+    priceDisplay: 'Price on Request',
+    acOnly: true,
+    features: [
+      'Pushback reclining seats with extra legroom',
+      'Roof-mounted AC for all rows',
+      'USB charging points at every seat row',
+      'Dedicated rear luggage boot for group baggage',
+      'Best for large family groups, corporate offsites & pilgrimages',
+    ],
+    image: '/fleet/force-traveller-yaksha-front-01.webp',
+    images: [
+      '/fleet/force-traveller-yaksha-front-01.webp',
+      '/fleet/force-traveller-yaksha-front-02.webp',
+      '/fleet/force-traveller-yaksha-interior-01.webp',
+    ],
+    description:
+      'Our 17-seater Force Tempo Traveller is built for large groups who need extra capacity for outstation trips, corporate offsites and pilgrimages out of Bangalore. Photos and confirmed per-km pricing for this specific vehicle are being finalised — call or WhatsApp for a quote in the meantime.',
+    sortOrder: 2,
   },
 
   // ---------------------------------------------------------------------

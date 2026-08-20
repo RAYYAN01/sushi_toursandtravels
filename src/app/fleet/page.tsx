@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HelpCircle } from 'lucide-react';
 import { getFleetItemListSchema, getBreadcrumbListSchema } from '@/lib/schema';
-import { sortVehiclesByName } from '@/lib/vehicles';
+import { sortVehiclesForDisplay } from '@/lib/vehicles';
 import VehicleCard from '@/components/VehicleCard';
 import { VehicleCardSkeleton } from '@/components/SkeletonLoader';
 
@@ -17,7 +17,7 @@ export default function FleetPage() {
     fetch('/api/fleet', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
-        if (data.vehicles) setVehiclesList(sortVehiclesByName(data.vehicles));
+        if (data.vehicles) setVehiclesList(sortVehiclesForDisplay(data.vehicles));
       })
       .catch((err) => console.error('Error fetching fleet:', err))
       .finally(() => setLoading(false));

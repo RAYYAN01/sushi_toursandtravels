@@ -1192,3 +1192,193 @@ could safely infer
 `src/lib/routes.ts`, `NOTES.md`, `SEO-STRATEGY.md`.
 
 `npx tsc --noEmit` and `npm run build` both pass; all 56 routes prerender.
+
+## 12. Fleet sort order, 17-seater keyword page, Maps embed, GBP link, new Blog section (2026-08-20)
+
+A follow-up pass covering six requested items: apply the new `sortVehiclesForDisplay()`
+fleet ordering everywhere it belongs, add a dedicated 17-seater Tempo
+Traveller landing page for keyword targeting, swap in the owner's new
+Google Maps embed (now with real reviews attached), connect the real
+Google Business Profile link, build a real `/blog` section with one
+genuine Gujarat travel-diary post, and a small cleanup pass. `npx tsc
+--noEmit` and `npm run build` both pass; all 61 routes prerender
+(the prior 56 + `/blog`, `/blog/[slug]` and the new
+`/vehicles/17-seater-tempo-traveller-bangalore` page). `npm run dev` +
+curl confirmed 200s on `/blog`, `/blog/statue-of-unity-kevadia-gujarat-travel-diary`,
+`/vehicles/17-seater-tempo-traveller-bangalore`, `/routes`, and `/contact`.
+
+### 1. Fleet sort order
+
+`src/app/fleet/page.tsx` and `src/app/page.tsx` (home featured-fleet
+section) now both import and call `sortVehiclesForDisplay()` instead of
+`sortVehiclesByName()` from `src/lib/vehicles.ts`. On the home page this is
+called per-category-row (the row grouping/order itself is untouched,
+per-category `categoryOrder` logic), so within each row cars sort A–Z and
+Tempo Traveller/Bus rows sort by ascending seat count — exactly what the
+function is documented to do. `sortVehiclesByName()` itself was left
+exported and untouched, in case anything else still wants pure alphabetical
+sorting.
+
+### 2. Keyword targeting for the three Tempo Traveller sizes
+
+- `src/lib/vehiclePages.ts`'s `9-seater-luxury-tempo-traveller-bangalore`
+  and `tempo-traveller-rental-bangalore` (12-seater) pages had their
+  `geoSummary` copy adjusted (one sentence each) so the exact phrases "9
+  seater tempo traveller in Bangalore" and "12 seater tempo traveller in
+  Bangalore" appear naturally, once, without keyword-stuffing. Nothing else
+  on either page (title, H1, pricing, FAQs) was changed — both already read
+  fine.
+- **New page added**: `src/lib/vehiclePages.ts` now has a third entry,
+  slug **`17-seater-tempo-traveller-bangalore`**, `vehicleIds:
+  ['force-tempo-traveller-17-seater']`, following the exact same
+  `VehiclePage` shape as the 9/12-seater entries (title, metaDescription,
+  heroSubtitle, geoSummary containing "17 seater tempo traveller in
+  Bangalore" once, 3 bodyParagraphs, 4 FAQs, relatedVehicleSlugs/
+  relatedServiceSlugs/relatedRouteSlugs). Since `force-tempo-traveller-17-seater`
+  in `src/lib/vehicles.ts` is genuinely `priceDisplay: 'Price on Request'`
+  (real vehicle, pricing/photos pending — see that file's own comment
+  block), this new page's copy never states a specific ₹/km rate; every FAQ
+  answer and body paragraph instead says pricing is on request /
+  call-or-WhatsApp for a quote, consistent with how the vehicle data itself
+  is marked and how the existing 21-seater/50-seater bus pages already
+  handle unpriced tiers. `VehiclePricingTable.tsx` (shared component,
+  unchanged) already renders a "Price on request" note automatically for
+  any vehicle without a confirmed rate, so no new pricing-display code was
+  needed. The new page was cross-linked into the 9-seater and 12-seater
+  pages' `relatedVehicleSlugs` arrays so all three tiers reference each
+  other.
+
+### 3. Google Maps embed
+
+`src/app/contact/page.tsx` was the only place in `src/` with a
+`google.com/maps/embed` iframe (grepped `src/` to confirm — no second
+occurrence anywhere else). Replaced its `src` with the owner-supplied embed
+URL (now has real reviews attached) exactly as given; every other iframe
+attribute (`width`, `height`, `style`, `allowFullScreen`, `loading`,
+`referrerPolicy`, `aria-label`) and the surrounding wrapper/overlay buttons
+were left untouched.
+
+### 4. Google Business Profile link
+
+Added `https://share.google/St55UlsbDobuLv9jP` as a real, visible,
+clickable link in three places (not just buried in schema):
+- `src/app/contact/page.tsx` — a "Read our reviews on Google ↗" link
+  centered directly under the Maps embed.
+- `src/components/Footer.tsx` — a "Read our reviews on Google ↗" line
+  under the office address in the Contact Details column.
+- `src/lib/schema.ts`'s `getLocalBusinessSchema()` — added to the existing
+  `sameAs` array alongside the Instagram link (same pattern already used
+  for that social link, nothing new invented).
+
+### 5. New `/blog` section — the Gujarat story
+
+Built fresh, simple, static blog infrastructure (deliberately not reviving
+the old Prisma `BlogPost` model removed in section 8 — this mirrors
+`src/lib/packages.ts`'s pattern instead):
+
+- **`src/lib/blog.ts`** (new) — `BlogPost` interface + one real entry,
+  slug **`statue-of-unity-kevadia-gujarat-travel-diary`**: a genuine,
+  first-person-plural travel-diary piece about Kevadia, Gujarat — the
+  Statue of Unity, the Sardar Sarovar Dam/reservoir it stands on, the
+  eagle-shaped Jungle Safari Park building, the preserved footprint
+  memorial under glass, and the riverside Valley of Flowers gardens. No
+  invented client name, booking date, or claim that a specific customer
+  booked this trip through Sushi Travels — it's framed as destination
+  content from the business, with one honest paragraph tying it to the
+  outstation/round-trip chauffeur service Sushi Travels actually offers
+  ("that's exactly the kind of trip Sushi Travels' outstation and
+  round-trip car rental service is built around"), not an overclaim that
+  this specific trip was booked with them. Also states plainly that
+  Kevadia is ~1,300 km from Bengaluru and realistically reached by flight +
+  road transfer, not a direct drive — an honest travel-planning fact, not
+  marketing spin.
+  - All 19 images (`Gujarat-blog-1.webp` through `Gujarat-blog-19.jpg`,
+    verified extension-by-extension against the actual `public/blog/`
+    directory listing before wiring in — 1–11/15/17 are `.webp`, 12–14/16/
+    18/19 are `.jpg`, exactly as they exist on disk) plus
+    `Gujarat-blog-video-1.mp4` are referenced.
+- **`src/app/blog/page.tsx`** (new) — index page. Per the owner's explicit
+  request ("one single card of gujarat holding all the pics inside it"),
+  renders exactly one fully-clickable card (cover image + "Travel Diary"
+  badge + title + date + excerpt + "Read the full story" link) — all the
+  other 18 photos live on the detail page's gallery, not the index. Card
+  styling (rounded-2xl, `border-navy-light/10`, `shadow-sm hover:shadow-md`,
+  serif heading) matches `PackageCard.tsx`/`VehicleCard.tsx` rather than
+  inventing a new visual language. Uses the shared `LandingHero` component
+  for the page hero, same as the `/vehicles`, `/services`, `/locations`,
+  `/routes` hub pages.
+- **`src/app/blog/[slug]/page.tsx`** (new) — detail page: full story text,
+  a `<video controls>` element (explicitly not autoplay/background-style
+  like the site's hero videos — a real content video the visitor has to
+  press play on), and a full photo gallery grid reusing the exact visual
+  pattern already established on `/vehicles/[slug]` (`grid grid-cols-2
+  sm:grid-cols-3 gap-4`, rounded-2xl bordered tiles, numbered alt text,
+  `loading="lazy"` after the first few images). A GEO-style 2–3 sentence
+  factual summary sits in its own bordered section right after the hero,
+  matching the same pattern the vehicle/service/route pages use. A visible
+  `FaqAccordion` (native `<details>/<summary>`, answer text always in the
+  server-rendered HTML) with 4 real, answer-first FAQs about visiting from
+  Bangalore (distance/travel approach, best time to visit, what else is
+  there to see, whether Sushi Travels arranges trips this far) backs the
+  `FAQPage` JSON-LD — schema only added because the FAQ is genuinely
+  visible on the page, per the project's existing rule.
+- **`src/lib/schema.ts`** — added `getBlogPostingSchema()` (new), following
+  the same parameterized-function style as `getServiceLandingSchema()`/
+  `getVehicleProductSchema()`. Author is `"Sushi Travels"` (an
+  `Organization`, not an invented person), `datePublished` is `2026-08-20`
+  (today, the actual publish date of this pass), image resolves to an
+  absolute URL via the existing `SITE_URL` constant.
+- **Nav/Footer**: added a "Blog" link to `src/components/Navbar.tsx`'s
+  `navLinks` array (after "Tours & Packages", before "About Us" — every
+  existing link stays) and a "Travel Blog" link to
+  `src/components/Footer.tsx`'s Quick Links column.
+- **`src/app/sitemap.ts`**: imports `blogPosts` from the new `lib/blog.ts`
+  and adds `/blog` (static, priority 0.6) plus one dynamic `/blog/[slug]`
+  entry per post (currently 1), using the post's real `publishDate` as
+  `lastModified` — same programmatic-from-data-file pattern the other four
+  page families already use, so a future post added to `blogPosts` is
+  automatically picked up with no manual sync step.
+- **Internal linking**: `src/app/routes/page.tsx` (the Routes hub) got one
+  new sentence at the bottom — "Planning a longer trip further afield? Read:
+  A Trip to the Statue of Unity, Gujarat" — linking to the post, since a
+  long-distance destination story is a natural fit next to the outstation
+  route guides. The blog post detail page itself links back out via a
+  `RelatedLinks` block to `/services/outstation-cab-bangalore`, `/routes`,
+  and `/vehicles`, plus a `CTABand` inviting outstation enquiries — both
+  reusing existing shared components rather than new one-off markup.
+
+### 6. Cleanup
+
+- Grepped all of `src/` for leftover `tempo-traveller-ac`/
+  `tempo-traveller-non-ac` id references beyond `vehiclePages.ts` — **zero
+  matches found**. That merge was already fully cleaned up in an earlier
+  pass; nothing left to remove here.
+- No new files in this pass introduce a TypeScript `any` — `src/lib/blog.ts`,
+  `src/app/blog/page.tsx`, and `src/app/blog/[slug]/page.tsx` are all fully
+  typed against the new `BlogPost` interface. `npx eslint` on every file
+  touched in this pass reports zero new errors; the only lint errors it
+  surfaces (`src/app/fleet/page.tsx` line 12, `src/app/page.tsx` lines 52/
+  406/409/424/438) are pre-existing `@typescript-eslint/no-explicit-any`
+  warnings on `useState`/`filter`/`map` callback types that predate this
+  pass (the same codebase-wide convention documented in section 8) — this
+  pass only changed which sort function those lines call, not their typing,
+  and retyping the home/fleet page's client-fetched API row shape is a
+  larger, separate effort out of proportion to this task.
+
+### Content decisions / assumptions the owner should confirm
+
+- The Gujarat post's "~1,300 km from Bengaluru" and "flight into Ahmedabad
+  or Vadodara + road transfer" framing is general-knowledge geography, not
+  a distance sourced from any file in this codebase — reasonable and
+  clearly hedged ("roughly"), but not independently verified against a live
+  routing API.
+- No specific per-km rate or itinerary price for a Kevadia/Gujarat trip is
+  stated anywhere in the post — deliberately, since this codebase has no
+  confirmed pricing for a route that far outside Karnataka/South India.
+
+### Database note
+
+None of this pass touches Prisma, `seed.ts`, or any DB-backed table — the
+new blog section is fully static data (`src/lib/blog.ts`), same pattern as
+`packages.ts`/`vehiclePages.ts`/`services.ts`/etc. No migration, `db:push`,
+or reseed is required for anything in this section.
