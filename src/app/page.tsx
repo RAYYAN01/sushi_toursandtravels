@@ -278,8 +278,8 @@ export default function Home() {
             <div className="lg:col-span-5 space-y-6">
               <div className="relative rounded-2xl overflow-hidden shadow-sm aspect-[4/3]">
                 <Image
-                  src="/fleet/force-urbania-front-02.webp"
-                  alt="Sushi Travels Force Urbania tempo traveller on a group road trip"
+                  src="/mysuru.webp"
+                  alt="Mysuru Palace — one of Karnataka's most iconic destinations, reachable on a Sushi Travels round trip"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
