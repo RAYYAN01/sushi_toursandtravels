@@ -462,22 +462,22 @@ export const vehiclePages: VehiclePage[] = [
     h1: 'Bus & Mini Coach Rental in Bangalore',
     title: 'Bus & Mini Coach Rental Bangalore',
     metaDescription:
-      'Compare our Bangalore bus rental options: SGR Mini Coach (20-seater), 21-seater and 50-seater AC buses for group travel, weddings & corporate events.',
+      'Compare our Bangalore bus rental options: Sushi Mini Bus (20-seater), 21-seater and 50-seater AC buses for group travel, weddings & corporate events.',
     heroSubtitle:
       'From a 20-seater mini coach to a full 50-seater — compare our AC bus fleet for corporate events, weddings, school trips and pilgrimage groups.',
     vehicleIds: ['sgr-mini-coach', 'bus-21-seater', 'bus-50-seater'],
     geoSummary:
-      'Sushi Travels operates three larger-capacity AC vehicles for group bus rental in Bangalore: the SGR Mini Coach (20-seater), a 21-seater bus, and a 50-seater bus. None of these tiers carry a fixed confirmed per-km rate — each is quoted per trip based on route, duration and group size.',
+      'Sushi Travels operates three larger-capacity AC vehicles for group bus rental in Bangalore: the Sushi Mini Bus (20-seater), a 21-seater bus, and a 50-seater bus. None of these tiers carry a fixed confirmed per-km rate — each is quoted per trip based on route, duration and group size.',
     bodyParagraphs: [
       'Not every large-group search is specific to a seat count — this page is a quick comparison hub for anyone deciding between our three bigger vehicles before requesting a quote.',
-      'The SGR Mini Coach seats 20 with AC pushback seating and a rear cargo hold, suited to large corporate offsites, school and college outings, and big pilgrimage or wedding parties. The 21-seater bus is a close mid-size step up, and the 50-seater is our largest-capacity vehicle for full corporate events, weddings and large tour groups.',
+      'The Sushi Mini Bus seats 20 with AC pushback seating and a rear cargo hold, suited to large corporate offsites, school and college outings, and big pilgrimage or wedding parties. The 21-seater bus is a close mid-size step up, and the 50-seater is our largest-capacity vehicle for full corporate events, weddings and large tour groups.',
       'All three include overhead luggage racks, a PA/music system, and pushback AC seating. Because pricing depends heavily on route, trip duration and total distance, none of these tiers publish a per-km rate — call or WhatsApp with your group size and itinerary and we\'ll get back with a quote quickly.',
     ],
     faqs: [
       {
         question: 'Which bus size should I book for my group?',
         answer:
-          'The SGR Mini Coach (20-seater) suits mid-size groups, the 21-seater bus is a close step up, and the 50-seater is for full corporate events, weddings or large tour groups. Tell us your headcount and we\'ll recommend the right fit.',
+          'The Sushi Mini Bus (20-seater) suits mid-size groups, the 21-seater bus is a close step up, and the 50-seater is for full corporate events, weddings or large tour groups. Tell us your headcount and we\'ll recommend the right fit.',
       },
       {
         question: 'What is the per-km rate for these buses?',
@@ -509,7 +509,7 @@ export function getVehiclePage(slug: string): VehiclePage | undefined {
  * /vehicles/[slug] landing page, if one exists. Used by VehicleCard to
  * deep-link fleet/home cards into the new SEO landing pages (in addition
  * to, not instead of, the existing Call/WhatsApp/Book CTAs). Prefers a
- * non-hub page match first (a vehicle like the SGR Mini Coach only exists
+ * non-hub page match first (a vehicle like the Sushi Mini Bus only exists
  * on the hub page, so that's returned as a fallback).
  */
 export function getVehicleDetailHref(vehicleId: string): string | undefined {

@@ -230,11 +230,21 @@ export const vehicles: Vehicle[] = [
       'Large tinted windows for scenic ghat-road views',
       'Best for mid-size family groups, corporate teams & pilgrimage trips',
     ],
+    // Added 2026-08-25: 6 real interior photos + 2 more exterior angles
+    // (owner-provided) alongside the original airport front photo.
     image: '/fleet/tempo-traveller-9-seater-front-01.webp',
     images: [
       '/fleet/tempo-traveller-9-seater-front-01.webp',
+      '/fleet/tempo-traveller-9-seater-front-02.webp',
+      '/fleet/tempo-traveller-9-seater-side-01.webp',
+      '/fleet/tempo-traveller-9-seater-interior-01.webp',
+      '/fleet/tempo-traveller-9-seater-interior-02.webp',
+      '/fleet/tempo-traveller-9-seater-interior-03.webp',
+      '/fleet/tempo-traveller-9-seater-interior-04.webp',
+      '/fleet/tempo-traveller-9-seater-interior-05.webp',
+      '/fleet/tempo-traveller-9-seater-interior-06.webp',
     ],
-    imagePositions: ['50% 55%'],
+    imagePositions: ['50% 55%', '50% 50%', '50% 50%', '50% 50%', '50% 50%', '50% 50%', '50% 50%', '50% 50%', '50% 50%'],
     description:
       'Our 9 Seater Tempo Traveller (9+1) is built for mid-size groups that want extra comfort on long outstation drives. Executive pushback seats, individual AC vents, and a spacious luggage boot make it a favourite for corporate offsites, pilgrimages, and multi-family trips to Coorg, Mysore, and Ooty.',
     sortOrder: 3,
@@ -521,7 +531,7 @@ export const vehicles: Vehicle[] = [
   // ---------------------------------------------------------------------
   {
     id: 'sgr-mini-coach',
-    name: 'SGR Mini Coach',
+    name: 'Sushi Mini Bus',
     type: 'Bus',
     seats: 20,
     seatsDisplay: '20 Seater',
@@ -549,7 +559,7 @@ export const vehicles: Vehicle[] = [
       '/fleet/coach-sgr-rear-02.webp',
     ],
     description:
-      'The SGR Mini Coach is a 20-seater AC coach built for big groups such as corporate offsites, school and college outings, and large pilgrimage or wedding parties that need everyone travelling together in one vehicle.',
+      'The Sushi Mini Bus is a 20-seater AC coach built for big groups such as corporate offsites, school and college outings, and large pilgrimage or wedding parties that need everyone travelling together in one vehicle.',
     sortOrder: 11,
   },
   {
