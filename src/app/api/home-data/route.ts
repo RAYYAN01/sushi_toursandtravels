@@ -1,17 +1,8 @@
 import { NextResponse } from 'next/server';
 import { connectDB, prisma } from '@/lib/db';
+import { toClientVehicle, toClient } from '@/lib/dbMappers';
 
 export const dynamic = 'force-dynamic';
-
-function toClientVehicle(vehicle: any) {
-  const { id, vehicleId, ...rest } = vehicle;
-  return { ...rest, id: vehicleId, _id: id };
-}
-
-function toClient(entity: any) {
-  const { id, ...rest } = entity;
-  return { ...rest, _id: id, id };
-}
 
 export async function GET() {
   try {

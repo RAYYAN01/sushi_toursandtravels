@@ -1731,3 +1731,64 @@ shortening, not left unchecked here, just correctly not re-touched).
 `npm run build` passes (59 routes prerender). `npx eslint` on all changed
 files reports 0 new errors. No deploy, push, DB write, or `git` operation
 performed — all changes are local, uncommitted, code/content-file only.
+
+## 15. Fixed empty-fleet-in-raw-HTML crawlability gap (2026-08-25)
+
+Section 14 flagged this as the largest open SEO issue: `/` and `/fleet`
+were `'use client'` pages that fetched vehicle/route/review data
+client-side via `useEffect` + `fetch('/api/home-data')` / `fetch('/api/fleet')`.
+A crawler reading the raw server-rendered HTML saw an empty fleet grid —
+confirmed live at the time: the ItemList JSON-LD reported
+`numberOfItems: 0`.
+
+### Fix
+
+Converted both pages to async Server Components that fetch directly from
+Postgres via the existing Prisma client (`src/lib/db.ts`), then render a
+new client child component seeded with that data as props:
+
+- `src/app/page.tsx` (Server Component) → `src/app/HomeClient.tsx` (client,
+  all existing interactivity: search form, category rows, FAQ accordion,
+  custom-route modal, testimonials)
+- `src/app/fleet/page.tsx` (Server Component) → `src/app/fleet/FleetClient.tsx`
+  (client, all existing interactivity: per-vehicle filter chips, "You May
+  Also Like" suggestions)
+
+Both pages carry `export const dynamic = 'force-dynamic'` — vehicle data
+is admin-editable, so this stays fetched fresh per-request rather than
+cached at build time, matching the pattern the API routes already used.
+
+The Prisma-row → client-shape mapping logic (`toClientVehicle`, `toClient`)
+was previously duplicated near-identically in `src/app/api/fleet/route.ts`
+and `src/app/api/home-data/route.ts`. Extracted once to
+`src/lib/dbMappers.ts`; both API routes and both new server pages now
+import from there.
+
+`src/components/SkeletonLoader.tsx` deleted — its loading-skeleton
+components (`VehicleCardSkeleton`, `FleetCategoryRowSkeleton`) had no
+remaining callers once the client-side loading state they were built for
+was replaced by server-rendered initial data.
+
+### Verification (independent — re-checked myself, not just the pass's own report)
+
+- `npx tsc --noEmit`: 0 errors.
+- `npm run build`: passes; `/` and `/fleet` both show as `ƒ` (dynamic,
+  server-rendered on demand) in the route table, not static.
+- `npm run start` + `curl` against the actual built server: real vehicle
+  names ("12 Seater Tempo Traveller", "9 Seater Tempo Traveller", "Volvo
+  Bus 45...") present in the raw HTML of both `/` and `/fleet`, with no
+  JavaScript executed.
+- `/fleet`'s ItemList JSON-LD: `numberOfItems: 15`, matching the real
+  fleet count (was 0).
+- Grepped for stale references to the deleted `SkeletonLoader.tsx` — none
+  found.
+- Spot-checked `FleetClient.tsx` to confirm the per-vehicle filter chips +
+  "You May Also Like" logic (added 2026-08-25, same day) survived the
+  extraction intact, not regressed.
+
+### Files changed
+
+`src/app/page.tsx`, `src/app/fleet/page.tsx`, `src/app/api/fleet/route.ts`,
+`src/app/api/home-data/route.ts` (new: `src/app/HomeClient.tsx`,
+`src/app/fleet/FleetClient.tsx`, `src/lib/dbMappers.ts`; deleted:
+`src/components/SkeletonLoader.tsx`).

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { connectDB, prisma } from '@/lib/db';
 import { verifyToken } from '@/lib/jwt';
+import { toClientVehicle } from '@/lib/dbMappers';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,14 +13,6 @@ async function isAuthenticated() {
   if (!tokenCookie) return false;
   const payload = verifyToken(tokenCookie.value);
   return !!(payload && payload.authenticated);
-}
-
-// Maps Prisma's primary key back to Mongo-style `_id`, and the business
-// slug field (`vehicleId` in Postgres, was Mongo's `id` field) back to `id`
-// — the shape the frontend already reads/writes.
-function toClientVehicle(vehicle: any) {
-  const { id, vehicleId, ...rest } = vehicle;
-  return { ...rest, id: vehicleId, _id: id };
 }
 
 function parseNumberArrayOrDefault(value: any, length: number, fallback: number): number[] {
