@@ -346,7 +346,7 @@ export const routePages: RoutePage[] = [
     metaDescription:
       'Bangalore to Hyderabad cab service — approx. 570 km, 9–10 hrs one way. SUVs & Tempo Travellers for long-distance business & family travel.',
     heroSubtitle: 'Approx. 570 km, 9–10 hours one way — our longest regular outstation route.',
-    heroImage: '/fleet/innova-2011-front-01.webp',
+    heroImage: '/fleet/innova-2011-front-02.webp',
     distance: 'Approx. 570 km',
     duration: 'Approx. 9–10 hours one way',
     geoSummary:

@@ -1606,3 +1606,128 @@ the 4 fetch-backed API routes (`/api/fleet`, `/api/home-data`, `/api/
 routes`, `/api/reviews`), plus a genuine `404` on an unknown path and `200`
 on `/sitemap.xml` and `/robots.txt`. No deploy, push, or DB action taken —
 all changes are local and uncommitted per the owner's instruction.
+
+## 14. Full technical/on-page SEO re-audit (2026-08-25)
+
+A fresh audit pass re-verifying everything sections 9/11/12/13 already built
+and fixed, specifically checking for regressions or gaps introduced by the
+two new bus entries added to `src/lib/vehicles.ts` on 2026-08-25 (`bus-50-seater`'s
+real-photo swap and the new `volvo-bus-45-seater-luxury` entry). This was an
+audit-and-fix pass, not a rebuild — the vast majority of what the task's
+36-section brief asks for was already done and verified correct in prior
+passes; this pass's job was to find what, if anything, had drifted or was
+missed.
+
+### Real bug found and fixed: 2 broken image references (404s)
+
+`src/lib/routes.ts` (`bangalore-to-hyderabad-cab`'s `heroImage`) and
+`src/lib/services.ts` (`bangalore-sightseeing-cab`'s `heroImage`) both
+referenced `/fleet/innova-2011-front-01.webp` — a file that does not exist
+on disk (`public/fleet/` only has `innova-2011-front-02.webp` plus interior/
+dashboard shots; `-front-01` was apparently renamed or removed in an earlier
+pass without these two references being updated). This was a real, silent
+404 on two live page heroes — found via a full-repo script that extracted
+every literal image-path string referenced anywhere in `src/` (112 unique
+paths across `.ts`/`.tsx`) and checked each against `public/`. Fixed both to
+point at the existing `innova-2011-front-02.webp`. Re-ran the same check
+after the fix: 111 unique refs, 0 missing.
+
+### Minor title/meta-description length trims (2 pages)
+
+Two `metaDescription` values were meaningfully over the ~160-char SERP
+budget (not just marginally, which per section 11's own proportionality
+rule wouldn't warrant a change):
+- `src/lib/vehiclePages.ts` `sedan-rental-bangalore`: 171 → 141 chars
+  (dropped the redundant "Call or WhatsApp for a quote" tail — that CTA is
+  already implicit on every page's CTABand).
+- `src/lib/vehiclePages.ts` `bus-rental-bangalore`: 173 → 156 chars
+  (tightened the vehicle-list phrasing, kept every real fact: 20/21/45/50
+  seat tiers and the Volvo mention).
+
+All other title/meta lengths checked (11 vehicle pages, 6 service pages, 10
+location pages, 10 route pages) were within the same acceptable band section
+11 already established (including the two route titles at 62 chars —
+`bangalore-to-chikmagalur-cab` and `-pondicherry-cab` — which section 11
+explicitly documents as the deliberate, accepted outcome of its own suffix
+shortening, not left unchecked here, just correctly not re-touched).
+
+### Verified, no defect found (re-confirms prior passes are still accurate)
+
+- **Broken internal links**: cross-checked every `relatedVehicleSlugs` /
+  `relatedServiceSlugs` / `relatedLocationSlugs` / `relatedRouteSlugs` array
+  across `vehiclePages.ts`/`services.ts`/`locations.ts`/`routes.ts`/`blog.ts`
+  against the real slug lists in each file, and every `vehicleIds` entry in
+  `vehiclePages.ts` against the real `id` list in `vehicles.ts` — zero
+  broken references. The 2 vehicles with no dedicated landing page
+  (`toyota-innova-hycross`, `toyota-fortuner`) are both genuinely
+  `priceDisplay: 'Price on Request'` vehicles outside the brief's original
+  page list, consistent with the documented pattern (Hycross already noted
+  as an intentional gap in section 9); not a bug.
+- **Sitemap completeness/correctness**: `sitemap.xml` returns exactly 49
+  `<url>` entries (11 static/hub + 11 vehicle + 6 service + 10 location +
+  10 route + 1 blog), matching `staticRoutes.length + vehiclePages.length +
+  servicePages.length + locationPages.length + routePages.length +
+  blogPosts.length` exactly — no drift between the data files and the
+  sitemap generator. No noindex/404/redirect/param URLs in it.
+- **robots.txt**: still correctly allows `/`, disallows `/api/` and
+  `/admin`, and references the sitemap — doesn't block any CSS/JS/image
+  path (Next.js serves `_next/static/*` and `public/*` outside those
+  disallow prefixes).
+- **JSON-LD validity**: wrote a script that fetched `/`, `/fleet`,
+  `/vehicles/bus-rental-bangalore`, `/services/bangalore-sightseeing-cab`,
+  and `/routes/bangalore-to-hyderabad-cab` from a local production-build
+  server and `JSON.parse()`'d every `<script type="application/ld+json">`
+  block — all parsed cleanly, 0 failures.
+- **Heading hierarchy**: confirmed exactly one `<h1>` per public page again
+  (all core pages directly, all 4 dynamic families + `/blog/[slug]` via the
+  shared `LandingHero.tsx`, which renders exactly one `<h1>`). `/admin` has
+  2 `<h1>`s but is disallowed in robots.txt and not a public/indexed page.
+- **FAQPage schema visibility regression check**: re-verified the homepage's
+  FAQ answer text is still present in server-rendered HTML (the fix from
+  section 11, item 4) — confirmed via a fresh `curl`+parse against a live
+  local server; no regression.
+- **Build/lint**: `npm run build` passes, all 59 routes prerender correctly
+  (same route set as section 13's 60-minus-the-count-quirk from `/admin`
+  page-data grouping — verified via the build's own route table, nothing
+  missing). `npx eslint` on every file touched in this pass reports 0 new
+  errors.
+- **Live 200 checks**: `npm run build` + a local production-mode server,
+  `curl`-verified 200 on `/`, `/fleet`, `/sitemap.xml`, `/robots.txt`,
+  `/vehicles/sedan-rental-bangalore`, `/vehicles/bus-rental-bangalore`,
+  `/services/bangalore-sightseeing-cab`,
+  `/routes/bangalore-to-hyderabad-cab`, and the corrected image path
+  `/fleet/innova-2011-front-02.webp`.
+
+### Re-confirmed still open (not fixed this pass — same reasons as before)
+
+- **Section 11 item 35, still accurate**: `/` and `/fleet` are still
+  `'use client'` pages that fetch vehicle/route/review data from
+  `/api/home-data` / `/api/fleet` (both DB-backed via Prisma) inside a
+  `useEffect`, so the server-rendered HTML shipped to non-JS-executing
+  crawlers still ships an empty fleet grid — reconfirmed live in this pass
+  (`ItemList.numberOfItems: 0` in `/fleet`'s own JSON-LD when fetched from a
+  fresh server-rendered response, and 0 vehicle-card markers in the raw
+  HTML). This sandbox still has no live/seeded database connection to safely
+  verify a server-component refactor end-to-end, and the vehicle/route/
+  review data is admin-editable via the dashboard (i.e. it can genuinely
+  diverge from `src/lib/vehicles.ts`), so silently falling back to the
+  static data file as SSR content risks showing crawlers different content
+  than what a logged-in admin update would show real visitors — a
+  data-integrity tradeoff, not just an engineering one. Left as a flagged,
+  scoped-out follow-up requiring real DB access, same as section 11
+  concluded.
+- `public/tirupati.jpg` remains orphaned (unreferenced in `src/`, unchanged
+  since sections 10/11) — not touched again.
+- Section 11 item 34's "50+ GPS Monitored Cars / 10k+ Delighted Travelers /
+  15+ Years" stats banner on `/about` still cannot be independently verified
+  against any data file in this codebase — left unchanged, still flagged for
+  the owner to confirm or soften.
+
+### Files changed in this pass
+
+`src/lib/routes.ts`, `src/lib/services.ts`, `src/lib/vehiclePages.ts`,
+`NOTES.md`.
+
+`npm run build` passes (59 routes prerender). `npx eslint` on all changed
+files reports 0 new errors. No deploy, push, DB write, or `git` operation
+performed — all changes are local, uncommitted, code/content-file only.

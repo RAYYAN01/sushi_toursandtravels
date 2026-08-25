@@ -233,7 +233,7 @@ export const servicePages: ServicePage[] = [
       'Half-day and full-day Bangalore sightseeing cab rental with a local driver — sedans, SUVs and group vehicles for city tours and day trips.',
     heroSubtitle:
       'Half-day and full-day Bangalore sightseeing rental with a local driver — city tours, day trips and group outings.',
-    heroImage: '/fleet/innova-2011-front-01.webp',
+    heroImage: '/fleet/innova-2011-front-02.webp',
     geoSummary:
       'Sushi Travels offers Bangalore sightseeing cab service for half-day and full-day city tours, using sedans, SUVs and group vehicles with local drivers. This service also covers same-day round trips to nearby destinations such as Mysore for visitors with limited time.',
     bodyParagraphs: [

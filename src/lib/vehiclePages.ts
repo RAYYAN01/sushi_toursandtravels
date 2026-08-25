@@ -32,7 +32,7 @@ export const vehiclePages: VehiclePage[] = [
     h1: 'Sedan Rental in Bangalore with Driver',
     title: 'Sedan Rental Bangalore with Driver',
     metaDescription:
-      'Book a chauffeur-driven sedan (Toyota Etios / Maruti Suzuki Dzire) in Bangalore at ₹13/km. Airport transfers, local drops & outstation trips. Call or WhatsApp for a quote.',
+      'Book a chauffeur-driven sedan (Toyota Etios / Maruti Suzuki Dzire) in Bangalore at ₹13/km. Airport transfers, local drops & outstation trips.',
     heroSubtitle:
       'Toyota Etios & Maruti Suzuki Dzire — chauffeur-driven AC sedans for airport transfers, local city travel and outstation trips out of Bangalore.',
     vehicleIds: ['toyota-etios', 'maruti-dzire'],
@@ -462,7 +462,7 @@ export const vehiclePages: VehiclePage[] = [
     h1: 'Bus & Mini Coach Rental in Bangalore',
     title: 'Bus & Mini Coach Rental Bangalore',
     metaDescription:
-      'Compare our Bangalore bus rental options: Sushi Mini Bus (20-seater), 21-seater, Volvo 45-seater luxury and 50-seater AC buses for group travel, weddings & corporate events.',
+      'Compare our Bangalore bus rental options: 20 to 50-seater AC coaches, including a Volvo 45-seater luxury bus, for group travel, weddings & corporate events.',
     heroSubtitle:
       'From a 20-seater mini coach to a full-size Volvo luxury coach — compare our AC bus fleet for corporate events, weddings, school trips and pilgrimage groups.',
     vehicleIds: ['sgr-mini-coach', 'bus-21-seater', 'volvo-bus-45-seater-luxury', 'bus-50-seater'],
