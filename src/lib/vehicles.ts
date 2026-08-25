@@ -139,14 +139,21 @@ export const vehicles: Vehicle[] = [
       'Reading lights, curtains & music system',
       'Best for small families and close friend groups',
     ],
-    image: '/fleet/force-traveller-c-front-01.webp',
+    // Card front image: force-traveller-c-front-03.webp is a cropped version
+    // of the Yaksha front-02 photo (owner-requested crop, 2026-08-25) — tight
+    // on the van, no sky/ground. The old "-side-01" file was renamed to
+    // "-interior-04" since it was actually an interior shot, not a side
+    // view — that mislabel was why VehicleCard's side-view auto-pick was
+    // showing an interior seat photo as the card thumbnail.
+    image: '/fleet/force-traveller-c-front-03.webp',
     images: [
+      '/fleet/force-traveller-c-front-03.webp',
       '/fleet/force-traveller-c-front-01.webp',
       '/fleet/force-traveller-c-front-02.webp',
-      '/fleet/force-traveller-c-side-01.webp',
       '/fleet/force-traveller-c-interior-01.webp',
       '/fleet/force-traveller-c-interior-02.webp',
       '/fleet/force-traveller-c-interior-03.webp',
+      '/fleet/force-traveller-c-interior-04.webp',
       '/fleet/force-traveller-c-rear-02.webp',
     ],
     description:
