@@ -628,4 +628,45 @@ export const vehicles: Vehicle[] = [
       'Our largest-capacity vehicle, the 50-seater bus is built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
     sortOrder: 13,
   },
+
+  // ---------------------------------------------------------------------
+  // Volvo Bus 45 Seater Luxury — owner-provided photos, 2026-08-25.
+  // Interior photos have another operator's seat-cover branding blurred out
+  // per owner instruction (the exterior body carries no readable text, so
+  // those 4 shots were left untouched). No confirmed rate — Price on Request.
+  // ---------------------------------------------------------------------
+  {
+    id: 'volvo-bus-45-seater-luxury',
+    name: 'Volvo Bus 45 Seater Luxury',
+    type: 'Bus',
+    seats: 45,
+    seatsDisplay: '45 Seater',
+    ac: true,
+    luggage: 45,
+    ratePerKm: 0,
+    priceDisplay: 'Price on Request',
+    acOnly: true,
+    features: [
+      'Full-size Volvo luxury coach for large groups',
+      'Pushback reclining seats with curtains at every window',
+      'Roof-mounted AC across the full cabin',
+      'Large underbelly luggage hold for group baggage',
+      'Suited for large corporate events, weddings & big pilgrimage groups',
+      'Custom quote based on route, duration & group size',
+    ],
+    image: '/fleet/volvo-bus-45-seater-front-01.webp',
+    images: [
+      '/fleet/volvo-bus-45-seater-front-01.webp',
+      '/fleet/volvo-bus-45-seater-front-02.webp',
+      '/fleet/volvo-bus-45-seater-side-01.webp',
+      '/fleet/volvo-bus-45-seater-side-02.webp',
+      '/fleet/volvo-bus-45-seater-interior-01.webp',
+      '/fleet/volvo-bus-45-seater-interior-02.webp',
+      '/fleet/volvo-bus-45-seater-interior-03.webp',
+      '/fleet/volvo-bus-45-seater-interior-04.webp',
+    ],
+    description:
+      'Our Volvo Bus 45 Seater Luxury is a full-size Volvo coach built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one premium AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
+    sortOrder: 14,
+  },
 ];
