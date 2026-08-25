@@ -23,7 +23,12 @@
 
 /* Base resets and defaults */
 html {
-  scroll-behavior: smooth;
+  /* Deliberately NOT scroll-behavior: smooth — with the homepage's async
+     data fetch reflowing the page taller after first paint, the browser's
+     scroll-position restoration on reload fights with the smooth animation
+     and overshoots toward the bottom, landing on the footer. Nothing on the
+     site currently relies on smooth anchor-scrolling, so removed outright
+     rather than scoped. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
