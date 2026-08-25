@@ -74,7 +74,7 @@ export const vehiclePages: VehiclePage[] = [
     h1: 'Toyota Innova Rental in Bangalore',
     title: 'Toyota Innova Rental Bangalore with Driver',
     metaDescription:
-      'Chauffeur-driven Toyota Innova (2011) rental in Bangalore at ₹17/km. Spacious 7-seater SUV for family outstation trips, pilgrimages & airport transfers.',
+      'Chauffeur-driven Toyota Innova rental in Bangalore at ₹17/km. Spacious 7-seater SUV for family outstation trips, pilgrimages & airport transfers.',
     heroSubtitle:
       'A dependable, spacious 7-seater Toyota Innova for family outstation trips, pilgrimages, and highway journeys, at ₹17/km.',
     vehicleIds: ['toyota-innova-2011'],
@@ -89,7 +89,7 @@ export const vehiclePages: VehiclePage[] = [
       {
         question: 'What is the per-km rate for the Toyota Innova?',
         answer:
-          'The Toyota Innova (2011) is priced at ₹17/km with a 300 km/day minimum billing distance, driven by a verified chauffeur.',
+          'The Toyota Innova is priced at ₹17/km with a 300 km/day minimum billing distance, driven by a verified chauffeur.',
       },
       {
         question: 'Is driver bata included?',

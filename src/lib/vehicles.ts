@@ -393,7 +393,7 @@ export const vehicles: Vehicle[] = [
   // ---------------------------------------------------------------------
   {
     id: 'toyota-innova-2011',
-    name: 'Toyota Innova (2011)',
+    name: 'Toyota Innova',
     type: 'SUV',
     seats: 7,
     seatsDisplay: '7 Seater',
@@ -411,14 +411,17 @@ export const vehicles: Vehicle[] = [
       'Good luggage capacity for family trips',
       'Well suited for outstation road trips & pilgrimages',
     ],
-    image: '/fleet/innova-2011-front-01.webp',
+    // "-front-01" was actually an interior seat-cover photo (mislabeled) —
+    // renamed to "-interior-04" on 2026-08-25. Real front card image is
+    // "-front-02" per owner confirmation (owner's own vehicle).
+    image: '/fleet/innova-2011-front-02.webp',
     images: [
-      '/fleet/innova-2011-front-01.webp',
       '/fleet/innova-2011-front-02.webp',
       '/fleet/innova-2011-dashboard-01.webp',
       '/fleet/innova-2011-interior-01.webp',
       '/fleet/innova-2011-interior-02.webp',
       '/fleet/innova-2011-interior-03.webp',
+      '/fleet/innova-2011-interior-04.webp',
       '/fleet/innova-2011-interior-08.webp',
     ],
     description:
