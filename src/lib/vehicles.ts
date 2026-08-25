@@ -529,78 +529,52 @@ export const vehicles: Vehicle[] = [
   // ---------------------------------------------------------------------
   // Buses / Coaches
   // ---------------------------------------------------------------------
+  // 25 Seater Mini Bus — real owner-provided photos, 2026-08-25, replacing
+  // both the former "Sushi Mini Bus" (sgr-mini-coach) and "21-Seater Bus"
+  // entries, which were removed outright per owner instruction rather than
+  // just re-photographed. The shared coach-sgr-* placeholder set those two
+  // used is now unreferenced anywhere and was deleted from public/fleet.
+  // Front card image has another operator's ("AADHYA") name blurred out
+  // where it was painted across the windshield; interior/side shots carry
+  // no readable branding and were left untouched.
+  // ---------------------------------------------------------------------
   {
-    id: 'sgr-mini-coach',
-    name: 'Sushi Mini Bus',
+    id: 'sushi-travels-25-seater-mini-bus',
+    name: '25 Seater Mini Bus',
     type: 'Bus',
-    seats: 20,
-    seatsDisplay: '20 Seater',
+    seats: 25,
+    seatsDisplay: '25 Seater',
     ac: true,
-    luggage: 18,
+    luggage: 22,
     ratePerKm: 0,
     priceDisplay: 'Price on Request',
     acOnly: true,
     features: [
-      'Spacious mini coach for larger groups',
-      'Rows of AC pushback seating',
-      'Overhead luggage racks plus rear cargo hold',
-      'PA/music system for group announcements',
-      'Suited for large corporate offsites, school/college trips & big pilgrimage groups',
-    ],
-    image: '/fleet/coach-sgr-front-01.webp',
-    images: [
-      '/fleet/coach-sgr-front-01.webp',
-      '/fleet/coach-sgr-front-02.webp',
-      '/fleet/coach-sgr-front-03.webp',
-      '/fleet/coach-sgr-interior-01.webp',
-      '/fleet/coach-sgr-interior-02.webp',
-      '/fleet/coach-sgr-interior-03.webp',
-      '/fleet/coach-sgr-rear-01.webp',
-      '/fleet/coach-sgr-rear-02.webp',
-    ],
-    description:
-      'The Sushi Mini Bus is a 20-seater AC coach built for big groups such as corporate offsites, school and college outings, and large pilgrimage or wedding parties that need everyone travelling together in one vehicle.',
-    sortOrder: 11,
-  },
-  {
-    id: 'bus-21-seater',
-    name: '21-Seater Bus',
-    type: 'Bus',
-    seats: 21,
-    seatsDisplay: '21 Seater',
-    ac: true,
-    luggage: 20,
-    ratePerKm: 0,
-    priceDisplay: 'Price on Request',
-    acOnly: true,
-    features: [
-      'AC pushback seating for 21 passengers',
+      'AC pushback seating for 25 passengers',
       'Overhead luggage racks plus rear cargo hold',
       'PA/music system for group announcements',
       'Suited for corporate offsites, school/college trips & pilgrimage groups',
       'Custom quote based on route, duration & group size',
     ],
-    image: '/fleet/coach-sgr-front-01.webp',
+    image: '/fleet/sushi-travels-25-seater-mini-bus-front-01.webp',
     images: [
-      '/fleet/coach-sgr-front-01.webp',
-      '/fleet/coach-sgr-front-02.webp',
-      '/fleet/coach-sgr-front-03.webp',
-      '/fleet/coach-sgr-interior-01.webp',
-      '/fleet/coach-sgr-interior-02.webp',
-      '/fleet/coach-sgr-interior-03.webp',
-      '/fleet/coach-sgr-rear-01.webp',
-      '/fleet/coach-sgr-rear-02.webp',
+      '/fleet/sushi-travels-25-seater-mini-bus-front-01.webp',
+      '/fleet/sushi-travels-25-seater-mini-bus-front-02.webp',
+      '/fleet/sushi-travels-25-seater-mini-bus-side-01.webp',
+      '/fleet/sushi-travels-25-seater-mini-bus-interior-01.webp',
+      '/fleet/sushi-travels-25-seater-mini-bus-interior-02.webp',
+      '/fleet/sushi-travels-25-seater-mini-bus-interior-03.webp',
     ],
     description:
-      'Our 21-seater bus is built for mid-size groups that have outgrown a Tempo Traveller — corporate offsites, school and college trips, and pilgrimage groups travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
-    sortOrder: 12,
+      'Our 25-seater mini bus is built for mid-to-large groups — corporate offsites, school and college trips, and pilgrimage groups travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
+    sortOrder: 11,
   },
   // ---------------------------------------------------------------------
   // Sushi Travels - 50 Seater Bus — real owner-provided photos, 2026-08-25,
   // replacing the previously-shared coach-sgr-* placeholder set (that set
-  // stays in use by the Sushi Mini Bus and 21-Seater Bus entries, so those
-  // shared files were not deleted). Interior shots were initially blurred
-  // to hide another operator's "AADHYA" branding, then re-sent unblurred
+  // was also used by the Sushi Mini Bus / 21-Seater Bus entries, both since
+  // removed — see the 25 Seater Mini Bus entry above). Interior shots were
+  // initially blurred to hide another operator's "AADHYA" branding, then re-sent unblurred
   // and swapped in per owner instruction (2026-08-25) — filenames bumped
   // to "-v2" since these paths are served with an immutable cache header.
   // A front-fascia shot with the same branding painted directly on the
