@@ -45,13 +45,20 @@ export const STANDARD_DUTY_HOURS = '6:00 AM – 10:00 PM';
 // Per-tier rate/km and driver bata, exactly as confirmed by the owner.
 // Nothing here is invented — a tier not in this sheet (Innova Hycross, the
 // two bus entries) stays "Price on Request" with no ratePerKm.
+//
+// tempoTravellerAc / luxuryTempoTraveller9Plus1 / tempoTraveller17Seater bata
+// & rates updated 2026-08-25 on the owner's explicit instruction to match
+// published market rates from a reference competitor site (Yogi Tours &
+// Travels) for the 9/12/17-seater Tempo Traveller tiers — a deliberate
+// pricing-strategy decision, not a guess.
 const PRICING = {
   sedan: { ratePerKm: 13, driverBata: 400 },
   innova: { ratePerKm: 17, driverBata: 400 },
   innovaCrysta: { ratePerKm: 19, driverBata: 400 },
-  tempoTravellerAc: { ratePerKm: 22, driverBata: 500 },
-  tempoTravellerNonAc: { ratePerKm: 20, driverBata: 500 },
-  luxuryTempoTraveller9Plus1: { ratePerKm: 30, driverBata: 600 },
+  tempoTravellerAc: { ratePerKm: 22, driverBata: 700 },
+  tempoTravellerNonAc: { ratePerKm: 20, driverBata: 700 },
+  luxuryTempoTraveller9Plus1: { ratePerKm: 28, driverBata: 500 },
+  tempoTraveller17Seater: { ratePerKm: 30, driverBata: 700 },
   forceUrbaniaMaharaja12: { ratePerKm: 45, driverBata: 700 },
   forceUrbaniaLuxury16: { ratePerKm: 38, driverBata: 700 },
 } as const;
@@ -148,11 +155,11 @@ export const vehicles: Vehicle[] = [
   },
 
   // ---------------------------------------------------------------------
-  // 17-Seater Force Tempo Traveller — owner confirmed this vehicle is real
-  // (2026-08-20) but pricing and real photos are pending. Placeholder
-  // reuses the existing Force Traveller Yaksha photo set (NOT Urbania, per
-  // owner instruction) until real 17-seater photos arrive. No rate is
-  // invented — shows "Price on Request" until confirmed.
+  // 17-Seater Force Tempo Traveller — owner confirmed real (2026-08-20).
+  // Real front photo (owner-provided, 2026-08-25) replaces the earlier
+  // Yaksha placeholder. Rate/bata set 2026-08-25 per owner instruction to
+  // match the reference competitor rate for this tier (see PRICING comment
+  // above) — not an invented figure.
   // ---------------------------------------------------------------------
   {
     id: 'force-tempo-traveller-17-seater',
@@ -162,8 +169,10 @@ export const vehicles: Vehicle[] = [
     seatsDisplay: '17 Seater',
     ac: true,
     luggage: 14,
-    ratePerKm: 0,
-    priceDisplay: 'Price on Request',
+    ratePerKm: PRICING.tempoTraveller17Seater.ratePerKm,
+    driverBata: PRICING.tempoTraveller17Seater.driverBata,
+    minKmPerDay: MIN_KM_PER_DAY,
+    drivingHours: STANDARD_DUTY_HOURS,
     acOnly: true,
     features: [
       'Pushback reclining seats with extra legroom',
@@ -172,14 +181,12 @@ export const vehicles: Vehicle[] = [
       'Dedicated rear luggage boot for group baggage',
       'Best for large family groups, corporate offsites & pilgrimages',
     ],
-    image: '/fleet/force-traveller-yaksha-front-01.webp',
+    image: '/fleet/force-tempo-traveller-17-seater-front-01.webp',
     images: [
-      '/fleet/force-traveller-yaksha-front-01.webp',
-      '/fleet/force-traveller-yaksha-front-02.webp',
-      '/fleet/force-traveller-yaksha-interior-01.webp',
+      '/fleet/force-tempo-traveller-17-seater-front-01.webp',
     ],
     description:
-      'Our 17-seater Force Tempo Traveller is built for large groups who need extra capacity for outstation trips, corporate offsites and pilgrimages out of Bangalore. Photos and confirmed per-km pricing for this specific vehicle are being finalised — call or WhatsApp for a quote in the meantime.',
+      'Our 17-seater Force Tempo Traveller is built for large groups who need extra capacity for outstation trips, corporate offsites and pilgrimages out of Bangalore. Pushback seating, roof AC and a dedicated luggage boot make it a strong pick for bigger group travel.',
     sortOrder: 2,
   },
 

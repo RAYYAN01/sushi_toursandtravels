@@ -8,7 +8,7 @@ function getJwtSecret(): string {
   return secret;
 }
 
-export function signToken(payload: any, expiresInSeconds: number): string {
+export function signToken(payload: Record<string, unknown>, expiresInSeconds: number): string {
   const JWT_SECRET = getJwtSecret();
   const header = { alg: 'HS256', typ: 'JWT' };
   const exp = Math.floor(Date.now() / 1000) + expiresInSeconds;
@@ -25,7 +25,7 @@ export function signToken(payload: any, expiresInSeconds: number): string {
   return `${encodedHeader}.${encodedPayload}.${signature}`;
 }
 
-export function verifyToken(token: string): any | null {
+export function verifyToken(token: string): (Record<string, unknown> & { exp?: number }) | null {
   try {
     const JWT_SECRET = getJwtSecret();
     const parts = token.split('.');
@@ -47,7 +47,7 @@ export function verifyToken(token: string): any | null {
     }
 
     return payload;
-  } catch (err) {
+  } catch {
     return null;
   }
 }

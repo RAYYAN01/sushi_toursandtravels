@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Compass, Target, Users2, ShieldCheck } from 'lucide-react';
+import { Compass, Target, ShieldCheck } from 'lucide-react';
 import { getBreadcrumbListSchema } from '@/lib/schema';
 
 export const metadata = {

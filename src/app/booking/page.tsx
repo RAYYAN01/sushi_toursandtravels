@@ -49,7 +49,7 @@ export default function BookingPage() {
       >
         <div className="absolute inset-0 bg-navy-dark/80 z-0" />
         <div className="relative z-10 max-w-7xl mx-auto space-y-3">
-          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white">
             Book a Vehicle with Driver in Bangalore
           </h1>
           <p className="text-sm text-cream-warm/95 max-w-xl mx-auto">
@@ -59,7 +59,7 @@ export default function BookingPage() {
       </div>
 
       {/* Main Form Area wrapper */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* BookingForm requires Suspense as it uses useSearchParams() */}
         <Suspense fallback={
           <div className="py-20 text-center font-bold text-navy animate-pulse">

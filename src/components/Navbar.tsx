@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, PhoneCall } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PHONE_NUMBER } from '@/lib/contact';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -110,7 +111,7 @@ export default function Navbar() {
               {/* Booking CTA */}
               <Link
                 href="/booking"
-                className="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold rounded-full px-6 py-2.5 shadow-sm transition-colors duration-200"
+                className="inline-flex items-center justify-center bg-primary hover:bg-primary-dark active:scale-[0.98] text-white text-sm font-semibold rounded-full px-6 py-2.5 shadow-sm transition-all duration-200"
               >
                 Book Your Ride
               </Link>
@@ -206,8 +207,8 @@ export default function Navbar() {
               {/* Call and Book CTA inside Drawer */}
               <div className="pt-6 border-t border-navy-light/20 space-y-4">
                 <a
-                  href="tel:+919071660099"
-                  className="flex items-center justify-center space-x-2 w-full border border-primary/40 hover:border-primary text-cream-warm hover:text-white rounded-full py-3 text-sm font-semibold transition-all duration-200 bg-navy/30"
+                  href={`tel:${PHONE_NUMBER}`}
+                  className="flex items-center justify-center space-x-2 w-full border border-primary/40 hover:border-primary text-cream-warm hover:text-white rounded-full py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.98] bg-navy/30"
                 >
                   <PhoneCall className="w-4 h-4 text-primary" />
                   <span>Call: +91 90716 60099</span>
@@ -215,7 +216,7 @@ export default function Navbar() {
 
                 <Link
                   href="/booking"
-                  className="flex items-center justify-center w-full bg-primary hover:bg-primary-dark text-white rounded-full py-3 text-sm font-semibold shadow-sm transition-colors duration-200"
+                  className="flex items-center justify-center w-full bg-primary hover:bg-primary-dark active:scale-[0.98] text-white rounded-full py-3 text-sm font-semibold shadow-sm transition-all duration-200"
                 >
                   Book Your Ride Now
                 </Link>

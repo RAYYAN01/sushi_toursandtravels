@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
+import { getWhatsAppUrl } from '@/lib/contact';
 
 export default function WhatsAppFloat() {
-  const whatsappNumber = '919071660099';
   const message = 'Hello Sushi Tours & Travels, I would like to enquire about a vehicle for my trip. Please share the availability and quotation.';
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+  const whatsappUrl = getWhatsAppUrl(message);
 
   return (
     <a

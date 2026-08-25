@@ -19,9 +19,20 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { bookingSchema, BookingData } from '@/lib/validations';
+import { getWhatsAppUrl } from '@/lib/contact';
+
+interface BookingFormVehicle {
+  id: string;
+  type: string;
+  name: string;
+  priceDisplay?: string;
+  ratePerKm?: number;
+  ratePerKmAc?: number;
+  ratePerKmNonAc?: number;
+}
 
 export default function BookingForm() {
-  const [vehiclesList, setVehiclesList] = useState<any[]>([]);
+  const [vehiclesList, setVehiclesList] = useState<BookingFormVehicle[]>([]);
 
   useEffect(() => {
     fetch('/api/fleet')
@@ -57,7 +68,7 @@ export default function BookingForm() {
     defaultValues: {
       pickupLocation: defaultPickup,
       dropLocation: defaultDrop,
-      tripType: (defaultTripType === 'Round Trip' || defaultTripType === 'Local Package' || defaultTripType === 'One Way' ? defaultTripType : 'One Way') as any,
+      tripType: (defaultTripType === 'Round Trip' || defaultTripType === 'Local Package' || defaultTripType === 'One Way' ? defaultTripType : 'One Way') as BookingData['tripType'],
       date: '',
       time: '',
       returnDate: '',
@@ -78,11 +89,13 @@ export default function BookingForm() {
     if (defaultDrop) setValue('dropLocation', defaultDrop);
     if (defaultVehicle) setValue('vehicleType', defaultVehicle);
     const typeParam = searchParams.get('type');
-    if (typeParam) setValue('tripType', typeParam as any);
+    if (typeParam === 'One Way' || typeParam === 'Round Trip' || typeParam === 'Local Package') {
+      setValue('tripType', typeParam);
+    }
   }, [defaultPickup, defaultDrop, defaultVehicle, searchParams, setValue]);
 
   const handleNextStep = async () => {
-    let fieldsToValidate: any[] = [];
+    let fieldsToValidate: (keyof BookingData)[] = [];
     if (step === 1) {
       fieldsToValidate = [
         'pickupLocation',
@@ -155,7 +168,7 @@ export default function BookingForm() {
     const vehicleName = matchedVehicle ? matchedVehicle.name : waVehicle;
 
     const text = `Hello Sushi Travels, I would like to book a ride:\n- *Pickup:* ${waPickup}\n- *Drop:* ${waDrop}\n- *Trip Type:* ${selectedTripType}\n- *Vehicle:* ${vehicleName}\n- *Date:* ${waDate}`;
-    return `https://wa.me/919071660099?text=${encodeURIComponent(text)}`;
+    return getWhatsAppUrl(text);
   };
 
   // Detailed WhatsApp booking message for checkout confirmation
@@ -169,7 +182,7 @@ export default function BookingForm() {
     const vehicleName = matchedVehicle ? matchedVehicle.name : currentValues.vehicleType;
 
     const text = `Hello Sushi Travels,\n\nI have just placed a booking request on your website. Here are my details:\n\n*Booking ID:* ${bookingId}\n*Lead Passenger:* ${currentValues.fullName}\n*Mobile:* ${currentValues.mobile}\n*Email:* ${currentValues.email}\n*Trip Type:* ${currentValues.tripType}\n*Route:* ${currentValues.pickupLocation} ➔ ${currentValues.dropLocation}\n*Date & Time:* ${currentValues.date} at ${currentValues.time}\n${currentValues.returnDate ? `*Return Date:* ${currentValues.returnDate}\n` : ''}*Vehicle:* ${vehicleName}\n*Passengers:* ${currentValues.passengers}\n${currentValues.specialRequests ? `*Special Request:* ${currentValues.specialRequests}\n` : ''}\nThank you!`;
-    return `https://wa.me/919071660099?text=${encodeURIComponent(text)}`;
+    return getWhatsAppUrl(text);
   };
 
   // Resolve preselected category type from vehicle parameter query
@@ -257,7 +270,7 @@ export default function BookingForm() {
                             key={t}
                             type="button"
                             disabled={isDisabled}
-                            onClick={() => setValue('tripType', t as any)}
+                            onClick={() => setValue('tripType', t as BookingData['tripType'])}
                             className={`py-3 px-3 text-center rounded-xl text-xs font-bold border transition-all ${
                               isSelected
                                 ? 'bg-navy border-navy text-white shadow-sm'
@@ -634,7 +647,7 @@ export default function BookingForm() {
                   </button>
                   <button
                     type="submit"
-                    className="bg-primary hover:bg-primary-dark text-white font-bold rounded-full px-10 py-3.5 transition-colors shadow-sm"
+                    className="bg-primary hover:bg-primary-dark active:scale-[0.98] text-white font-bold rounded-full px-10 py-3.5 transition-all duration-200 shadow-sm"
                   >
                     Confirm Booking
                   </button>

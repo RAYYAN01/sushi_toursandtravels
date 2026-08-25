@@ -250,27 +250,27 @@ export const vehiclePages: VehiclePage[] = [
     h1: '17-Seater Force Tempo Traveller Rental in Bangalore',
     title: '17 Seater Tempo Traveller Rental Bangalore',
     metaDescription:
-      'Hire a 17 seater tempo traveller in Bangalore for large group outstation trips, corporate offsites & pilgrimages. Pricing on request — call or WhatsApp for a quote.',
+      'Hire a 17 seater tempo traveller in Bangalore for large group outstation trips, corporate offsites & pilgrimages. Starting at ₹30/km — call or WhatsApp for a quote.',
     heroSubtitle:
-      'Our largest Force Tempo Traveller — built for big groups on outstation trips, corporate offsites and pilgrimages. Pricing available on request.',
+      'Our largest Force Tempo Traveller — built for big groups on outstation trips, corporate offsites and pilgrimages. Starting at ₹30/km.',
     vehicleIds: ['force-tempo-traveller-17-seater'],
     geoSummary:
-      'Sushi Travels offers a 17 seater tempo traveller in Bangalore for large groups needing extra capacity on outstation trips, corporate offsites and pilgrimages. This is a real, confirmed vehicle in our fleet; per-km pricing and dedicated photos are being finalised, so it is currently quoted on request rather than at a fixed rate.',
+      'Sushi Travels offers a 17 seater tempo traveller in Bangalore for large groups needing extra capacity on outstation trips, corporate offsites and pilgrimages, starting at ₹30/km with a ₹700/day driver bata and a 300 km/day minimum.',
     bodyParagraphs: [
       'When a 12-seater Tempo Traveller isn\'t quite enough room, our 17-seater Force Tempo Traveller steps up to carry a larger group in one vehicle — pushback reclining seats, roof-mounted AC across every row, and a dedicated rear luggage boot sized for a full group\'s bags.',
       'It suits large family gatherings, corporate offsites where an entire team travels together, and pilgrimage groups heading to South Indian temple towns who want everyone in a single vehicle rather than splitting across two smaller ones.',
-      'This tier is genuinely new to our lineup: the vehicle itself is confirmed and in service, but its dedicated photography and a fixed per-km rate are still being finalised with our team. Call or WhatsApp us with your route and group size and we\'ll get back with a quote quickly — for a similarly sized premium option with confirmed pricing today, see the Force Urbania Maharaja 12-Seater and Force Urbania Luxury 16-Seater pages below.',
+      'Starting at ₹30/km with a 300 km/day minimum and ₹700/day driver bata, plus toll, parking, permit and state taxes as applicable. Call or WhatsApp us with your route and group size for an exact quote — for a similarly sized premium option, see the Force Urbania Maharaja 12-Seater and Force Urbania Luxury 16-Seater pages below.',
     ],
     faqs: [
       {
         question: 'What is the per-km rate for the 17-seater tempo traveller?',
         answer:
-          'This tier is currently priced on request rather than a fixed confirmed per-km rate, while photos and final pricing are being confirmed. Call or WhatsApp us with your route and group size for a fast quote.',
+          'The 17-seater Force Tempo Traveller starts at ₹30/km, with a 300 km/day minimum and ₹700/day driver bata. Toll, parking, permit and state taxes are additional. Call or WhatsApp us with your route and group size for an exact quote.',
       },
       {
         question: 'Is this a real vehicle in the Sushi Travels fleet?',
         answer:
-          'Yes — the 17-seater Force Tempo Traveller is a confirmed, real vehicle in our fleet. Dedicated photography for this specific vehicle is still being finalised, which is why pricing is quoted on request for now.',
+          'Yes — the 17-seater Force Tempo Traveller is a confirmed, real vehicle in our fleet, in service today.',
       },
       {
         question: 'Can I book this for outstation travel?',

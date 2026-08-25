@@ -1,4 +1,5 @@
 import { Vehicle } from './vehicles';
+import { PHONE_NUMBER } from './contact';
 
 const SITE_URL = 'https://sushitravels.com'; // Change to actual domain if needed
 
@@ -11,7 +12,7 @@ export function getLocalBusinessSchema() {
     image: `${SITE_URL}/fleet/force-urbania-front-01.webp`,
     description: 'Sushi Travels is a premier Indian travel agency renting out vehicles with drivers for local, airport transfer, and outstation trips in India.',
     url: SITE_URL,
-    telephone: '+919071660099',
+    telephone: PHONE_NUMBER,
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'No 272 , corner shop ,G/F , 8th cross, Opposite to BBMP office Bhuvaneshwari Nagara Dodda Basti Main Road, post, Nagadevana Halli',
@@ -184,7 +185,7 @@ export function getServiceLandingSchema(params: {
       '@type': 'TravelAgency',
       name: 'Sushi Travels',
       url: SITE_URL,
-      telephone: '+919071660099',
+      telephone: PHONE_NUMBER,
     },
     areaServed: (params.areaServed ?? ['Bengaluru', 'Karnataka', 'South India']).map((name) => ({
       '@type': 'City',

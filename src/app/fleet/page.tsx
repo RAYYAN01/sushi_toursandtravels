@@ -4,22 +4,29 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HelpCircle } from 'lucide-react';
 import { getFleetItemListSchema, getBreadcrumbListSchema } from '@/lib/schema';
-import { sortVehiclesForDisplay } from '@/lib/vehicles';
+import { sortVehiclesForDisplay, Vehicle } from '@/lib/vehicles';
 import VehicleCard from '@/components/VehicleCard';
 import { VehicleCardSkeleton } from '@/components/SkeletonLoader';
 
 export default function FleetPage() {
-  const [vehiclesList, setVehiclesList] = useState<any[]>([]);
+  const [vehiclesList, setVehiclesList] = useState<Vehicle[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
     fetch('/api/fleet', { cache: 'no-store' })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Fleet API responded with ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         if (data.vehicles) setVehiclesList(sortVehiclesForDisplay(data.vehicles));
       })
-      .catch((err) => console.error('Error fetching fleet:', err))
+      .catch((err) => {
+        console.error('Error fetching fleet:', err);
+        setFetchError(true);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -128,6 +135,14 @@ export default function FleetPage() {
                   <VehicleCard vehicle={vehicle} />
                 </div>
               ))}
+            </div>
+          ) : fetchError ? (
+            <div className="text-center py-20 bg-white rounded-2xl border border-navy-light/10 flex flex-col items-center justify-center space-y-3">
+              <HelpCircle className="w-12 h-12 text-primary" />
+              <h2 className="font-serif font-bold text-xl text-navy">Couldn&apos;t Load the Fleet</h2>
+              <p className="text-xs text-navy max-w-sm">
+                Something went wrong loading our vehicles. Please refresh the page, or call/WhatsApp us directly and we&apos;ll help you right away.
+              </p>
             </div>
           ) : (
             <div className="text-center py-20 bg-white rounded-2xl border border-navy-light/10 flex flex-col items-center justify-center space-y-3">

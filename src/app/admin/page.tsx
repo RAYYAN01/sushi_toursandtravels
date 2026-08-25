@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   Lock,
   Mail,
@@ -17,8 +16,6 @@ import {
   AlertCircle,
   Upload,
   Image as ImageIcon,
-  ExternalLink,
-  ChevronRight,
   Star,
   X,
   ZoomIn,
@@ -67,7 +64,6 @@ function compressImage(file: File): Promise<string> {
 }
 
 export default function AdminPage() {
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -203,58 +199,6 @@ export default function AdminPage() {
     setCropImageIndex(null);
   };
 
-  const moveVehicleOrder = async (index: number, direction: 'up' | 'down') => {
-    const visibleFleet = [...fleet]
-      .filter(v => adminFleetFilter === 'All' || v.type === adminFleetFilter)
-      .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= visibleFleet.length) return;
-
-    const currentItem = visibleFleet[index];
-    const targetItem = visibleFleet[targetIndex];
-
-    const currentGlobalIndex = fleet.findIndex(v => v._id === currentItem._id);
-    const targetGlobalIndex = fleet.findIndex(v => v._id === targetItem._id);
-
-    if (currentGlobalIndex === -1 || targetGlobalIndex === -1) return;
-
-    const tempOrder = currentItem.sortOrder || 0;
-    currentItem.sortOrder = targetItem.sortOrder || 0;
-    targetItem.sortOrder = tempOrder;
-
-    if (currentItem.sortOrder === targetItem.sortOrder) {
-      const globalSorted = [...fleet].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-      globalSorted.forEach((v, idx) => {
-        v.sortOrder = idx;
-      });
-      const temp = globalSorted[currentGlobalIndex].sortOrder;
-      globalSorted[currentGlobalIndex].sortOrder = globalSorted[targetGlobalIndex].sortOrder;
-      globalSorted[targetGlobalIndex].sortOrder = temp;
-      
-      setFleet([...globalSorted]);
-    } else {
-      const fleetCopy = [...fleet];
-      fleetCopy[currentGlobalIndex] = currentItem;
-      fleetCopy[targetGlobalIndex] = targetItem;
-      setFleet(fleetCopy);
-    }
-
-    try {
-      await Promise.all([
-        saveVehicleOrderOnBackend(currentItem),
-        saveVehicleOrderOnBackend(targetItem)
-      ]);
-      const res = await fetch('/api/fleet', { cache: 'no-store' });
-      if (res.ok) {
-        const d = await res.json();
-        setFleet(d.vehicles || []);
-      }
-    } catch (err) {
-      console.error('Reorder save error:', err);
-    }
-  };
-
   // ─── LOCAL-ONLY reorder (no API call) — user must click Save Arrangement ───
   const moveVehicleInRow = (vehicleId: string, direction: 'left' | 'right') => {
     const vehicle = fleet.find(v => v._id === vehicleId);
@@ -280,18 +224,6 @@ export default function AdminPage() {
       return updated ? { ...item, sortOrder: updated.sortOrder } : item;
     }));
     setHasPendingRearrange(true);
-  };
-
-  const saveVehicleOrderOnBackend = async (vehicle: any) => {
-    const res = await fetch(`/api/fleet?id=${vehicle._id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...vehicle,
-        features: Array.isArray(vehicle.features) ? vehicle.features.join(', ') : vehicle.features,
-      }),
-    });
-    if (!res.ok) throw new Error('Order update failed');
   };
 
   // ─── LOCAL-ONLY category row move (no API call) ───
@@ -357,11 +289,6 @@ export default function AdminPage() {
       setIsSavingRearrange(false);
     }
   };
-
-  // Check authentication on load
-  useEffect(() => {
-    checkAuth();
-  }, []);
 
   // Global mouse/touch gesture listener for drag-to-crop
   useEffect(() => {
@@ -440,23 +367,6 @@ export default function AdminPage() {
     };
   }, [isDraggingCrop, cropDragStart, cropDragStartCoords, cropImgRatio, cropZoom, cropImageIndex, updateImagePosition]);
 
-  const checkAuth = async () => {
-    try {
-      const res = await fetch('/api/admin/auth-check');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.authenticated) {
-          setAuthenticated(true);
-          fetchDashboardData();
-        }
-      }
-    } catch (err) {
-      console.error('Auth check error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const fetchDashboardData = async () => {
     try {
       const [fleetRes, routesRes, reviewsRes, bookingsRes] = await Promise.all([
@@ -486,6 +396,29 @@ export default function AdminPage() {
       console.error('Failed to load dashboard data:', err);
     }
   };
+
+  const checkAuth = async () => {
+    try {
+      const res = await fetch('/api/admin/auth-check');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.authenticated) {
+          setAuthenticated(true);
+          fetchDashboardData();
+        }
+      }
+    } catch (err) {
+      console.error('Auth check error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Check authentication on load
+  useEffect(() => {
+    checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Login handlers
   const handleLoginStep1 = async (e: React.FormEvent) => {
@@ -567,7 +500,7 @@ export default function AdminPage() {
   };
 
   // Image Upload handler (resizes & compresses to Base64)
-  const handleImageFileChange = async (e: React.ChangeEvent<HTMLInputElement>, targetField: string) => {
+  const handleImageFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -859,8 +792,8 @@ export default function AdminPage() {
     setActionError('');
 
     let endpoint = '';
-    let method = modalType === 'create' ? 'POST' : 'PUT';
-    let bodyData: any = {};
+    const method = modalType === 'create' ? 'POST' : 'PUT';
+    let bodyData: Record<string, unknown> = {};
 
     if (activeTab === 'fleet') {
       endpoint = '/api/fleet';
@@ -1271,7 +1204,7 @@ export default function AdminPage() {
                           <div className="text-[10px] text-navy-light/85 mt-0.5">{b.passengers} Passenger(s)</div>
                           {b.specialRequests && (
                             <div className="text-[10px] italic text-primary-dark/95 mt-1 max-w-xs truncate" title={b.specialRequests}>
-                              "{b.specialRequests}"
+                              &quot;{b.specialRequests}&quot;
                             </div>
                           )}
                         </td>
@@ -1368,7 +1301,7 @@ export default function AdminPage() {
                           .filter(v => adminFleetFilter === 'All' || v.type === adminFleetFilter)
                           .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
-                        return visibleVehicles.map((v, idx) => (
+                        return visibleVehicles.map((v) => (
                           <tr key={v._id} className="hover:bg-cream/40 transition">
                             <td className="p-4">
                               <div className="relative w-14 h-10 rounded overflow-hidden border border-navy-light/10 bg-cream">
@@ -1986,7 +1919,7 @@ export default function AdminPage() {
                       <input
                         type="file"
                         accept="image/*"
-                        onChange={(e) => handleImageFileChange(e, 'image')}
+                        onChange={(e) => handleImageFileChange(e)}
                         className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                       />
                       <Upload className="w-6 h-6 text-navy-light/70 mb-2" />

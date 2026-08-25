@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { contactSchema, ContactData } from '@/lib/validations';
 import { getBreadcrumbListSchema } from '@/lib/schema';
+import { PHONE_NUMBER, getWhatsAppUrl } from '@/lib/contact';
 
 export default function ContactPage() {
   const {
@@ -32,7 +33,7 @@ export default function ContactPage() {
     const text = `Hello Sushi Travels, I would like to make an inquiry:\n- *Name:* ${data.name}\n- *Email:* ${data.email}\n- *Phone:* ${data.phone}\n- *Subject:* ${data.subject}\n- *Message:* ${data.message}`;
     
     // Redirect/Open WhatsApp in a new tab
-    const waUrl = `https://wa.me/919071660099?text=${encodeURIComponent(text)}`;
+    const waUrl = getWhatsAppUrl(text);
     window.open(waUrl, '_blank');
     
     reset();
@@ -118,7 +119,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-bold text-xs uppercase tracking-wider text-navy">Call & WhatsApp</h3>
                   <p className="text-sm font-semibold mt-1">
-                    <a href="tel:+919071660099" className="hover:text-primary transition">
+                    <a href={`tel:${PHONE_NUMBER}`} className="hover:text-primary transition">
                       +91 90716 60099
                     </a>
                   </p>
@@ -243,7 +244,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center justify-center bg-navy hover:bg-primary text-white font-bold rounded-full px-8 py-3 transition shadow-md disabled:opacity-55"
+                  className="inline-flex items-center justify-center bg-navy hover:bg-primary active:scale-[0.98] text-white font-bold rounded-full px-8 py-3 transition-all duration-200 shadow-md disabled:opacity-55 disabled:active:scale-100"
                 >
                   <Send className="w-4 h-4 mr-2" />
                   <span>Send Message</span>

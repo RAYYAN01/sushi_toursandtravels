@@ -4,17 +4,15 @@ import React from 'react';
 import Image from 'next/image';
 import { MapPin, Route, Phone, MessageCircle } from 'lucide-react';
 import { TourPackage } from '@/lib/packages';
+import { PHONE_NUMBER, getWhatsAppUrl } from '@/lib/contact';
 
 interface PackageCardProps {
   pkg: TourPackage;
 }
 
-const WHATSAPP_NUMBER = '919071660099';
-const PHONE_NUMBER = '+919071660099';
-
 export default function PackageCard({ pkg }: PackageCardProps) {
   const whatsappMessage = `Hello Sushi Tours & Travels, I would like to enquire about the ${pkg.title} package (${pkg.destination}). Please share availability and a quotation.`;
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappUrl = getWhatsAppUrl(whatsappMessage);
 
   return (
     <article className="group bg-white rounded-2xl border border-navy-light/10 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
@@ -79,7 +77,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
           <div className="flex items-center space-x-2 shrink-0">
             <a
               href={`tel:${PHONE_NUMBER}`}
-              className="inline-flex items-center justify-center w-11 h-11 bg-cream border border-navy-light/15 hover:bg-[#0078FF] hover:border-[#0078FF] text-navy hover:text-white rounded-full transition-all duration-300 hover:scale-105 shadow-sm shrink-0"
+              className="inline-flex items-center justify-center w-11 h-11 bg-cream border border-navy-light/15 hover:bg-[#0078FF] hover:border-[#0078FF] text-navy hover:text-white rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm shrink-0"
               aria-label={`Call Sushi Tours & Travels about ${pkg.title}`}
             >
               <Phone className="w-4.5 h-4.5" />
@@ -88,7 +86,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-11 h-11 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full transition-all duration-300 hover:scale-105 shadow-sm shrink-0"
+              className="inline-flex items-center justify-center w-11 h-11 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm shrink-0"
               aria-label={`Enquire about ${pkg.title} on WhatsApp`}
             >
               <MessageCircle className="w-4.5 h-4.5" />

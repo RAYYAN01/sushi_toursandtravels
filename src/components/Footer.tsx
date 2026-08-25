@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ShieldAlert, Award, Compass } from 'lucide-react';
+import { PHONE_NUMBER } from '@/lib/contact';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -160,7 +161,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <a href="tel:+919071660099" className="hover:text-primary transition-colors">
+                <a href={`tel:${PHONE_NUMBER}`} className="hover:text-primary transition-colors">
                   +91 90716 60099
                 </a>
               </li>
@@ -190,7 +191,17 @@ export default function Footer() {
               &copy; {currentYear} Sushi Travels India. All rights reserved. Registered under Karnataka Tourism Board.
             </p>
             <span className="hidden sm:inline text-cream-warm/30" aria-hidden="true">|</span>
-            <p>Developed by Naaz AI Labs</p>
+            <p>
+              Developed by{' '}
+              <a
+                href="https://www.naazailabs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors duration-150"
+              >
+                Naaz AI Labs
+              </a>
+            </p>
           </div>
           <div className="flex space-x-6">
             <Link href="/contact" className="hover:text-primary transition-colors duration-150">

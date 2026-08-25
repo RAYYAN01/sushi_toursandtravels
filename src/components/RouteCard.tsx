@@ -71,7 +71,7 @@ export default function RouteCard({ route }: RouteCardProps) {
 
           <Link
             href={`/booking?pickup=${encodeURIComponent(route.from)}&drop=${encodeURIComponent(route.to)}&type=${encodeURIComponent(route.tripType || 'Round Trip')}&compulsory=true`}
-            className="inline-flex items-center justify-center bg-white/15 hover:bg-primary text-white text-xs font-bold rounded-full px-4 py-2 border border-white/10 hover:border-transparent transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center justify-center bg-white/15 hover:bg-primary text-white text-xs font-bold rounded-full px-4 py-2 border border-white/10 hover:border-transparent transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <span>Book Now</span>
           </Link>

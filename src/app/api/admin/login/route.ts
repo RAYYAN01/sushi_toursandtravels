@@ -6,6 +6,15 @@ import { connectDB, prisma } from '@/lib/db';
 import { signToken, verifyToken } from '@/lib/jwt';
 import { rateLimit, getClientIp } from '@/lib/rateLimit';
 
+interface AdminTokenPayload {
+  email?: string;
+  step?: number;
+  otpHash?: string;
+  otpExpires?: number;
+  authenticated?: boolean;
+  exp?: number;
+}
+
 // Helper to get SMTP transporter
 function getTransporter() {
   return nodemailer.createTransport({
@@ -68,7 +77,7 @@ export async function POST(req: Request) {
       }
 
       // Verify temp token
-      const payload = verifyToken(tempToken);
+      const payload = verifyToken(tempToken) as AdminTokenPayload | null;
       if (!payload || payload.step !== 1) {
         return NextResponse.json({ error: 'Session expired or invalid. Please restart login.' }, { status: 401 });
       }
@@ -93,7 +102,7 @@ export async function POST(req: Request) {
         const transporter = getTransporter();
         const mailOptions = {
           from: `"Sushi Travels Admin" <${process.env.MAIL_USER}>`,
-          to: email,
+          to: email as string,
           subject: 'Sushi Travels Admin Panel OTP Verification',
           text: `Your OTP for admin panel verification is: ${otp}. It is valid for 5 minutes.`,
           html: `
@@ -114,9 +123,9 @@ export async function POST(req: Request) {
         await transporter.sendMail(mailOptions);
         emailSent = true;
         console.log(`[Mail] OTP email sent successfully to ${email}`);
-      } catch (err: any) {
+      } catch (err) {
         console.error('[Mail] Failed to send OTP email via SMTP:', err);
-        emailError = err.message || 'SMTP Configuration Error';
+        emailError = err instanceof Error ? err.message : 'SMTP Configuration Error';
       }
 
       // ALWAYS log the OTP in server console for easy fallback/debugging
@@ -150,13 +159,13 @@ export async function POST(req: Request) {
       }
 
       // Verify temp token
-      const payload = verifyToken(tempToken);
+      const payload = verifyToken(tempToken) as AdminTokenPayload | null;
       if (!payload || payload.step !== 2) {
         return NextResponse.json({ error: 'Session expired or invalid. Please restart login.' }, { status: 401 });
       }
 
       // Check expiration
-      if (Date.now() > payload.otpExpires) {
+      if (!payload.otpExpires || Date.now() > payload.otpExpires) {
         return NextResponse.json({ error: 'OTP has expired. Please request a new OTP.' }, { status: 401 });
       }
 
@@ -186,7 +195,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ error: 'Invalid step' }, { status: 400 });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }

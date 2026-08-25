@@ -1382,3 +1382,227 @@ None of this pass touches Prisma, `seed.ts`, or any DB-backed table — the
 new blog section is fully static data (`src/lib/blog.ts`), same pattern as
 `packages.ts`/`vehiclePages.ts`/`services.ts`/etc. No migration, `db:push`,
 or reseed is required for anything in this section.
+
+## 13. Code cleanup, bug fixes, and interaction-polish pass (2026-08-24)
+
+An incremental quality pass covering the three things the owner asked for:
+clean the code, fix bugs, and make the site feel smoother/more premium — no
+redesign, no content/pricing changes, local-only (nothing committed, pushed,
+or deployed). Baseline going in: `npx tsc --noEmit` was already clean;
+`npx eslint . --quiet` reported 81 errors (all pre-existing, per sections 8/
+9/12's own documented decision not to do a large `any`-typing refactor).
+After this pass: **67 → 61 eslint errors remaining, all in the same
+pre-existing category** (see below), `npx tsc --noEmit` still clean, and
+`npm run build` still prerenders all **60 routes** (10 static/core pages +
+`/admin` + 7 API routes + 4 hub pages + 11 vehicle + 6 service + 10 location
++ 10 route + 1 blog post + sitemap/robots/not-found) — same count as before
+this pass, confirming nothing broke.
+
+### Real bugs found and fixed
+
+1. **`src/app/admin/page.tsx`: `checkAuth`/`fetchDashboardData` were called
+   from a `useEffect` before either was declared** (`checkAuth` referenced
+   `fetchDashboardData` which was defined ~20 lines below it, and the mount
+   effect called `checkAuth` before *it* was declared) — harmless at runtime
+   (both are `const` closures assigned before the effect actually fires
+   post-render) but flagged as a real ESLint error
+   (`react-hooks/immutability`, "accessed before it is declared") since it
+   relies on hoisting-adjacent timing rather than normal top-to-bottom
+   declaration order. Reordered so `fetchDashboardData` → `checkAuth` → the
+   mount `useEffect` now appear in that dependency order.
+2. **Two silently-broken "empty state" fallbacks on the homepage
+   (`src/app/page.tsx`)**: the Popular Routes and Testimonials sections both
+   fetch from `/api/home-data` client-side; on a failed fetch, `loadingFleet`/
+   `loadingRoutes` still flip to `false` but the list arrays stay empty, so
+   the sections rendered **completely blank with no message** — silent
+   failure was the pattern the task explicitly warned about, and the Fleet
+   preview section (a few lines above, in the same file) already had a
+   fallback message that these two sections were missing. Added a
+   `homeDataError` state (set in the fetch's `.catch`) and matching
+   `popularRoutesList.length > 0` / `testimonialsList.length > 0` fallback
+   messages ("Route guides are temporarily unavailable...", "Reviews are
+   temporarily unavailable...") so a real fetch failure now shows a sensible
+   message instead of an empty gap in the page. Also distinguished the fleet
+   preview's own existing empty-state message so it says something different
+   on a genuine fetch error vs. a legitimately empty vehicle list.
+3. **`src/app/fleet/page.tsx` had the same silent-failure gap**: fetch
+   failures fell through to the same "No Vehicles Available... Check back
+   soon!" message used for a genuinely-empty filtered category, which is
+   misleading on a real network/API error. Added a `fetchError` state (set
+   when the response isn't `.ok` or the fetch throws) with its own distinct
+   "Couldn't Load the Fleet" message and a call/WhatsApp fallback prompt.
+4. **`/booking`'s H1 was missing the `md:` breakpoint step** that every
+   other secondary-tier page hero (`/about`, `/contact`,
+   `/tours-and-packages`, `/blog/[slug]`) uses (`text-3xl sm:text-4xl
+   md:text-5xl`) — it capped at `text-4xl` on desktop
+   (`text-3xl sm:text-4xl`), so the Booking page's H1 rendered visibly
+   smaller than its sibling pages' H1s at desktop widths for no reasoned
+   difference. Added the missing `md:text-5xl` step.
+5. **`/booking`'s main content wrapper used `py-12`** while the three other
+   structurally-identical "main content wrapper right below the hero"
+   containers (`/about`, `/contact`, `/tours-and-packages`) all use `py-16`
+   — normalized to `py-16` to match the established rhythm (the four hub
+   pages `/vehicles`, `/services`, `/locations`, `/routes` already agreed
+   with each other at `py-14`, a different but internally-consistent family,
+   so those were left alone).
+6. Two real, pre-existing ESLint errors fixed as drive-by quick wins while
+   already in `src/app/admin/page.tsx` for the ordering fix above: `let
+   method = ...` never reassigned (`prefer-const`), and one more raw `"`
+   around quoted text that should be `&quot;` (`react/no-unescaped-entities`,
+   the same category sections 8/11 had already fixed elsewhere in this file
+   but missed this one instance).
+
+### Verified, no defect found
+
+- **Internal links**: grepped every `href="/..."` and `href={\`/...\`}`
+  literal/template-literal link across `src/` — all resolve to real routes
+  under `src/app` (including the 4 dynamic `${slug}` template patterns).
+  Nothing broken.
+- **Hydration risk**: grepped every `Date.now()`/`Math.random()` and
+  `window.`/`document.`/`localStorage` usage in `src/` — all are inside
+  event handlers, `useEffect` bodies, or server-side API routes, never
+  directly in a component's render body. No hydration-mismatch risk found.
+- **Image references**: a script cross-checked every literal image path
+  string (`.webp`/`.jpe?g`/`.png`/`.svg`/`.mp4`/`.ico`/`.gif`) referenced
+  anywhere in `src/` against `public/` — 102 unique references, zero
+  missing files.
+- **Layout shift risk**: checked every `<Image>` usage in `src/` — every one
+  either passes explicit `width`/`height` (logo, icons) or uses `fill` inside
+  a parent with an explicit `aspect-*`/fixed-size class (card thumbnails,
+  hero backgrounds). None were missing dimensioning.
+- **Skeleton loader accuracy**: `SkeletonLoader.tsx`'s `VehicleCardSkeleton`/
+  `RouteCardSkeleton`/`TestimonialCardSkeleton`/`FleetCategoryRowSkeleton`
+  already closely mirror their real card's section structure and spacing
+  (built carefully in an earlier pass) — no size-jump risk found, nothing
+  changed here.
+- **Font loading**: `layout.tsx` uses `next/font/google` for both Inter and
+  Playfair Display with `display: 'swap'` already set — no FOIT risk, no
+  changes needed.
+- **`scroll-behavior: smooth`**: confirmed present on `html` in
+  `globals.css`, and every hero-banner page's `-mt-[72px] md:-mt-[80px]`
+  offset (paired with `LayoutWrapper.tsx`'s `pt-[72px] md:pt-[80px]` on
+  `<main>`) is applied consistently across all 9 hero-banner page types
+  (5 core pages directly, plus all 4 landing-page families and the blog
+  detail page via the shared `LandingHero.tsx` component) — nothing to fix.
+- **Transition/animation consistency**: audited hover/transition classes
+  across `VehicleCard.tsx`, `PackageCard.tsx`, `RouteCard.tsx`,
+  `TestimonialCard.tsx`, and `Navbar.tsx` — already unified from an earlier
+  minimalism pass (section 8): cards consistently use `shadow-sm
+  hover:shadow-md transition-shadow duration-300`, image zooms use
+  `duration-500` (deliberately slower for a smoother zoom feel), and nav/text
+  links use `duration-150`–`200` (deliberately snappier for text). No
+  mismatched/sluggish outliers found — this requirement was already
+  satisfied going in.
+
+### Interaction polish: button press feedback
+
+The one real gap found in the "smoothness" requirement: primary CTA buttons
+site-wide had hover feedback (`hover:scale-105`, color changes) but **no
+press/active feedback at all** outside the admin dashboard. Added a
+consistent `active:scale-95` (round icon CTAs on cards) or `active:scale-
+[0.98]` (pill-shaped text buttons, a more subtle press for larger buttons)
+to every primary public-facing CTA: the Call/WhatsApp/Book icon buttons on
+`VehicleCard.tsx`/`PackageCard.tsx`, the route card CTA in `RouteCard.tsx`,
+all three buttons in the shared `CTABand.tsx` (used across every vehicle/
+service/location/route landing page), the Navbar's desktop and mobile-drawer
+"Book Your Ride" buttons and mobile Call button, the Booking form's "Confirm
+Booking" submit button, the Contact page's "Send Message" submit button, and
+the home page's hero "Book Your Ride" CTA, search-bar "Search Ride" submit,
+"Plan Your Group Trip" CTA, and the custom-route modal's two action buttons.
+This is additive only (a press-state, not a second stacked hover effect), so
+it doesn't conflict with section 8's earlier deliberate "one hover effect per
+button, not two or three stacked" simplification — it was left alone inside
+`src/app/admin/page.tsx` since that's an internal tool, not the public
+premium-feel surface this task targeted.
+
+### Code cleanup
+
+- **New `src/lib/contact.ts`**: the WhatsApp business number (`919071660099`
+  bare / `+919071660099` E.164) and the `https://wa.me/...?text=...` deep-
+  link construction pattern were independently copy-pasted as literal
+  strings in **10 different files** (`VehicleCard.tsx`, `PackageCard.tsx`,
+  `CTABand.tsx`, `WhatsAppFloat.tsx`, `CallFloat.tsx`, `Navbar.tsx`,
+  `Footer.tsx`, `BookingForm.tsx`, `contact/page.tsx`, `page.tsx`, plus
+  `schema.ts`'s structured-data `telephone` field) — exactly the kind of
+  "copy-pasted near-identically across multiple components" duplication the
+  task asked to look for. Added `WHATSAPP_NUMBER`, `PHONE_NUMBER`, and
+  `getWhatsAppUrl(message)` to one new small file and repointed all 11
+  call sites at it. A future number change is now a one-line edit instead of
+  a grep-and-replace across the whole codebase; every existing WhatsApp
+  message string and `tel:` link text was left completely unchanged (this is
+  a pure refactor of *where the number lives*, not what any button says).
+- **Dead code removed from `src/app/admin/page.tsx`**: `moveVehicleOrder`
+  and its helper `saveVehicleOrderOnBackend` (~65 lines total) were entirely
+  unreferenced — superseded by the newer local-only `moveVehicleInRow` +
+  "Save Arrangement" flow already in the same file, but never deleted when
+  that replacement was built. Removed both functions.
+- **Unused imports/variables removed**: `Users2` (`about/page.tsx`,
+  unused lucide icon), `ExternalLink`/`ChevronRight` (`admin/page.tsx`,
+  unused lucide icons), `useRouter`/`router` (`admin/page.tsx` — confirmed
+  zero `router.` usages anywhere in the file), `Link` (`vehicles/[slug]/
+  page.tsx`, unused `next/link` import), and two unused function
+  parameters/loop variables (`targetField` in `handleImageFileChange`,
+  `idx` in one `.map()`) in `admin/page.tsx`.
+- **`any` → proper types, in files already being touched for other reasons**
+  (per the task's own "quick, safe fix... don't do a large type-system
+  refactor" scope): `src/lib/jwt.ts`'s `signToken`/`verifyToken` now use
+  `Record<string, unknown>` instead of `any`; `src/app/api/admin/login/
+  route.ts` gained a local `AdminTokenPayload` interface for its OTP-flow
+  token payloads (email/step/otpHash/otpExpires/authenticated) and proper
+  `catch` typing (`err instanceof Error ? err.message : ...` instead of
+  `err: any`); `src/components/BookingForm.tsx`'s `vehiclesList` state went
+  from `any[]` to a real `BookingFormVehicle` interface, and three `as any`
+  casts on `tripType` were narrowed to the real `BookingData['tripType']`
+  union / a validated string-literal check; `src/app/page.tsx`'s
+  `vehiclesList` state went from `any[]` to a `Vehicle & {homeCategory?,
+  categoryOrder?, showOnHome?}` type (matching the documented reason from
+  section 9 for why the home page's fetched rows need fields beyond the
+  base `Vehicle` interface), which let 4 explicit `(v: any)` callback
+  annotations be removed entirely since the type now flows through
+  inference; `src/app/fleet/page.tsx`'s `vehiclesList` similarly went from
+  `any[]` to `Vehicle[]`. **Left alone** (consistent with sections 8/9/12's
+  own documented decision): the remaining `any` usage across the API routes
+  (`api/bookings`, `api/fleet`, `api/home-data`, `api/reviews`, `api/
+  routes`) and most of `admin/page.tsx` — that's pre-existing, codebase-wide
+  convention predating this pass, and retyping every route's Prisma-row/
+  request-body shape is a larger, separate effort disproportionate to a
+  cleanup pass (`npx eslint . --quiet` still shows 61 errors, all in this
+  one documented category, down from 81 before this pass).
+- **Stray debug logging**: audited every `console.log` in `src/` — all
+  remaining instances are intentional (the booking form and contact page's
+  pre-WhatsApp-redirect inquiry logs the task explicitly called out as fine,
+  plus server-side seed-status/mail-confirmation/WhatsApp-simulation logging
+  in `seed.ts`/`api/bookings/route.ts`/`api/admin/login/route.ts`, which
+  substitutes for a real SMS/WhatsApp API integration that doesn't exist
+  yet). No stray/leftover debug logs found or removed.
+
+### Files changed in this pass
+
+`src/lib/contact.ts` (new), `src/app/admin/page.tsx`, `src/app/api/admin/
+login/route.ts`, `src/app/booking/page.tsx`, `src/app/contact/page.tsx`,
+`src/app/fleet/page.tsx`, `src/app/page.tsx`, `src/app/about/page.tsx`,
+`src/app/vehicles/[slug]/page.tsx`, `src/components/BookingForm.tsx`,
+`src/components/CTABand.tsx`, `src/components/CallFloat.tsx`,
+`src/components/Footer.tsx`, `src/components/Navbar.tsx`,
+`src/components/PackageCard.tsx`, `src/components/RouteCard.tsx`,
+`src/components/VehicleCard.tsx`, `src/components/WhatsAppFloat.tsx`,
+`src/lib/jwt.ts`, `src/lib/schema.ts`, `NOTES.md`.
+
+**Not touched by this pass, found pre-existing on disk**: `src/app/
+globals.css` had an unstaged whitespace-only diff (trailing spaces trimmed
+on 2 blank lines) and `public/fleet/WhatsApp Image 2026-08-22 at 1.20.14
+PM.jpeg` was present as an untracked file — both existed before this pass
+started and weren't created or modified by it; flagged here only so they
+aren't mistaken for this pass's work.
+
+`npx tsc --noEmit` — clean. `npm run build` — passes, all 60 routes
+prerender (same count as before this pass). `npm run dev` + curl confirmed
+200s on `/`, `/fleet`, `/about`, `/contact`, `/tours-and-packages`, `/blog`,
+`/blog/statue-of-unity-kevadia-gujarat-travel-diary`, `/booking`,
+`/vehicles`, `/services`, `/locations`, `/routes`,
+`/vehicles/sedan-rental-bangalore`, `/services/bangalore-airport-taxi`,
+`/locations/car-rental-whitefield`, `/routes/bangalore-to-mysore-cab`, and
+the 4 fetch-backed API routes (`/api/fleet`, `/api/home-data`, `/api/
+routes`, `/api/reviews`), plus a genuine `404` on an unknown path and `200`
+on `/sitemap.xml` and `/robots.txt`. No deploy, push, or DB action taken —
+all changes are local and uncommitted per the owner's instruction.

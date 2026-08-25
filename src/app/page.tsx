@@ -8,11 +8,12 @@ import { Shield, UserCheck, Headset, BadgePercent, ArrowRight, Star, MapPin, Mes
 import { getLocalBusinessSchema, getFAQSchema } from '@/lib/schema';
 import { motion } from 'framer-motion';
 import VehicleCard from '@/components/VehicleCard';
-import { sortVehiclesForDisplay } from '@/lib/vehicles';
+import { sortVehiclesForDisplay, Vehicle } from '@/lib/vehicles';
 import PackageCard from '@/components/PackageCard';
 import { packages } from '@/lib/packages';
 import RouteCard, { RouteInfo } from '@/components/RouteCard';
 import TestimonialCard, { Testimonial } from '@/components/TestimonialCard';
+import { getWhatsAppUrl } from '@/lib/contact';
 import { useEffect } from 'react';
 import { FleetCategoryRowSkeleton, RouteCardSkeleton, TestimonialCardSkeleton } from '@/components/SkeletonLoader';
 
@@ -49,23 +50,31 @@ export default function Home() {
   const [searchVehicle, setSearchVehicle] = useState('');
 
   // Dynamic States
-  const [vehiclesList, setVehiclesList] = useState<any[]>([]);
+  type HomeVehicle = Vehicle & { homeCategory?: string; categoryOrder?: number; showOnHome?: boolean };
+  const [vehiclesList, setVehiclesList] = useState<HomeVehicle[]>([]);
   const [popularRoutesList, setPopularRoutesList] = useState<RouteInfo[]>([]);
   const [testimonialsList, setTestimonialsList] = useState<Testimonial[]>([]);
   const [loadingFleet, setLoadingFleet] = useState(true);
   const [loadingRoutes, setLoadingRoutes] = useState(true);
+  const [homeDataError, setHomeDataError] = useState(false);
   const [showCustomRouteModal, setShowCustomRouteModal] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   useEffect(() => {
     fetch('/api/home-data')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Home data API responded with ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         if (data.vehicles) setVehiclesList(data.vehicles);
         if (data.routes) setPopularRoutesList(data.routes);
         if (data.reviews) setTestimonialsList(data.reviews);
       })
-      .catch((err) => console.error('Error fetching home data:', err))
+      .catch((err) => {
+        console.error('Error fetching home data:', err);
+        setHomeDataError(true);
+      })
       .finally(() => {
         setLoadingFleet(false);
         setLoadingRoutes(false);
@@ -106,7 +115,7 @@ export default function Home() {
 
   const getCustomRouteWhatsAppUrl = () => {
     const text = `Hello Sushi Travels,\n\nI would like to request a custom route quote:\n- *From:* ${searchFrom}\n- *To:* ${searchTo}\n- *Travel Date:* ${searchDate || 'Not selected'}\n- *Vehicle Class:* ${searchVehicle || 'Choose Class'}\n\nPlease provide a rate quote. Thank you!`;
-    return `https://wa.me/919071660099?text=${encodeURIComponent(text)}`;
+    return getWhatsAppUrl(text);
   };
 
   const handleProceedToCustomBooking = () => {
@@ -165,7 +174,7 @@ export default function Home() {
           <div className="flex justify-center">
             <Link
               href="/booking"
-              className="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-base font-bold rounded-full px-8 py-3.5 shadow-sm transition-colors duration-200"
+              className="inline-flex items-center justify-center bg-primary hover:bg-primary-dark active:scale-[0.98] text-white text-base font-bold rounded-full px-8 py-3.5 shadow-sm transition-all duration-200"
             >
               <span>Book Your Ride</span>
               <ArrowRight className="w-5 h-5 ml-2" />
@@ -249,7 +258,7 @@ export default function Home() {
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-navy hover:bg-primary text-white text-xs font-bold rounded-xl py-3.5 shadow transition-all duration-200"
+                  className="w-full bg-navy hover:bg-primary active:scale-[0.98] text-white text-xs font-bold rounded-xl py-3.5 shadow transition-all duration-200"
                 >
                   Search Ride
                 </button>
@@ -311,7 +320,7 @@ export default function Home() {
               <div className="pt-2">
                 <Link
                   href="/booking"
-                  className="inline-flex items-center justify-center bg-navy hover:bg-primary text-white text-xs font-bold rounded-full px-6 py-3 shadow transition-all duration-200"
+                  className="inline-flex items-center justify-center bg-navy hover:bg-primary active:scale-[0.98] text-white text-xs font-bold rounded-full px-6 py-3 shadow transition-all duration-200"
                 >
                   <span>Plan Your Group Trip</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -403,10 +412,10 @@ export default function Home() {
             </>
           ) : (() => {
             // Filter only vehicles marked showOnHome (default true if field missing)
-            const homeVehicles = vehiclesList.filter((v: any) => v.showOnHome !== false);
+            const homeVehicles = vehiclesList.filter((v) => v.showOnHome !== false);
             // Get unique categories with their categoryOrder, sorted by categoryOrder then first seen
             const categoryMap = new Map<string, number>();
-            homeVehicles.forEach((v: any) => {
+            homeVehicles.forEach((v) => {
               if (v.type && !categoryMap.has(v.type)) {
                 categoryMap.set(v.type, v.categoryOrder ?? 0);
               }
@@ -416,12 +425,16 @@ export default function Home() {
               .map(([cat]) => cat);
             if (categories.length === 0) {
               return (
-                <div className="text-center text-navy-light py-16">No vehicles available to display.</div>
+                <div className="text-center text-navy-light py-16">
+                  {homeDataError
+                    ? "Couldn't load the fleet right now — please refresh, or call/WhatsApp us directly."
+                    : 'No vehicles available to display.'}
+                </div>
               );
             }
             return categories.map((cat: string, catIdx: number) => {
               const catVehicles = sortVehiclesForDisplay(
-                homeVehicles.filter((v: any) => v.type === cat)
+                homeVehicles.filter((v) => v.type === cat)
               );
               if (catVehicles.length === 0) return null;
               // Use homeCategory label from first vehicle of this type if set, else fallback to type name
@@ -435,7 +448,7 @@ export default function Home() {
                     </h3>
                   </div>
                   <div className={`flex overflow-x-auto pb-6 space-x-6 md:space-x-0 md:grid md:grid-cols-3 md:gap-8 scrollbar-thin snap-x snap-mandatory scroll-smooth ${catVehicles.length === 1 ? 'justify-center md:justify-start' : ''}`}>
-                    {catVehicles.map((vehicle: any, idx: number) => (
+                    {catVehicles.map((vehicle, idx) => (
                       <div key={vehicle.id} className="w-80 flex-shrink-0 md:w-auto md:flex-shrink-1 snap-center">
                         <VehicleCard vehicle={vehicle} priority={catIdx === 0 && idx === 0} />
                       </div>
@@ -464,10 +477,18 @@ export default function Home() {
                 <RouteCardSkeleton />
                 <RouteCardSkeleton />
               </>
-            ) : (
+            ) : popularRoutesList.length > 0 ? (
               popularRoutesList.map((route, idx) => (
                 <RouteCard key={idx} route={route} />
               ))
+            ) : (
+              <div className="col-span-full text-center text-navy-light py-16">
+                Route guides are temporarily unavailable. Please check our{' '}
+                <Link href="/routes" className="text-primary font-semibold hover:text-primary-dark">
+                  full routes page
+                </Link>{' '}
+                or contact us directly.
+              </div>
             )}
           </div>
 
@@ -614,12 +635,16 @@ export default function Home() {
                   <TestimonialCardSkeleton />
                 </div>
               </>
-            ) : (
+            ) : testimonialsList.length > 0 ? (
               testimonialsList.map((test) => (
                 <div key={test._id || test.id} className="w-80 flex-shrink-0 md:w-auto md:flex-shrink-1 snap-center">
                   <TestimonialCard testimonial={test} />
                 </div>
               ))
+            ) : (
+              <div className="w-full text-center text-navy-light py-8">
+                Reviews are temporarily unavailable — please check back shortly.
+              </div>
             )}
           </div>
         </div>
@@ -774,14 +799,14 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowCustomRouteModal(false)}
-                className="flex-1 inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-full py-3.5 px-6 shadow-md shadow-emerald-600/20 hover:scale-[1.02] transition duration-200 text-xs sm:text-sm"
+                className="flex-1 inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-full py-3.5 px-6 shadow-md shadow-emerald-600/20 hover:scale-[1.02] active:scale-[0.98] transition duration-200 text-xs sm:text-sm"
               >
                 <MessageSquare className="w-4 h-4 mr-2 fill-current" />
                 <span>Request on WhatsApp</span>
               </a>
               <button
                 onClick={handleProceedToCustomBooking}
-                className="flex-1 inline-flex items-center justify-center bg-navy hover:bg-primary text-white font-bold rounded-full py-3.5 px-6 shadow-md transition duration-200 hover:scale-[1.02] text-xs sm:text-sm"
+                className="flex-1 inline-flex items-center justify-center bg-navy hover:bg-primary text-white font-bold rounded-full py-3.5 px-6 shadow-md transition duration-200 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm"
               >
                 <span>Submit Online Form</span>
               </button>
