@@ -85,7 +85,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/fleet" className="hover:text-primary transition-colors duration-150">
+                <Link href="/fleet" prefetch={false} className="hover:text-primary transition-colors duration-150">
                   Explore Our Fleet
                 </Link>
               </li>

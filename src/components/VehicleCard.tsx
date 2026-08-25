@@ -254,6 +254,18 @@ export default function VehicleCard({ vehicle, priority = false }: VehicleCardPr
             </Link>
           </div>
         </div>
+
+        {/* Primary Call CTA — full-width and clearly labeled, since a bare
+            phone icon above is easy to miss and calling is how most
+            customers actually book on a vehicle rental site in India. */}
+        <a
+          href={`tel:${PHONE_NUMBER}`}
+          className="mt-3 inline-flex items-center justify-center space-x-2 w-full bg-primary hover:bg-primary-dark active:scale-[0.98] text-white text-sm font-bold rounded-xl py-3 shadow-sm transition-all duration-200"
+          aria-label={`Call Sushi Tours & Travels now about ${vehicle.name}`}
+        >
+          <Phone className="w-4 h-4" />
+          <span>Call Now for Best Price</span>
+        </a>
       </div>
     </div>
   );

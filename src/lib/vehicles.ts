@@ -595,9 +595,20 @@ export const vehicles: Vehicle[] = [
       'Our 21-seater bus is built for mid-size groups that have outgrown a Tempo Traveller — corporate offsites, school and college trips, and pilgrimage groups travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
     sortOrder: 12,
   },
+  // ---------------------------------------------------------------------
+  // Sushi Travels - 50 Seater Bus — real owner-provided photos, 2026-08-25,
+  // replacing the previously-shared coach-sgr-* placeholder set (that set
+  // stays in use by the Sushi Mini Bus and 21-Seater Bus entries, so those
+  // shared files were not deleted). Interior shots have another operator's
+  // branding ("AADHYA") blurred out on seat covers and a ceiling sign per
+  // owner instruction; a front-fascia shot with the same branding painted
+  // directly on the body was dropped rather than blurred — too much of the
+  // frame was branding to salvage a usable photo. The clean side-view shot
+  // carries no visible branding and leads the gallery.
+  // ---------------------------------------------------------------------
   {
     id: 'bus-50-seater',
-    name: '50-Seater Bus',
+    name: 'Sushi Travels - 50 Seater Bus',
     type: 'Bus',
     seats: 50,
     seatsDisplay: '50 Seater',
@@ -613,19 +624,14 @@ export const vehicles: Vehicle[] = [
       'Suited for large corporate events, weddings & big pilgrimage groups',
       'Custom quote based on route, duration & group size',
     ],
-    image: '/fleet/coach-sgr-front-01.webp',
+    image: '/fleet/sushi-travels-50-seater-bus-side-01.webp',
     images: [
-      '/fleet/coach-sgr-front-01.webp',
-      '/fleet/coach-sgr-front-02.webp',
-      '/fleet/coach-sgr-front-03.webp',
-      '/fleet/coach-sgr-interior-01.webp',
-      '/fleet/coach-sgr-interior-02.webp',
-      '/fleet/coach-sgr-interior-03.webp',
-      '/fleet/coach-sgr-rear-01.webp',
-      '/fleet/coach-sgr-rear-02.webp',
+      '/fleet/sushi-travels-50-seater-bus-side-01.webp',
+      '/fleet/sushi-travels-50-seater-bus-interior-01.webp',
+      '/fleet/sushi-travels-50-seater-bus-interior-02.webp',
     ],
     description:
-      'Our largest-capacity vehicle, the 50-seater bus is built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
+      'Our largest-capacity vehicle, the Sushi Travels 50 Seater Bus is built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
     sortOrder: 13,
   },
 
