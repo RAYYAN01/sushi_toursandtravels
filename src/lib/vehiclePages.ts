@@ -462,22 +462,22 @@ export const vehiclePages: VehiclePage[] = [
     h1: 'Bus & Mini Coach Rental in Bangalore',
     title: 'Bus & Mini Coach Rental Bangalore',
     metaDescription:
-      'Compare our Bangalore bus rental options: 25 to 50-seater AC coaches, including a Volvo 45-seater luxury bus, for group travel, weddings & corporate events.',
+      'Compare our Bangalore bus rental options: 25 to 50-seater AC coaches, including 33-seater and Volvo 45-seater luxury buses, for group travel & events.',
     heroSubtitle:
       'From a 25-seater mini bus to a full-size Volvo luxury coach — compare our AC bus fleet for corporate events, weddings, school trips and pilgrimage groups.',
-    vehicleIds: ['sushi-travels-25-seater-mini-bus', 'volvo-bus-45-seater-luxury', 'bus-50-seater'],
+    vehicleIds: ['sushi-travels-25-seater-mini-bus', 'sushi-travels-33-seater-bus-luxury', 'volvo-bus-45-seater-luxury', 'bus-50-seater'],
     geoSummary:
-      'Sushi Travels operates three larger-capacity AC vehicles for group bus rental in Bangalore: a 25-seater mini bus, a Volvo Bus 45 Seater Luxury coach, and a 50-seater bus. None of these tiers carry a fixed confirmed per-km rate — each is quoted per trip based on route, duration and group size.',
+      'Sushi Travels operates four larger-capacity AC vehicles for group bus rental in Bangalore: a 25-seater mini bus, a 33 Seater Bus Luxury, a Volvo Bus 45 Seater Luxury coach, and a 50-seater bus. None of these tiers carry a fixed confirmed per-km rate — each is quoted per trip based on route, duration and group size.',
     bodyParagraphs: [
       'Not every large-group search is specific to a seat count — this page is a quick comparison hub for anyone deciding between our bigger vehicles before requesting a quote.',
-      'The 25-seater mini bus seats 25 with AC pushback seating and a rear cargo hold, suited to large corporate offsites, school and college outings, and big pilgrimage or wedding parties. The Volvo Bus 45 Seater Luxury is a full-size premium coach with reclining seats and curtained windows, and the 50-seater is our largest-capacity vehicle for full corporate events, weddings and large tour groups.',
-      'All three include overhead luggage racks, a PA/music system, and pushback AC seating. Because pricing depends heavily on route, trip duration and total distance, none of these tiers publish a per-km rate — call or WhatsApp with your group size and itinerary and we\'ll get back with a quote quickly.',
+      'The 25-seater mini bus seats 25 with AC pushback seating and a rear cargo hold, suited to large corporate offsites, school and college outings, and big pilgrimage or wedding parties. The 33 Seater Bus Luxury and the Volvo Bus 45 Seater Luxury are both full-size premium coaches with reclining seats and curtained windows, and the 50-seater is our largest-capacity vehicle for full corporate events, weddings and large tour groups.',
+      'All four include overhead luggage racks, a PA/music system, and pushback AC seating. Because pricing depends heavily on route, trip duration and total distance, none of these tiers publish a per-km rate — call or WhatsApp with your group size and itinerary and we\'ll get back with a quote quickly.',
     ],
     faqs: [
       {
         question: 'Which bus size should I book for my group?',
         answer:
-          'The 25-seater mini bus suits mid-size groups, the Volvo Bus 45 Seater Luxury suits large groups wanting a premium coach, and the 50-seater is for full corporate events, weddings or large tour groups. Tell us your headcount and we\'ll recommend the right fit.',
+          'The 25-seater mini bus suits mid-size groups, the 33 Seater Bus Luxury and Volvo Bus 45 Seater Luxury suit larger groups wanting a premium coach, and the 50-seater is for full corporate events, weddings or large tour groups. Tell us your headcount and we\'ll recommend the right fit.',
       },
       {
         question: 'What is the per-km rate for these buses?',
@@ -486,11 +486,11 @@ export const vehiclePages: VehiclePage[] = [
       },
       {
         question: 'Can I book a bus for outstation travel?',
-        answer: 'Yes — all three tiers are commonly booked for outstation group trips, pilgrimages, weddings and multi-day tours.',
+        answer: 'Yes — all four tiers are commonly booked for outstation group trips, pilgrimages, weddings and multi-day tours.',
       },
       {
         question: 'Can I book airport pickup with a bus?',
-        answer: 'Yes, large-group airport pickup/drop can be arranged for any of the three bus tiers — mention your group size when enquiring.',
+        answer: 'Yes, large-group airport pickup/drop can be arranged for any of the four bus tiers — mention your group size when enquiring.',
       },
     ],
     relatedVehicleSlugs: ['25-seater-mini-bus-rental-bangalore', '50-seater-bus-rental-bangalore', 'force-urbania-16-seater-luxury-bangalore'],

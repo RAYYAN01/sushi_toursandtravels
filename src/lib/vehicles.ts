@@ -651,4 +651,42 @@ export const vehicles: Vehicle[] = [
       'Our Volvo Bus 45 Seater Luxury is a full-size Volvo coach built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one premium AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
     sortOrder: 14,
   },
+
+  // ---------------------------------------------------------------------
+  // Sushi Travels - 33 Seater Bus Luxury — owner-provided photos,
+  // 2026-08-25. Front exterior shots have another operator's ("SHANVI")
+  // name blurred out where it was painted across the windshield; interior
+  // shots carry no readable branding and were left untouched. No confirmed
+  // rate — Price on Request.
+  // ---------------------------------------------------------------------
+  {
+    id: 'sushi-travels-33-seater-bus-luxury',
+    name: '33 Seater Bus Luxury',
+    type: 'Bus',
+    seats: 33,
+    seatsDisplay: '33 Seater',
+    ac: true,
+    luggage: 30,
+    ratePerKm: 0,
+    priceDisplay: 'Price on Request',
+    acOnly: true,
+    features: [
+      'Full-size luxury coach for large groups',
+      'Pushback reclining seats with curtains at every window',
+      'Roof-mounted AC across the full cabin',
+      'Large underbelly luggage hold for group baggage',
+      'Suited for large corporate events, weddings & big pilgrimage groups',
+      'Custom quote based on route, duration & group size',
+    ],
+    image: '/fleet/sushi-travels-33-seater-bus-luxury-front-01.webp',
+    images: [
+      '/fleet/sushi-travels-33-seater-bus-luxury-front-01.webp',
+      '/fleet/sushi-travels-33-seater-bus-luxury-front-02.webp',
+      '/fleet/sushi-travels-33-seater-bus-luxury-interior-01.webp',
+      '/fleet/sushi-travels-33-seater-bus-luxury-interior-02.webp',
+    ],
+    description:
+      'Our 33 Seater Bus Luxury is a full-size luxury coach built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one premium AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
+    sortOrder: 15,
+  },
 ];
