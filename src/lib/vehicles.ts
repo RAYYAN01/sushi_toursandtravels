@@ -193,8 +193,9 @@ export const vehicles: Vehicle[] = [
   // ---------------------------------------------------------------------
   // 9 Seater Tempo Traveller (9+1 = 10 total seats)
   // Renamed from "Luxury Tempo Traveller 9+1 Seater" on 2026-08-25 per owner
-  // instruction. Real owner-provided front photo (KA03AB2312 at Bengaluru
-  // airport) leads the gallery; the Yaksha set follows as supporting shots.
+  // instruction. Only the real owner-provided photo (KA03AB2312 at Bengaluru
+  // airport) is used — the Yaksha set was removed on 2026-08-25 because the
+  // owner confirmed those photos are not this vehicle.
   // Portrait source, so imagePositions biases the crop down onto the van.
   // ---------------------------------------------------------------------
   {
@@ -221,28 +222,8 @@ export const vehicles: Vehicle[] = [
     image: '/fleet/tempo-traveller-9-seater-front-01.webp',
     images: [
       '/fleet/tempo-traveller-9-seater-front-01.webp',
-      '/fleet/force-traveller-yaksha-front-01.webp',
-      '/fleet/force-traveller-yaksha-front-02.webp',
-      '/fleet/force-traveller-yaksha-front-03.webp',
-      '/fleet/force-traveller-yaksha-front-04.webp',
-      '/fleet/force-traveller-yaksha-front-05.webp',
-      '/fleet/force-traveller-yaksha-interior-01.webp',
-      '/fleet/force-traveller-yaksha-interior-02.webp',
-      '/fleet/force-traveller-yaksha-interior-03.webp',
-      '/fleet/force-traveller-yaksha-rear-01.webp',
     ],
-    imagePositions: [
-      '50% 55%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-      '50% 50%',
-    ],
+    imagePositions: ['50% 55%'],
     description:
       'Our 9 Seater Tempo Traveller (9+1) is built for mid-size groups that want extra comfort on long outstation drives. Executive pushback seats, individual AC vents, and a spacious luggage boot make it a favourite for corporate offsites, pilgrimages, and multi-family trips to Coorg, Mysore, and Ooty.',
     sortOrder: 3,
