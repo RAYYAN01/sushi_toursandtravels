@@ -112,15 +112,21 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
               {pageVehicles.length > 1 && (
                 <h2 className="font-serif font-bold text-xl text-navy">{vehicle.name} — Photos</h2>
               )}
+              {/* aspect-square + object-contain (not aspect-video + object-cover): many
+                  fleet photos are tall phone portraits, and forcing those into a 16:9
+                  landscape crop cut off the top/bottom, leaving only a disorienting
+                  close-up sliver of seat fabric — looked "sideways" even though nothing
+                  was rotated. contain guarantees the whole photo is always visible,
+                  matching what this gallery promises ("every image"). */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {galleryImages.map((img, idx) => (
-                  <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden border border-navy-light/10 shadow-sm bg-cream-warm/30">
+                  <div key={idx} className="relative aspect-square rounded-2xl overflow-hidden border border-navy-light/10 shadow-sm bg-cream-warm/30">
                     <Image
                       src={img}
                       alt={`Sushi Travels ${vehicle.name} — photo ${idx + 1} of ${galleryImages.length}`}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover"
+                      className="object-contain"
                       loading={idx < 3 ? undefined : 'lazy'}
                     />
                   </div>
