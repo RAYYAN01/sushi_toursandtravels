@@ -46,11 +46,13 @@ export const STANDARD_DUTY_HOURS = '6:00 AM – 10:00 PM';
 // Nothing here is invented — a tier not in this sheet (Innova Hycross, the
 // two bus entries) stays "Price on Request" with no ratePerKm.
 //
-// tempoTravellerAc / luxuryTempoTraveller9Plus1 / tempoTraveller17Seater bata
-// & rates updated 2026-08-25 on the owner's explicit instruction to match
-// published market rates from a reference competitor site (Yogi Tours &
-// Travels) for the 9/12/17-seater Tempo Traveller tiers — a deliberate
-// pricing-strategy decision, not a guess.
+// tempoTravellerAc / luxuryTempoTraveller9Plus1 / tempoTraveller17SeaterAc /
+// tempoTraveller17SeaterNonAc bata & rates updated 2026-08-25 on the owner's
+// explicit instruction to match published market rates from a reference
+// competitor site (Yogi Tours & Travels) for the 9/12/17-seater Tempo
+// Traveller tiers — a deliberate pricing-strategy decision, not a guess.
+// The 17-seater Non-AC rate (₹28/km) was added later, directly from the
+// owner rather than the competitor reference.
 const PRICING = {
   sedan: { ratePerKm: 13, driverBata: 400 },
   innova: { ratePerKm: 17, driverBata: 400 },
@@ -58,7 +60,8 @@ const PRICING = {
   tempoTravellerAc: { ratePerKm: 22, driverBata: 700 },
   tempoTravellerNonAc: { ratePerKm: 20, driverBata: 700 },
   luxuryTempoTraveller9Plus1: { ratePerKm: 28, driverBata: 500 },
-  tempoTraveller17Seater: { ratePerKm: 30, driverBata: 700 },
+  tempoTraveller17SeaterAc: { ratePerKm: 30, driverBata: 700 },
+  tempoTraveller17SeaterNonAc: { ratePerKm: 28, driverBata: 700 },
   forceUrbaniaLuxury16: { ratePerKm: 38, driverBata: 700 },
 } as const;
 
@@ -174,15 +177,17 @@ export const vehicles: Vehicle[] = [
     seats: 17,
     seatsDisplay: '17 Seater',
     ac: true,
+    hasNonAcOption: true,
     luggage: 14,
-    ratePerKm: PRICING.tempoTraveller17Seater.ratePerKm,
-    driverBata: PRICING.tempoTraveller17Seater.driverBata,
+    ratePerKm: PRICING.tempoTraveller17SeaterAc.ratePerKm,
+    ratePerKmAc: PRICING.tempoTraveller17SeaterAc.ratePerKm,
+    ratePerKmNonAc: PRICING.tempoTraveller17SeaterNonAc.ratePerKm,
+    driverBata: PRICING.tempoTraveller17SeaterAc.driverBata,
     minKmPerDay: MIN_KM_PER_DAY,
     drivingHours: STANDARD_DUTY_HOURS,
-    acOnly: true,
     features: [
       'Pushback reclining seats with extra legroom',
-      'Roof-mounted AC for all rows',
+      'Available in AC or Non-AC configuration',
       'USB charging points at every seat row',
       'Dedicated rear luggage boot for group baggage',
       'Best for large family groups, corporate offsites & pilgrimages',
@@ -192,7 +197,7 @@ export const vehicles: Vehicle[] = [
       '/fleet/force-tempo-traveller-17-seater-front-01.webp',
     ],
     description:
-      'Our 17-seater Force Tempo Traveller is built for large groups who need extra capacity for outstation trips, corporate offsites and pilgrimages out of Bangalore. Pushback seating, roof AC and a dedicated luggage boot make it a strong pick for bigger group travel.',
+      'Our 17-seater Force Tempo Traveller is built for large groups who need extra capacity for outstation trips, corporate offsites and pilgrimages out of Bangalore — available in AC or Non-AC. Pushback seating and a dedicated luggage boot make it a strong pick for bigger group travel.',
     sortOrder: 2,
   },
 
@@ -275,7 +280,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: 'force-urbania-luxury-16-seater',
-    name: 'Force Urbania Luxury 16-Seater',
+    name: 'Force Urbania',
     type: 'Tempo Traveller',
     seats: 16,
     seatsDisplay: '16 Seater',
@@ -294,12 +299,17 @@ export const vehicles: Vehicle[] = [
       'Premium interior lighting & entertainment system',
       'Best for large families, wedding groups, corporate offsites & big pilgrimages',
     ],
-    image: '/fleet/force-urbania-front-01.webp',
+    // Card front image is interior-02 (owner-requested, 2026-08-25) — despite
+    // the filename it's actually a front exterior shot at a temple, not an
+    // interior photo. Moved to the front of the gallery to become the
+    // VehicleCard thumbnail (VehicleCard uses images[0], not the `image`
+    // field, once a "side" match isn't found).
+    image: '/fleet/force-urbania-interior-02.webp',
     images: [
+      '/fleet/force-urbania-interior-02.webp',
       '/fleet/force-urbania-front-01.webp',
       '/fleet/force-urbania-front-02.webp',
       '/fleet/force-urbania-interior-01.webp',
-      '/fleet/force-urbania-interior-02.webp',
       '/fleet/force-urbania-interior-03.webp',
       '/fleet/force-urbania-interior-04.webp',
       '/fleet/force-urbania-interior-05.webp',
@@ -308,7 +318,7 @@ export const vehicles: Vehicle[] = [
       '/fleet/force-urbania-rear-02.webp',
     ],
     description:
-      'Our flagship Force Urbania Luxury is the largest and most premium van in the fleet: a full 16-seater built for big groups who refuse to compromise on comfort. High-roof cabin space, captain seats, and strong AC make it the top choice for large family holidays, wedding transportation, and corporate group travel across South India.',
+      'Our flagship Force Urbania is the largest and most premium van in the fleet: a full 16-seater built for big groups who refuse to compromise on comfort. High-roof cabin space, captain seats, and strong AC make it the top choice for large family holidays, wedding transportation, and corporate group travel across South India.',
     sortOrder: 5,
   },
 
