@@ -8,6 +8,37 @@ import { sortVehiclesForDisplay, Vehicle } from '@/lib/vehicles';
 import VehicleCard from '@/components/VehicleCard';
 import { VehicleCardSkeleton } from '@/components/SkeletonLoader';
 
+/**
+ * Picks up to 6 alternative vehicles for the "You May Also Like" section,
+ * and assigns each of up to 3 of them one merchandising badge. Deterministic
+ * from real vehicle data (price, sort order, type) — never random, so the
+ * same selection always produces the same suggestions.
+ */
+function getSuggestions(selected: Vehicle, all: Vehicle[]) {
+  const others = sortVehiclesForDisplay(all.filter((v) => v.id !== selected.id));
+  const sameType = others.filter((v) => v.type === selected.type);
+  const differentType = others.filter((v) => v.type !== selected.type);
+  const shortlist = [...sameType, ...differentType].slice(0, 6);
+
+  const badges = new Map<string, string>();
+
+  const priced = shortlist.filter((v) => !v.priceDisplay && v.ratePerKm > 0);
+  if (priced.length > 0) {
+    const cheapest = priced.reduce((a, b) => (a.ratePerKm < b.ratePerKm ? a : b));
+    badges.set(cheapest.id, 'Best Price');
+  }
+
+  const popular = shortlist.find((v) => v.sortOrder === 1 && !badges.has(v.id))
+    ?? shortlist.find((v) => !badges.has(v.id));
+  if (popular) badges.set(popular.id, 'Popular Choice');
+
+  const recommended = shortlist.find((v) => v.type === selected.type && !badges.has(v.id))
+    ?? shortlist.find((v) => !badges.has(v.id));
+  if (recommended) badges.set(recommended.id, 'Recommended');
+
+  return { shortlist, badges };
+}
+
 export default function FleetPage() {
   const [vehiclesList, setVehiclesList] = useState<Vehicle[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>('All');
@@ -30,11 +61,17 @@ export default function FleetPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filterCategories = ['All', ...Array.from(new Set(vehiclesList.map(v => v.type).filter(Boolean)))];
+  // Filter chips are per-vehicle (exact selection), not per broad type —
+  // clicking "9 Seater Tempo Traveller" must show only that vehicle, not
+  // every Tempo Traveller variant. Keyed by vehicle id (name isn't
+  // guaranteed unique); "All" resets to the full grid.
+  const filterOptions = [{ id: 'All', name: 'All' }, ...vehiclesList.map((v) => ({ id: v.id, name: v.name }))];
 
-  const filteredVehicles = activeFilter === 'All'
-    ? vehiclesList
-    : vehiclesList.filter((v) => v.type.toLowerCase() === activeFilter.toLowerCase());
+  const selectedVehicle = activeFilter === 'All' ? null : vehiclesList.find((v) => v.id === activeFilter) ?? null;
+  const filteredVehicles = activeFilter === 'All' ? vehiclesList : selectedVehicle ? [selectedVehicle] : [];
+  const { shortlist: suggestedVehicles, badges: suggestionBadges } = selectedVehicle
+    ? getSuggestions(selectedVehicle, vehiclesList)
+    : { shortlist: [], badges: new Map<string, string>() };
 
   // Breadcrumbs config
   const breadcrumbItems = [
@@ -102,24 +139,25 @@ export default function FleetPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col space-y-6">
 
-          {/* Filters List */}
+          {/* Filters List — one chip per exact vehicle, not per broad type */}
           <div className="flex items-center justify-center overflow-x-auto py-2.5 space-x-3 scrollbar-thin">
-            {filterCategories.map((category) => (
+            {filterOptions.map((option) => (
               <button
-                key={category}
-                onClick={() => setActiveFilter(category)}
+                key={option.id}
+                onClick={() => setActiveFilter(option.id)}
+                aria-pressed={activeFilter === option.id}
                 className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                  activeFilter === category
+                  activeFilter === option.id
                     ? 'bg-primary border-primary text-white shadow-md'
                     : 'bg-white border-navy-light/10 text-navy hover:bg-cream-warm hover:border-navy-light/20'
                 }`}
               >
-                {category}
+                {option.name}
               </button>
             ))}
           </div>
 
-          {/* Results Grid */}
+          {/* Results */}
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6 justify-items-center">
               {[...Array(6)].map((_, idx) => (
@@ -129,12 +167,43 @@ export default function FleetPage() {
               ))}
             </div>
           ) : filteredVehicles.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6 justify-items-center">
-              {filteredVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="h-full w-full max-w-md mx-auto sm:max-w-none">
-                  <VehicleCard vehicle={vehicle} />
+            <div key={activeFilter} className="animate-fade-in">
+              {selectedVehicle ? (
+                // Exact-selection view: one featured vehicle, centered and prominent.
+                <div className="max-w-md mx-auto pt-6">
+                  <VehicleCard vehicle={selectedVehicle} priority />
                 </div>
-              ))}
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6 justify-items-center">
+                  {filteredVehicles.map((vehicle) => (
+                    <div key={vehicle.id} className="h-full w-full max-w-md mx-auto sm:max-w-none">
+                      <VehicleCard vehicle={vehicle} />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* You May Also Like — only in exact-selection view */}
+              {selectedVehicle && suggestedVehicles.length > 0 && (
+                <div className="pt-14">
+                  <div className="text-center mb-8">
+                    <h2 className="font-serif font-bold text-2xl text-navy">You May Also Like</h2>
+                    <p className="text-xs text-navy-light mt-1">Other vehicles worth a look for your trip</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                    {suggestedVehicles.map((vehicle) => (
+                      <div key={vehicle.id} className="relative h-full w-full max-w-md mx-auto sm:max-w-none">
+                        {suggestionBadges.has(vehicle.id) && (
+                          <span className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-navy text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                            {suggestionBadges.get(vehicle.id)}
+                          </span>
+                        )}
+                        <VehicleCard vehicle={vehicle} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ) : fetchError ? (
             <div className="text-center py-20 bg-white rounded-2xl border border-navy-light/10 flex flex-col items-center justify-center space-y-3">
