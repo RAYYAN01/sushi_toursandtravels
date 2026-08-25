@@ -43,7 +43,6 @@ export default function RoutesHubPage() {
       <LandingHero
         h1="Popular Bangalore Outstation Cab Routes"
         subtitle="Distance, travel time and vehicle guidance for the South India routes we drive most often."
-        image="/coorg.webp"
         crumbs={[{ name: 'Routes', href: '/routes' }]}
       />
 

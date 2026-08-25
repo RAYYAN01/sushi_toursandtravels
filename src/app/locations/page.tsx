@@ -42,7 +42,6 @@ export default function LocationsHubPage() {
       <LandingHero
         h1="Areas We Serve Across Bangalore"
         subtitle="Chauffeur-driven pickup and drop across Bangalore's major residential and business neighbourhoods."
-        image="/fleet/force-traveller-yaksha-front-01.webp"
         crumbs={[{ name: 'Areas We Serve', href: '/locations' }]}
       />
 

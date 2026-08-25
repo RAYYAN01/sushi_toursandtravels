@@ -91,7 +91,6 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
       <LandingHero
         h1={page.h1}
         subtitle={page.heroSubtitle}
-        image={HERO_IMAGE}
         crumbs={[
           { name: 'Areas We Serve', href: '/locations' },
           { name: page.name, href: url },

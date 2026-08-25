@@ -43,7 +43,6 @@ export default function VehiclesHubPage() {
       <LandingHero
         h1="Vehicle Rental Options in Bangalore"
         subtitle="Compare each vehicle category by seating, pricing and best use-case before you book — from sedans to full-size buses."
-        image="/fleet/force-urbania-front-01.webp"
         crumbs={[{ name: 'Vehicles', href: '/vehicles' }]}
       />
 

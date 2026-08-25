@@ -43,7 +43,6 @@ export default function BlogIndexPage() {
       <LandingHero
         h1="Travel Stories from Sushi Travels"
         subtitle="Honest travel diaries and destination notes — written for people planning their own trip, not just a highlight reel."
-        image={blogPosts[0]?.coverImage ?? '/logo-light-v3.png'}
         crumbs={[{ name: 'Blog', href: '/blog' }]}
       />
 

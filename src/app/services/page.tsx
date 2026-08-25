@@ -43,7 +43,6 @@ export default function ServicesHubPage() {
       <LandingHero
         h1="Car & Van Rental Services in Bangalore"
         subtitle="Chauffeur-driven rental for every use-case — airport transfers, outstation trips, local travel, corporate transport, weddings and sightseeing."
-        image="/fortuner-front-view.webp"
         crumbs={[{ name: 'Services', href: '/services' }]}
       />
 

@@ -77,7 +77,6 @@ export default async function RouteDetailPage({ params }: { params: Promise<{ sl
       <LandingHero
         h1={page.h1}
         subtitle={page.heroSubtitle}
-        image={page.heroImage}
         crumbs={[
           { name: 'Routes', href: '/routes' },
           { name: page.h1, href: url },

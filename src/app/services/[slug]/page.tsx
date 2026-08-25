@@ -90,7 +90,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <LandingHero
         h1={page.h1}
         subtitle={page.heroSubtitle}
-        image={page.heroImage}
         crumbs={[
           { name: 'Services', href: '/services' },
           { name: page.h1, href: url },

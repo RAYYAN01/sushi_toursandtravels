@@ -51,7 +51,6 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
   if (!page) notFound();
 
   const pageVehicles = getVehiclesForPage(page);
-  const heroImage = getPagePrimaryImage(page);
   const url = `/vehicles/${page.slug}`;
 
   const breadcrumbItems = [
@@ -93,7 +92,6 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
       <LandingHero
         h1={page.h1}
         subtitle={page.heroSubtitle}
-        image={heroImage}
         crumbs={[
           { name: 'Vehicles', href: '/vehicles' },
           { name: page.h1, href: url },
