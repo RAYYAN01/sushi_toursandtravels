@@ -599,12 +599,14 @@ export const vehicles: Vehicle[] = [
   // Sushi Travels - 50 Seater Bus — real owner-provided photos, 2026-08-25,
   // replacing the previously-shared coach-sgr-* placeholder set (that set
   // stays in use by the Sushi Mini Bus and 21-Seater Bus entries, so those
-  // shared files were not deleted). Interior shots have another operator's
-  // branding ("AADHYA") blurred out on seat covers and a ceiling sign per
-  // owner instruction; a front-fascia shot with the same branding painted
-  // directly on the body was dropped rather than blurred — too much of the
-  // frame was branding to salvage a usable photo. The clean side-view shot
-  // carries no visible branding and leads the gallery.
+  // shared files were not deleted). Interior shots were initially blurred
+  // to hide another operator's "AADHYA" branding, then re-sent unblurred
+  // and swapped in per owner instruction (2026-08-25) — filenames bumped
+  // to "-v2" since these paths are served with an immutable cache header.
+  // A front-fascia shot with the same branding painted directly on the
+  // body was dropped rather than used — too much of the frame was
+  // branding for a usable photo. The clean side-view shot carries no
+  // visible branding and leads the gallery.
   // ---------------------------------------------------------------------
   {
     id: 'bus-50-seater',
@@ -627,8 +629,8 @@ export const vehicles: Vehicle[] = [
     image: '/fleet/sushi-travels-50-seater-bus-side-01.webp',
     images: [
       '/fleet/sushi-travels-50-seater-bus-side-01.webp',
-      '/fleet/sushi-travels-50-seater-bus-interior-01.webp',
-      '/fleet/sushi-travels-50-seater-bus-interior-02.webp',
+      '/fleet/sushi-travels-50-seater-bus-interior-01-v2.webp',
+      '/fleet/sushi-travels-50-seater-bus-interior-02-v2.webp',
     ],
     description:
       'Our largest-capacity vehicle, the Sushi Travels 50 Seater Bus is built for large corporate events, weddings, and big pilgrimage or group tours that need everyone travelling together in one AC vehicle. Pricing is quoted per trip based on route, duration and group size.',
