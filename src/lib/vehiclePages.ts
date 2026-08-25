@@ -167,7 +167,7 @@ export const vehiclePages: VehiclePage[] = [
     bodyParagraphs: [
       'The Tempo Traveller is the go-to vehicle for small family groups and close-friend circles who want to travel together rather than split across multiple cars. Pushback reclining seats, extra legroom, and a proper luggage boot make it far more comfortable than a minivan for multi-hour drives.',
       'The AC tier runs dual roof-mounted AC across all rows, suited to summer travel and longer routes; the Non-AC tier is a practical, budget-friendly option for shorter trips or cooler-weather travel. Both come with USB charging points, reading lights and a music system.',
-      'For mid-size groups of 9–10 passengers who want a premium executive-seat upgrade, see our Luxury Tempo Traveller 9+1 Seater page below; for 12–16 passenger premium vans, see the Force Urbania pages.',
+      'For mid-size groups of 9–10 passengers who want an executive-seat upgrade, see our 9 Seater Tempo Traveller page below; for 12–16 passenger premium vans, see the Force Urbania pages.',
     ],
     faqs: [
       {
@@ -178,7 +178,7 @@ export const vehiclePages: VehiclePage[] = [
       {
         question: 'Is driver bata included?',
         answer:
-          'Driver bata is ₹500/day for both tiers, billed separately from the per-km rate. Tolls, parking, permits and state taxes are additional. Standard duty is 6:00 AM–10:00 PM, with extra bata after 10:00 PM.',
+          'Driver bata is ₹700/day for both tiers, billed separately from the per-km rate. Tolls, parking, permits and state taxes are additional. Standard duty is 6:00 AM–10:00 PM, with extra bata after 10:00 PM.',
       },
       {
         question: 'Can I book this for outstation travel?',
@@ -201,17 +201,17 @@ export const vehiclePages: VehiclePage[] = [
   },
   {
     slug: '9-seater-luxury-tempo-traveller-bangalore',
-    h1: '9+1 Seater Luxury Tempo Traveller Rental in Bangalore',
-    title: '9 Seater Luxury Tempo Traveller Bangalore',
+    h1: '9 Seater Tempo Traveller Rental in Bangalore',
+    title: '9 Seater Tempo Traveller Bangalore',
     metaDescription:
-      'Book the Luxury Tempo Traveller 9+1 Seater in Bangalore at ₹30/km — premium executive pushback seats for corporate teams, pilgrimages & mid-size family trips.',
+      'Book a 9 seater tempo traveller in Bangalore at ₹28/km — executive pushback seats for corporate teams, pilgrimages & mid-size family trips.',
     heroSubtitle:
-      'Premium-badged 9+1 seater with executive pushback seats and individual AC vents, at ₹30/km — built for mid-size groups on longer outstation drives.',
+      '9+1 seater with executive pushback seats and individual AC vents, at ₹28/km — built for mid-size groups on longer outstation drives.',
     vehicleIds: ['luxury-tempo-traveller-9-plus-1'],
     geoSummary:
-      'Sushi Travels offers the 9 seater tempo traveller in Bangalore — badged as our Luxury Tempo Traveller 9+1 Seater — for corporate offsites, pilgrimages and mid-size family group travel. Priced at ₹30/km with a 300 km/day minimum billing, it upgrades the standard Tempo Traveller with executive seating and individual AC vents.',
+      'Sushi Travels offers the 9 seater tempo traveller (9+1) in Bangalore for corporate offsites, pilgrimages and mid-size family group travel. Priced at ₹28/km with a 300 km/day minimum billing, it upgrades the standard Tempo Traveller with executive seating and individual AC vents.',
     bodyParagraphs: [
-      'This is our premium-badged Tempo Traveller — nine-plus-one executive pushback seats, ambient cabin lighting, individual AC vents, and large tinted windows that make the ghat-road drive to Coorg, Ooty or Munnar noticeably more comfortable for every passenger, not just the front row.',
+      'Our 9 seater Tempo Traveller — nine-plus-one executive pushback seats, ambient cabin lighting, individual AC vents, and large tinted windows that make the ghat-road drive to Coorg, Ooty or Munnar noticeably more comfortable for every passenger, not just the front row.',
       'It suits corporate teams heading to an offsite, extended families on a pilgrimage trip, or any group of 9–10 that wants more legroom and a quieter cabin than the standard 12-seater tier.',
       'For groups of 12 or more, see the Force Urbania Maharaja 12-Seater and Force Urbania Luxury 16-Seater pages below, which carry more passengers in a similarly premium cabin.',
     ],
@@ -219,12 +219,12 @@ export const vehiclePages: VehiclePage[] = [
       {
         question: 'What is the per-km rate for this vehicle?',
         answer:
-          'The Luxury Tempo Traveller 9+1 Seater is priced at ₹30/km with a 300 km/day minimum billing distance.',
+          'The 9 Seater Tempo Traveller is priced at ₹28/km with a 300 km/day minimum billing distance.',
       },
       {
         question: 'Is driver bata included?',
         answer:
-          'Driver bata is ₹600/day, charged separately from the per-km rate, along with tolls, parking, permits and state taxes at actuals. Standard duty is 6:00 AM–10:00 PM, with extra bata after 10:00 PM.',
+          'Driver bata is ₹500/day, charged separately from the per-km rate, along with tolls, parking, permits and state taxes at actuals. Standard duty is 6:00 AM–10:00 PM, with extra bata after 10:00 PM.',
       },
       {
         question: 'Can I book this for outstation travel?',
@@ -305,7 +305,7 @@ export const vehiclePages: VehiclePage[] = [
     bodyParagraphs: [
       'The Force Urbania Maharaja is the 12-seater trim of our flagship Urbania — a modern, high-roof van built for mid-size groups who want more headroom and a car-like ride than a traditional Tempo Traveller offers, without stepping up to the full 16-seater.',
       'Captain-style seats, powerful roof AC with individual vents, and a large rear cargo hold make it well suited to family holidays, corporate offsites and pilgrimage groups travelling with substantial luggage.',
-      'If your group is closer to 16 passengers, see the Force Urbania Luxury 16-Seater page below; for a lighter 9-seat premium option, see the Luxury Tempo Traveller.',
+      'If your group is closer to 16 passengers, see the Force Urbania Luxury 16-Seater page below; for a lighter 9-seat option, see the 9 Seater Tempo Traveller.',
     ],
     faqs: [
       {

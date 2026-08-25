@@ -191,13 +191,15 @@ export const vehicles: Vehicle[] = [
   },
 
   // ---------------------------------------------------------------------
-  // Luxury Tempo Traveller 9+1 Seater
-  // Repurposed from the former "12-Seater Force Traveller Yaksha" entry —
-  // premium-badged trim, fits the "Luxury" naming; 9+1 = 10 total seats.
+  // 9 Seater Tempo Traveller (9+1 = 10 total seats)
+  // Renamed from "Luxury Tempo Traveller 9+1 Seater" on 2026-08-25 per owner
+  // instruction. Real owner-provided front photo (KA03AB2312 at Bengaluru
+  // airport) leads the gallery; the Yaksha set follows as supporting shots.
+  // Portrait source, so imagePositions biases the crop down onto the van.
   // ---------------------------------------------------------------------
   {
     id: 'luxury-tempo-traveller-9-plus-1',
-    name: 'Luxury Tempo Traveller 9+1 Seater',
+    name: '9 Seater Tempo Traveller',
     type: 'Tempo Traveller',
     seats: 10,
     seatsDisplay: '9+1 Seater',
@@ -216,8 +218,9 @@ export const vehicles: Vehicle[] = [
       'Large tinted windows for scenic ghat-road views',
       'Best for mid-size family groups, corporate teams & pilgrimage trips',
     ],
-    image: '/fleet/force-traveller-yaksha-front-01.webp',
+    image: '/fleet/tempo-traveller-9-seater-front-01.webp',
     images: [
+      '/fleet/tempo-traveller-9-seater-front-01.webp',
       '/fleet/force-traveller-yaksha-front-01.webp',
       '/fleet/force-traveller-yaksha-front-02.webp',
       '/fleet/force-traveller-yaksha-front-03.webp',
@@ -228,8 +231,20 @@ export const vehicles: Vehicle[] = [
       '/fleet/force-traveller-yaksha-interior-03.webp',
       '/fleet/force-traveller-yaksha-rear-01.webp',
     ],
+    imagePositions: [
+      '50% 55%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+      '50% 50%',
+    ],
     description:
-      'The Force Traveller Yaksha is our premium-badged Luxury Tempo Traveller (9+1 seater), built for mid-size groups that want extra comfort on long outstation drives. Executive pushback seats, individual AC vents, and a spacious luggage boot make it a favourite for corporate offsites, pilgrimages, and multi-family trips to Coorg, Mysore, and Ooty.',
+      'Our 9 Seater Tempo Traveller (9+1) is built for mid-size groups that want extra comfort on long outstation drives. Executive pushback seats, individual AC vents, and a spacious luggage boot make it a favourite for corporate offsites, pilgrimages, and multi-family trips to Coorg, Mysore, and Ooty.',
     sortOrder: 3,
   },
 
