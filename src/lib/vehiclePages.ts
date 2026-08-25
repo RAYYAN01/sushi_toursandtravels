@@ -213,7 +213,7 @@ export const vehiclePages: VehiclePage[] = [
     bodyParagraphs: [
       'Our 9 seater Tempo Traveller — nine-plus-one executive pushback seats, ambient cabin lighting, individual AC vents, and large tinted windows that make the ghat-road drive to Coorg, Ooty or Munnar noticeably more comfortable for every passenger, not just the front row.',
       'It suits corporate teams heading to an offsite, extended families on a pilgrimage trip, or any group of 9–10 that wants more legroom and a quieter cabin than the standard 12-seater tier.',
-      'For groups of 12 or more, see the Force Urbania Maharaja 12-Seater and Force Urbania Luxury 16-Seater pages below, which carry more passengers in a similarly premium cabin.',
+      'For groups of 12 or more, see the Urbania 12 Seater Maharaja and Force Urbania Luxury 16-Seater pages below, which carry more passengers in a similarly premium cabin.',
     ],
     faqs: [
       {
@@ -259,7 +259,7 @@ export const vehiclePages: VehiclePage[] = [
     bodyParagraphs: [
       'When a 12-seater Tempo Traveller isn\'t quite enough room, our 17-seater Force Tempo Traveller steps up to carry a larger group in one vehicle — pushback reclining seats, roof-mounted AC across every row, and a dedicated rear luggage boot sized for a full group\'s bags.',
       'It suits large family gatherings, corporate offsites where an entire team travels together, and pilgrimage groups heading to South Indian temple towns who want everyone in a single vehicle rather than splitting across two smaller ones.',
-      'Starting at ₹30/km with a 300 km/day minimum and ₹700/day driver bata, plus toll, parking, permit and state taxes as applicable. Call or WhatsApp us with your route and group size for an exact quote — for a similarly sized premium option, see the Force Urbania Maharaja 12-Seater and Force Urbania Luxury 16-Seater pages below.',
+      'Starting at ₹30/km with a 300 km/day minimum and ₹700/day driver bata, plus toll, parking, permit and state taxes as applicable. Call or WhatsApp us with your route and group size for an exact quote — for a similarly sized premium option, see the Urbania 12 Seater Maharaja and Force Urbania Luxury 16-Seater pages below.',
     ],
     faqs: [
       {
@@ -293,29 +293,29 @@ export const vehiclePages: VehiclePage[] = [
   },
   {
     slug: 'force-urbania-12-seater-maharaja-bangalore',
-    h1: 'Force Urbania Maharaja 12-Seater Rental in Bangalore',
-    title: 'Force Urbania 12-Seater Rental Bangalore',
+    h1: 'Urbania 12 Seater Maharaja Rental in Bangalore',
+    title: 'Urbania 12 Seater Maharaja Rental Bangalore',
     metaDescription:
-      'Hire the Force Urbania Maharaja 12-Seater in Bangalore at ₹45/km. High-roof premium van with captain seats for family holidays & corporate group travel.',
+      'Hire the Urbania 12 Seater Maharaja in Bangalore. High-roof premium van with captain seats for family holidays & corporate group travel. Call or WhatsApp for a quote.',
     heroSubtitle:
-      'High-roof, premium 12-seater van with captain-style seating and strong AC, at ₹45/km — for mid-size groups who want extra comfort.',
+      'High-roof, premium 12-seater van with captain-style seating and strong AC — for mid-size groups who want extra comfort. Price on request.',
     vehicleIds: ['force-urbania-maharaja-12-seater'],
     geoSummary:
-      'Sushi Travels provides Force Urbania Maharaja 12-Seater rental in Bangalore for family holidays and corporate group travel across South India. Priced at ₹45/km with a 300 km/day minimum billing, it offers a high-roof cabin with stand-up walking space, uncommon in this seating class.',
+      'Sushi Travels provides Urbania 12 Seater Maharaja rental in Bangalore for family holidays and corporate group travel across South India, offering a high-roof cabin with stand-up walking space, uncommon in this seating class. Pricing is available on request.',
     bodyParagraphs: [
-      'The Force Urbania Maharaja is the 12-seater trim of our flagship Urbania — a modern, high-roof van built for mid-size groups who want more headroom and a car-like ride than a traditional Tempo Traveller offers, without stepping up to the full 16-seater.',
+      'The Urbania 12 Seater Maharaja is the 12-seater trim of our flagship Urbania — a modern, high-roof van built for mid-size groups who want more headroom and a car-like ride than a traditional Tempo Traveller offers, without stepping up to the full 16-seater.',
       'Captain-style seats, powerful roof AC with individual vents, and a large rear cargo hold make it well suited to family holidays, corporate offsites and pilgrimage groups travelling with substantial luggage.',
       'If your group is closer to 16 passengers, see the Force Urbania Luxury 16-Seater page below; for a lighter 9-seat option, see the 9 Seater Tempo Traveller.',
     ],
     faqs: [
       {
-        question: 'What is the per-km rate for the Force Urbania Maharaja 12-Seater?',
-        answer: 'It is priced at ₹45/km with a 300 km/day minimum billing distance.',
+        question: 'What is the per-km rate for the Urbania 12 Seater Maharaja?',
+        answer: 'Pricing is available on request — call or WhatsApp us with your route and group size for a custom quote.',
       },
       {
         question: 'Is driver bata included?',
         answer:
-          'Driver bata is ₹700/day, billed separately from the per-km rate, along with tolls, parking, permits and state taxes at actuals. Standard duty is 6:00 AM–10:00 PM, with extra bata after 10:00 PM.',
+          'Driver bata is billed separately from the per-km rate, along with tolls, parking, permits and state taxes at actuals. Standard duty is 6:00 AM–10:00 PM, with extra bata after 10:00 PM.',
       },
       {
         question: 'Can I book this for outstation travel?',

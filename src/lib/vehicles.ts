@@ -59,7 +59,6 @@ const PRICING = {
   tempoTravellerNonAc: { ratePerKm: 20, driverBata: 700 },
   luxuryTempoTraveller9Plus1: { ratePerKm: 28, driverBata: 500 },
   tempoTraveller17Seater: { ratePerKm: 30, driverBata: 700 },
-  forceUrbaniaMaharaja12: { ratePerKm: 45, driverBata: 700 },
   forceUrbaniaLuxury16: { ratePerKm: 38, driverBata: 700 },
 } as const;
 
@@ -237,23 +236,25 @@ export const vehicles: Vehicle[] = [
   },
 
   // ---------------------------------------------------------------------
-  // Force Urbania Maharaja 12-Seater / Luxury 16-Seater
-  // Both repurposed from the former "17-Seater Force Urbania" entry — same
-  // real photo set (force-urbania-*, only one Force Urbania set exists),
-  // split into two card entries differentiated by trim/seat count/price.
+  // Urbania 12 Seater Maharaja
+  // Renamed from "Force Urbania Maharaja 12-Seater" and switched to
+  // "Price on Request" on 2026-08-25 per owner instruction — the confirmed
+  // ₹45/km rate was removed rather than displayed alongside a "Price on
+  // Request" label. Real owner-provided photos (front + interior) replace
+  // the previously-shared force-urbania-* set (that set stays in use by
+  // the Luxury 16-Seater entry below, so those shared files were not
+  // deleted, only unlinked from this entry).
   // ---------------------------------------------------------------------
   {
     id: 'force-urbania-maharaja-12-seater',
-    name: 'Force Urbania Maharaja 12-Seater',
+    name: 'Urbania 12 Seater Maharaja',
     type: 'Tempo Traveller',
     seats: 12,
     seatsDisplay: '12 Seater',
     ac: true,
     luggage: 12,
-    ratePerKm: PRICING.forceUrbaniaMaharaja12.ratePerKm,
-    driverBata: PRICING.forceUrbaniaMaharaja12.driverBata,
-    minKmPerDay: MIN_KM_PER_DAY,
-    drivingHours: STANDARD_DUTY_HOURS,
+    ratePerKm: 0,
+    priceDisplay: 'Price on Request',
     acOnly: true,
     features: [
       '12 luxury captain-style pushback seats',
@@ -263,21 +264,13 @@ export const vehicles: Vehicle[] = [
       'Premium interior lighting & entertainment system',
       'Best for mid-size family groups, corporate offsites & pilgrimages',
     ],
-    image: '/fleet/force-urbania-front-01.webp',
+    image: '/fleet/force-urbania-maharaja-12-seater-front-01.webp',
     images: [
-      '/fleet/force-urbania-front-01.webp',
-      '/fleet/force-urbania-front-02.webp',
-      '/fleet/force-urbania-interior-01.webp',
-      '/fleet/force-urbania-interior-02.webp',
-      '/fleet/force-urbania-interior-03.webp',
-      '/fleet/force-urbania-interior-04.webp',
-      '/fleet/force-urbania-interior-05.webp',
-      '/fleet/force-urbania-interior-06.webp',
-      '/fleet/force-urbania-rear-01.webp',
-      '/fleet/force-urbania-rear-02.webp',
+      '/fleet/force-urbania-maharaja-12-seater-front-01.webp',
+      '/fleet/force-urbania-maharaja-12-seater-interior-01.webp',
     ],
     description:
-      'The Force Urbania Maharaja is the 12-seater trim of our flagship Force Urbania: a high-roof, premium van built for mid-size groups who want extra comfort. Captain seats, strong AC, and a spacious cabin make it a great choice for family holidays and corporate group travel across South India.',
+      'The Urbania 12 Seater Maharaja is the 12-seater trim of our flagship Force Urbania: a high-roof, premium van built for mid-size groups who want extra comfort. Captain seats, strong AC, and a spacious cabin make it a great choice for family holidays and corporate group travel across South India. Call or WhatsApp us for a custom quote.',
     sortOrder: 4,
   },
   {
