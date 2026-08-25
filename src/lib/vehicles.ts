@@ -118,7 +118,7 @@ export const vehicles: Vehicle[] = [
   // ---------------------------------------------------------------------
   {
     id: 'tempo-traveller',
-    name: 'Tempo Traveller',
+    name: '12 Seater Tempo Traveller',
     type: 'Tempo Traveller',
     seats: 12,
     seatsDisplay: '12 Seater',
