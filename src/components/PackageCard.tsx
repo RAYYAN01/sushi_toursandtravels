@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { MapPin, Route, Phone, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, MessageCircle } from 'lucide-react';
 import { TourPackage } from '@/lib/packages';
 import { PHONE_NUMBER, getWhatsAppUrl } from '@/lib/contact';
 
@@ -41,10 +41,6 @@ export default function PackageCard({ pkg }: PackageCardProps) {
             <MapPin className="w-3.5 h-3.5 text-primary" />
             <span>{pkg.destination}</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <Route className="w-3.5 h-3.5 text-primary" />
-            <span>{pkg.distance}</span>
-          </div>
         </div>
 
         <h3 className="font-serif font-bold text-lg text-navy group-hover:text-primary transition-colors duration-200 mb-2 leading-snug">
@@ -68,12 +64,9 @@ export default function PackageCard({ pkg }: PackageCardProps) {
           <span className="font-semibold text-navy">Best suited for:</span> {pkg.suitedFor}
         </p>
 
-        {/* Price & CTAs */}
+        {/* CTAs */}
         <div className="pt-4 border-t border-navy-light/10 flex items-center justify-between mt-auto">
-          <div>
-            <div className="text-[10px] text-navy font-bold uppercase tracking-wider">Package Price</div>
-            <div className="font-sans font-bold text-lg text-navy">{pkg.priceDisplay}</div>
-          </div>
+          <span className="text-xs font-semibold text-primary-dark">Get Quote / Call for Pricing</span>
           <div className="flex items-center space-x-2 shrink-0">
             <a
               href={`tel:${PHONE_NUMBER}`}
