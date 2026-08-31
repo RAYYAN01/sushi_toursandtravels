@@ -18,6 +18,14 @@ export interface VehiclePage {
   relatedRouteSlugs: string[];
   relatedLocationSlugs?: string[];
   isHub?: boolean;
+  /**
+   * When set, renders a side-by-side comparison table of every vehicle.ts
+   * entry matching this type on this page — lets a visitor pick a seat
+   * size without leaving the page (the single highest-value keyword URL
+   * for that category is the right place for this, not a thin one-vehicle
+   * page). Every cell reads from real vehicles.ts data, never invented.
+   */
+  compareVehicleType?: Vehicle['type'];
 }
 
 function v(id: string): Vehicle {
@@ -162,6 +170,7 @@ export const vehiclePages: VehiclePage[] = [
     heroSubtitle:
       '12-seater Tempo Traveller, available in AC (₹22/km) and Non-AC (₹20/km) — pushback seating and a dedicated luggage boot for group trips out of Bangalore.',
     vehicleIds: ['tempo-traveller'],
+    compareVehicleType: 'Tempo Traveller',
     geoSummary:
       'Sushi Travels provides the 12 seater tempo traveller in Bangalore for outstation group trips, weekend getaways and pilgrimages, available in AC (₹22/km) and Non-AC (₹20/km) tiers, both with a 300 km/day minimum billing and a dedicated rear luggage boot.',
     bodyParagraphs: [
@@ -189,6 +198,21 @@ export const vehiclePages: VehiclePage[] = [
         question: 'Can I book airport pickup with this vehicle?',
         answer:
           'Yes, group airport pickup/drop is available — useful when a family or group is arriving together and wants to travel from the airport in one vehicle.',
+      },
+      {
+        question: 'Which Tempo Traveller size should I choose?',
+        answer:
+          'We run three Tempo Traveller sizes: 9-seater (executive seating, ₹28/km), 12-seater (AC/Non-AC, ₹20–22/km), and 17-seater (AC/Non-AC, ₹28–30/km). For 12–16 passengers or a more premium cabin, the Force Urbania range is also worth comparing — see the table above.',
+      },
+      {
+        question: 'What is the difference between AC and Non-AC?',
+        answer:
+          'Both run the same pushback seating, luggage boot, USB points and music system. AC adds dual roof-mounted cooling across every row, better suited to summer travel and longer routes; Non-AC is a practical option for shorter or cooler-weather trips at a slightly lower per-km rate.',
+      },
+      {
+        question: 'Do you provide a driver with the Tempo Traveller?',
+        answer:
+          'Yes — every Tempo Traveller booking includes a verified chauffeur. Self-drive is not offered.',
       },
     ],
     relatedVehicleSlugs: [

@@ -11,6 +11,8 @@ import FaqAccordion from '@/components/FaqAccordion';
 import CTABand from '@/components/CTABand';
 import RelatedLinks from '@/components/RelatedLinks';
 import VehiclePricingTable from '@/components/VehiclePricingTable';
+import GroupSizeComparisonTable from '@/components/GroupSizeComparisonTable';
+import { vehicles as allVehicles } from '@/lib/vehicles';
 
 export function generateStaticParams() {
   return vehiclePages.map((p) => ({ slug: p.slug }));
@@ -142,6 +144,16 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             <p key={idx}>{para}</p>
           ))}
         </section>
+
+        {/* Compare every seat size in this category, when configured */}
+        {page.compareVehicleType && (
+          <GroupSizeComparisonTable
+            heading={`Compare ${page.compareVehicleType} Sizes`}
+            vehicles={allVehicles
+              .filter((v) => v.type === page.compareVehicleType)
+              .sort((a, b) => a.seats - b.seats)}
+          />
+        )}
 
         {/* Pricing */}
         <VehiclePricingTable vehicles={pageVehicles} />
