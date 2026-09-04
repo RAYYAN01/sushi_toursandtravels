@@ -194,6 +194,15 @@ export default function Footer() {
             <p>
               Developed by{' '}
               <a
+                href="https://cortinex-webstudio.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors duration-150"
+              >
+                Cortinex Webstudio
+              </a>{' '}
+              &amp;{' '}
+              <a
                 href="https://www.naazailabs.com"
                 target="_blank"
                 rel="noopener noreferrer"
