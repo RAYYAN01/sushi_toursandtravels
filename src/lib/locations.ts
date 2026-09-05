@@ -117,7 +117,7 @@ export const locationPages: LocationPage[] = [
       },
     ],
     relatedVehicleSlugs: ['sedan-rental-bangalore', 'tempo-traveller-rental-bangalore', 'innova-crysta-rental-bangalore'],
-    nearbyLocationSlugs: ['car-rental-indiranagar', 'car-rental-jayanagar', 'car-rental-whitefield'],
+    nearbyLocationSlugs: ['car-rental-indiranagar', 'car-rental-btm-layout', 'car-rental-hsr-layout'],
   },
   {
     slug: 'car-rental-indiranagar',
@@ -185,7 +185,7 @@ export const locationPages: LocationPage[] = [
       },
     ],
     relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
-    nearbyLocationSlugs: ['car-rental-jp-nagar', 'car-rental-koramangala', 'car-rental-electronic-city'],
+    nearbyLocationSlugs: ['car-rental-jp-nagar', 'car-rental-basavanagudi', 'car-rental-koramangala'],
   },
   {
     slug: 'car-rental-jp-nagar',
@@ -219,7 +219,7 @@ export const locationPages: LocationPage[] = [
       },
     ],
     relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
-    nearbyLocationSlugs: ['car-rental-jayanagar', 'car-rental-electronic-city', 'car-rental-koramangala'],
+    nearbyLocationSlugs: ['car-rental-jayanagar', 'car-rental-banashankari', 'car-rental-electronic-city'],
   },
   {
     slug: 'car-rental-marathahalli',
@@ -356,6 +356,278 @@ export const locationPages: LocationPage[] = [
     ],
     relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
     nearbyLocationSlugs: ['car-rental-hebbal', 'car-rental-yelahanka', 'car-rental-jayanagar'],
+  },
+  {
+    slug: 'car-rental-hsr-layout',
+    name: 'HSR Layout',
+    h1: 'Car Rental in HSR Layout, Bangalore',
+    title: 'Car Rental HSR Layout Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in HSR Layout, Bangalore. Corporate travel, airport transfers, outstation trips with verified drivers.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across HSR Layout, a fast-growing residential and startup hub in south-east Bangalore.',
+    geoSummary:
+      'Sushi Travels serves HSR Layout, Bangalore for local pickup/drop, corporate travel and outstation trips. HSR Layout is a well-planned residential neighbourhood in south-east Bangalore that has grown into a major startup and tech hub, sitting close to the Sarjapur Road and Outer Ring Road corridors, generating steady demand for both corporate and family travel.',
+    areaDescription:
+      'HSR Layout is a well-planned, sector-organised residential neighbourhood in south-east Bangalore that has, over the last decade, become one of the city\'s busiest startup and small-tech-company clusters, with offices packed alongside apartments and independent homes. It sits just off the Sarjapur Road and Outer Ring Road corridors, which keeps it well connected to the wider IT belt while retaining a distinctly residential character.',
+    bodyParagraphs: [
+      'A large share of our HSR Layout bookings mix startup-office corporate travel with everyday family use — airport transfers for founders and employees, plus weekend outstation trips booked by young working professionals living in the area.',
+      'Because HSR Layout sits close to the Sarjapur Road and Outer Ring Road junctions, our drivers are familiar with routing options toward both the airport and southern outstation routes depending on time of day and traffic.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for corporate and individual travel', 'Toyota Innova Crysta for airport transfers with luggage', 'Tempo Traveller for weekend group getaways'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within HSR Layout?',
+        answer: 'Yes, Sushi Travels serves HSR Layout for local pickup/drop, corporate travel, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book airport transfer from HSR Layout?',
+        answer: 'Yes — airport pickup and drop from HSR Layout is one of our regular bookings, with flight-time coordination available on request.',
+      },
+      {
+        question: 'Is outstation booking available from HSR Layout?',
+        answer: 'Yes, outstation round trips to destinations like Coorg, Ooty and Mysore can be booked with pickup from HSR Layout.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-crysta-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-bellandur', 'car-rental-btm-layout', 'car-rental-koramangala'],
+  },
+  {
+    slug: 'car-rental-bellandur',
+    name: 'Bellandur',
+    h1: 'Car Rental in Bellandur, Bangalore',
+    title: 'Car Rental Bellandur Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in Bellandur, Bangalore. Corporate travel, airport transfers, outstation trips with verified drivers.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across Bellandur, a major IT corridor along the Outer Ring Road in south-east Bangalore.',
+    geoSummary:
+      'Sushi Travels serves Bellandur, Bangalore for corporate travel, local pickup/drop and outstation trips. Bellandur sits along the Outer Ring Road IT corridor in south-east Bangalore, close to Sarjapur Road, with a dense concentration of large tech campuses that drives a steady volume of corporate airport and office-to-office bookings.',
+    areaDescription:
+      'Bellandur is one of the anchor points of Bangalore\'s Outer Ring Road IT corridor, home to several large corporate campuses alongside residential apartment complexes that developed to house the workforce. Its location between HSR Layout, Sarjapur Road and the wider ORR belt means traffic here is heavily shaped by office commute hours.',
+    bodyParagraphs: [
+      'Most of our Bellandur bookings are corporate — employee airport transfers, executive point-to-point travel between ORR campuses, and team transport for offsites — with peak-hour ORR traffic factored into our dispatch scheduling.',
+      'For residents in the surrounding apartment complexes, we also handle standard local and outstation family bookings the same way as anywhere else in the city.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for individual and corporate travel', 'Toyota Innova Crysta for airport transfers with luggage', 'Tempo Traveller for office team offsites and group travel'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within Bellandur?',
+        answer: 'Yes, we serve Bellandur for local pickup/drop, corporate travel, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book airport transfer from Bellandur?',
+        answer: 'Yes — airport pickup and drop from Bellandur is one of our regular bookings, with flight-time coordination available on request.',
+      },
+      {
+        question: 'Is outstation booking available from Bellandur?',
+        answer: 'Yes, outstation round trips to destinations like Coorg, Ooty and Mysore can be booked with pickup from Bellandur.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-crysta-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-hsr-layout', 'car-rental-sarjapur-road', 'car-rental-koramangala'],
+  },
+  {
+    slug: 'car-rental-sarjapur-road',
+    name: 'Sarjapur Road',
+    h1: 'Car Rental in Sarjapur Road, Bangalore',
+    title: 'Car Rental Sarjapur Road Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop along Sarjapur Road, Bangalore. Corporate travel, airport transfers, outstation trips.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop along Sarjapur Road, a fast-developing IT and residential corridor in south-east Bangalore.',
+    geoSummary:
+      'Sushi Travels serves Sarjapur Road, Bangalore for local pickup/drop, corporate travel and outstation trips. Sarjapur Road is a rapidly developed corridor running south-east from the city, lined with tech campuses, new residential communities and connecting roads to HSR Layout, Bellandur and the Outer Ring Road.',
+    areaDescription:
+      'Sarjapur Road has grown quickly over the past decade from a relatively quiet stretch into a busy corridor of IT campuses, apartment complexes and gated communities, extending south-east out of the city toward Sarjapur town. It connects directly into the HSR Layout and Bellandur end of the Outer Ring Road, which shapes much of the local commute traffic.',
+    bodyParagraphs: [
+      'Given the corridor\'s mix of large tech campuses and newer residential communities, our Sarjapur Road bookings span corporate airport transfers, office commutes and family local and outstation travel in fairly equal measure.',
+      'Because Sarjapur Road stretches over a considerable distance, our dispatch team confirms the exact pickup point along the corridor when booking to plan routing and timing accurately.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for corporate and individual travel', 'Toyota Innova Crysta for airport transfers with luggage', 'Tempo Traveller for family and group outstation trips'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop along Sarjapur Road?',
+        answer: 'Yes, Sushi Travels serves Sarjapur Road for local pickup/drop, corporate travel, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book airport transfer from Sarjapur Road?',
+        answer: 'Yes — airport pickup and drop from Sarjapur Road is one of our regular bookings, with flight-time coordination available on request.',
+      },
+      {
+        question: 'Is outstation booking available from Sarjapur Road?',
+        answer: 'Yes, outstation round trips to destinations like Coorg, Ooty and Mysore can be booked with pickup from Sarjapur Road.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-crysta-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-bellandur', 'car-rental-hsr-layout', 'car-rental-whitefield'],
+  },
+  {
+    slug: 'car-rental-rajajinagar',
+    name: 'Rajajinagar',
+    h1: 'Car Rental in Rajajinagar, Bangalore',
+    title: 'Car Rental Rajajinagar Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in Rajajinagar, Bangalore. Local travel, airport transfers, outstation and pilgrimage trips.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across Rajajinagar, one of Bangalore\'s established residential neighbourhoods on the central-west side.',
+    geoSummary:
+      'Sushi Travels serves Rajajinagar, Bangalore for local pickup/drop, airport transfers and outstation trips. Rajajinagar is one of Bangalore\'s older, well-established residential layouts on the central-west side of the city, known for its settled neighbourhoods and markets, generating steady demand for family local travel and outstation trips.',
+    areaDescription:
+      'Rajajinagar is one of Bangalore\'s older planned residential layouts, located on the central-west side of the city with a settled, largely family-residential character built around blocks and neighbourhood markets. Its central-west position keeps it reasonably well connected toward both the city centre and the roads heading north-west out of Bangalore.',
+    bodyParagraphs: [
+      'Given the neighbourhood\'s settled family character, a good share of our Rajajinagar bookings are everyday local travel, school and errand trips, along with family outstation and pilgrimage journeys.',
+      'We also handle regular airport transfer bookings from Rajajinagar, with its central-west location keeping travel times to Kempegowda Airport reasonably direct via the northern route.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for everyday family travel', 'Toyota Innova for family outstation and pilgrimage trips', 'Tempo Traveller for extended-family group travel'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within Rajajinagar?',
+        answer: 'Yes, we serve Rajajinagar for local pickup/drop, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book airport transfer from Rajajinagar?',
+        answer: 'Yes, airport pickup and drop is available from Rajajinagar with flight-time coordination on request.',
+      },
+      {
+        question: 'Can I book a family outstation trip from Rajajinagar?',
+        answer: 'Yes, family outstation and pilgrimage trips are commonly booked from Rajajinagar, usually in a sedan or Innova depending on family size.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-malleshwaram', 'car-rental-yeshwanthpur', 'car-rental-basavanagudi'],
+  },
+  {
+    slug: 'car-rental-malleshwaram',
+    name: 'Malleshwaram',
+    h1: 'Car Rental in Malleshwaram, Bangalore',
+    title: 'Car Rental Malleshwaram Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in Malleshwaram, Bangalore. Local travel, airport transfers, outstation and pilgrimage trips.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across Malleshwaram, one of Bangalore\'s oldest and most established residential neighbourhoods.',
+    geoSummary:
+      'Sushi Travels serves Malleshwaram, Bangalore for local pickup/drop, airport transfers and outstation trips. Malleshwaram is one of Bangalore\'s oldest planned residential neighbourhoods, located in the central-west part of the city near Rajajinagar and Yeshwanthpur, with a traditional, family-oriented character that generates steady local and pilgrimage travel demand.',
+    areaDescription:
+      'Malleshwaram is among the oldest and most traditional residential neighbourhoods in Bangalore, laid out with tree-lined streets, established markets and a mix of older independent homes and apartments. It sits in the central-west part of the city, close to Yeshwanthpur\'s railway hub and neighbouring Rajajinagar, which keeps it well connected for both local and onward travel.',
+    bodyParagraphs: [
+      'Given its traditional, family-residential character, a good share of our Malleshwaram bookings are pilgrimage trips, family functions and everyday local travel, alongside regular airport transfers.',
+      'Its proximity to Yeshwanthpur also means some of our Malleshwaram bookings connect travellers to and from the railway station for onward journeys.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for everyday family and local travel', 'Toyota Innova for pilgrimage and family outstation trips', 'Tempo Traveller for extended-family group travel'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within Malleshwaram?',
+        answer: 'Yes, we serve Malleshwaram for local pickup/drop, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book a pilgrimage trip from Malleshwaram?',
+        answer: 'Yes — pilgrimage trips to Tirupati and other South Indian temple towns are among our regular bookings from Malleshwaram, typically in a sedan or SUV.',
+      },
+      {
+        question: 'Is airport pickup available from Malleshwaram?',
+        answer: 'Yes, airport pickup and drop is available from Malleshwaram with flight-time coordination on request.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-rajajinagar', 'car-rental-yeshwanthpur', 'car-rental-basavanagudi'],
+  },
+  {
+    slug: 'car-rental-banashankari',
+    name: 'Banashankari',
+    h1: 'Car Rental in Banashankari, Bangalore',
+    title: 'Car Rental Banashankari Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in Banashankari, Bangalore. Local travel, airport transfers, outstation and pilgrimage trips.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across Banashankari, a well-established residential neighbourhood in south Bangalore.',
+    geoSummary:
+      'Sushi Travels serves Banashankari, Bangalore for local pickup/drop, airport transfers and outstation trips. Banashankari is a well-established residential neighbourhood in south Bangalore, close to Basavanagudi and JP Nagar, and near the NICE Road corridor, generating steady demand for family local and outstation travel.',
+    areaDescription:
+      'Banashankari is a settled, primarily residential part of south Bangalore, developed across multiple stages, with a mix of family homes, temples and neighbourhood markets. It sits close to the NICE Road (Bangalore-Mysore Road) corridor, which makes it a practical starting point for trips heading toward Mysore and other southern and western routes.',
+    bodyParagraphs: [
+      'Most of our Banashankari bookings are family-oriented — local errands, pilgrimage travel and family outstation trips — with the NICE Road connection giving a routing advantage for journeys toward Mysore and the south-west.',
+      'We handle both individual sedan bookings for everyday travel and larger vehicle bookings when an extended family or group from the neighbourhood is travelling together.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for everyday family travel', 'Toyota Innova for family outstation and pilgrimage trips', 'Tempo Traveller for extended-family group travel'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within Banashankari?',
+        answer: 'Yes, we serve Banashankari for local pickup/drop, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book an outstation trip toward Mysore from Banashankari?',
+        answer: 'Yes — Banashankari\'s proximity to the NICE Road corridor makes it a practical pickup point for outstation trips toward Mysore and the south-west.',
+      },
+      {
+        question: 'Is airport pickup available from Banashankari?',
+        answer: 'Yes, airport pickup and drop is available from Banashankari with flight-time coordination on request.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-basavanagudi', 'car-rental-jp-nagar', 'car-rental-btm-layout'],
+  },
+  {
+    slug: 'car-rental-basavanagudi',
+    name: 'Basavanagudi',
+    h1: 'Car Rental in Basavanagudi, Bangalore',
+    title: 'Car Rental Basavanagudi Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in Basavanagudi, Bangalore. Local travel, airport transfers, outstation and pilgrimage trips.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across Basavanagudi, one of Bangalore\'s oldest traditional neighbourhoods near Lalbagh.',
+    geoSummary:
+      'Sushi Travels serves Basavanagudi, Bangalore for local pickup/drop, airport transfers and outstation trips. Basavanagudi is one of Bangalore\'s oldest and most traditional neighbourhoods, located just south-west of Lalbagh Botanical Garden, with a strong temple-town character that drives frequent pilgrimage and family travel bookings.',
+    areaDescription:
+      'Basavanagudi is one of the oldest parts of Bangalore, known for its traditional character, well-known temples and markets, and its location just south-west of Lalbagh Botanical Garden. It borders Jayanagar and Banashankari, and its old-city street layout means our drivers plan pickups with that narrower-lane traffic in mind.',
+    bodyParagraphs: [
+      'Given its traditional, temple-town character, a large share of our Basavanagudi bookings are pilgrimage trips and family functions, alongside steady everyday local and airport transfer demand.',
+      'Being close to Jayanagar, outstation bookings from Basavanagudi often follow the same southern routing advantage toward Mysore and other southern destinations.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for everyday family and local travel', 'Toyota Innova for pilgrimage and family outstation trips', 'Tempo Traveller for extended-family group travel'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within Basavanagudi?',
+        answer: 'Yes, we serve Basavanagudi for local pickup/drop, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book a pilgrimage trip from Basavanagudi?',
+        answer: 'Yes — pilgrimage trips to Tirupati and other South Indian temple towns are among our regular bookings from Basavanagudi, typically in a sedan or SUV.',
+      },
+      {
+        question: 'Is airport pickup available from Basavanagudi?',
+        answer: 'Yes, airport pickup and drop is available from Basavanagudi with flight-time coordination on request.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-jayanagar', 'car-rental-banashankari', 'car-rental-btm-layout'],
+  },
+  {
+    slug: 'car-rental-btm-layout',
+    name: 'BTM Layout',
+    h1: 'Car Rental in BTM Layout, Bangalore',
+    title: 'Car Rental BTM Layout Bangalore',
+    metaDescription:
+      'Chauffeur-driven car rental for pickup and drop in BTM Layout, Bangalore. Local travel, airport transfers, outstation trips with verified drivers.',
+    heroSubtitle: 'Chauffeur-driven pickup and drop across BTM Layout, a dense residential and commercial neighbourhood in south-central Bangalore.',
+    geoSummary:
+      'Sushi Travels serves BTM Layout, Bangalore for local pickup/drop, airport transfers and outstation trips. BTM Layout is a densely populated residential and commercial neighbourhood in south-central Bangalore, sitting between Koramangala, Jayanagar and HSR Layout, which makes it a well-connected pickup point across the southern half of the city.',
+    areaDescription:
+      'BTM Layout is a busy, densely built residential and commercial neighbourhood in south-central Bangalore, home to a large working population living in apartments and independent houses alongside a steady stretch of shops and offices along its main roads. Its position between Koramangala, Jayanagar and HSR Layout makes it a practical pickup point that connects well in most directions across the southern city.',
+    bodyParagraphs: [
+      'Our BTM Layout bookings are a broad mix — everyday local travel and airport transfers for working residents, plus weekend outstation trips booked by young professionals and families, similar in pattern to neighbouring Koramangala and HSR Layout.',
+      'Given its central-south location, BTM Layout pickups generally connect efficiently toward both the airport route and outstation destinations to the south, including Mysore and Coorg.',
+    ],
+    commonVehicles: ['Sedan (Etios/Dzire) for local and airport travel', 'Toyota Innova for family outstation trips', 'Tempo Traveller for weekend group getaways with friends'],
+    faqs: [
+      {
+        question: 'Do you provide pickup and drop within BTM Layout?',
+        answer: 'Yes, we serve BTM Layout for local pickup/drop, airport transfers and outstation bookings.',
+      },
+      {
+        question: 'Can I book airport transfer from BTM Layout?',
+        answer: 'Yes, airport pickup and drop is available from BTM Layout with flight-time coordination on request.',
+      },
+      {
+        question: 'Can I book a weekend outstation trip from BTM Layout?',
+        answer: 'Yes — BTM Layout is a common pickup point for weekend outstation trips to Coorg, Ooty and Mysore, usually booked as a sedan, Innova or Tempo Traveller depending on group size.',
+      },
+    ],
+    relatedVehicleSlugs: ['sedan-rental-bangalore', 'innova-rental-bangalore', 'tempo-traveller-rental-bangalore'],
+    nearbyLocationSlugs: ['car-rental-koramangala', 'car-rental-hsr-layout', 'car-rental-jayanagar'],
   },
 ];
 
