@@ -6,7 +6,7 @@ import { routePages } from '@/lib/routes';
 import { blogPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://sushitravels.com';
+  const baseUrl = 'https://www.sushitravels.com';
   const now = new Date().toISOString();
 
   const staticRoutes = ['', '/fleet', '/tours-and-packages', '/booking', '/about', '/contact', '/vehicles', '/services', '/locations', '/routes', '/blog'].map(

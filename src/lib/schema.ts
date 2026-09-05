@@ -1,7 +1,7 @@
 import { Vehicle } from './vehicles';
 import { PHONE_NUMBER } from './contact';
 
-const SITE_URL = 'https://sushitravels.com'; // Change to actual domain if needed
+const SITE_URL = 'https://www.sushitravels.com';
 
 export function getLocalBusinessSchema() {
   return {

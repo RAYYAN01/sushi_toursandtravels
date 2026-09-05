@@ -19,12 +19,13 @@ const playfair = Playfair_Display({
 
 // Global SEO Metadata configurations
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sushitravels.com'),
+  metadataBase: new URL('https://www.sushitravels.com'),
   title: {
     default: 'Sushi Travels | Car & Tempo Traveller Rental Bangalore',
     template: '%s | Sushi Travels'
   },
-  description: 'Sushi Tours & Travels offers chauffeur-driven car & Tempo Traveller rentals in Bangalore: 9/12/17-seater vans, outstation cabs, airport transfers & local drops.',
+  description: 'Sushi Tours & Travels — chauffeur-driven car & Tempo Traveller rental in Bangalore. 9/12/17-seater vans, outstation cabs, airport transfers, local drops.',
+  publisher: 'Sushi Travels',
   keywords: [
     'Sushi Tours & Travels',
     'Sushi Tours and Travels Bangalore',
@@ -46,11 +47,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sushi Travels | Car Rental & Chauffeur Services India',
     description: 'Rent premium vehicles with professional drivers for outstation road trips and local travel in India. Transparent rates, GPS enabled fleet, and warm hospitality.',
-    url: 'https://sushitravels.com',
+    url: 'https://www.sushitravels.com',
     siteName: 'Sushi Travels',
     images: [
       {
-        url: 'https://sushitravels.com/fleet/force-urbania-front-01.webp',
+        url: 'https://www.sushitravels.com/fleet/force-urbania-front-01.webp',
         width: 800,
         height: 600,
         alt: 'Sushi Travels Chauffeur Services India'
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Sushi Travels | Car Rental with Driver India',
     description: 'Book verified drivers and premium vehicles across South India. Safe, transparent pricing, and 24/7 service.',
-    images: ['https://sushitravels.com/fleet/force-urbania-front-01.webp']
+    images: ['https://www.sushitravels.com/fleet/force-urbania-front-01.webp']
   },
   robots: {
     index: true,
